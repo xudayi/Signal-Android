@@ -77,6 +77,9 @@ import org.signal.core.util.concurrent.SimpleTask;
 import org.signal.core.util.logging.Log;
 import org.thoughtcrime.securesms.LoggingFragment;
 import org.thoughtcrime.securesms.R;
+import org.thoughtcrime.securesms.badges.gifts.OpenableGiftItemDecoration;
+import org.thoughtcrime.securesms.badges.gifts.viewgift.received.ViewReceivedGiftBottomSheet;
+import org.thoughtcrime.securesms.badges.gifts.viewgift.sent.ViewSentGiftBottomSheet;
 import org.thoughtcrime.securesms.components.ConversationScrollToView;
 import org.thoughtcrime.securesms.components.ConversationTypingView;
 import org.thoughtcrime.securesms.components.TypingStatusRepository;
@@ -308,6 +311,10 @@ public class ConversationFragment extends LoggingFragment implements Multiselect
 
     RecyclerViewColorizer recyclerViewColorizer = new RecyclerViewColorizer(list);
 
+    OpenableGiftItemDecoration openableGiftItemDecoration = new OpenableGiftItemDecoration(requireContext());
+    getViewLifecycleOwner().getLifecycle().addObserver(openableGiftItemDecoration);
+
+    list.addItemDecoration(openableGiftItemDecoration);
     list.addItemDecoration(multiselectItemDecoration);
     list.setItemAnimator(conversationItemAnimator);
 
@@ -411,6 +418,17 @@ public class ConversationFragment extends LoggingFragment implements Multiselect
     conversationViewModel.getSearchQuery().observe(getViewLifecycleOwner(), this::onSearchQueryUpdated);
 
     return view;
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    getChildFragmentManager().setFragmentResultListener(ViewReceivedGiftBottomSheet.REQUEST_KEY, getViewLifecycleOwner(), (key, bundle) -> {
+      if (bundle.getBoolean(ViewReceivedGiftBottomSheet.RESULT_NOT_NOW, false)) {
+        Snackbar.make(view.getRootView(), R.string.ConversationFragment__you_can_redeem_your_badge_later, Snackbar.LENGTH_SHORT)
+                .setTextColor(Color.WHITE)
+                .show();
+      }
+    });
   }
 
   private @NonNull GiphyMp4ProjectionRecycler initializeGiphyMp4() {
@@ -582,9 +600,8 @@ public class ConversationFragment extends LoggingFragment implements Multiselect
 
       if (recipient.isGroup()) {
         if (pendingMemberCount > 0) {
-          conversationBanner.setSubtitle(context.getResources()
-                                                .getQuantityString(R.plurals.MessageRequestProfileView_members_and_invited, memberCount,
-                                                                   memberCount, pendingMemberCount));
+          String invited = context.getResources().getQuantityString(R.plurals.MessageRequestProfileView_invited, pendingMemberCount, pendingMemberCount);
+          conversationBanner.setSubtitle(context.getResources().getQuantityString(R.plurals.MessageRequestProfileView_members_and_invited, memberCount, memberCount, invited));
         } else if (memberCount > 0) {
           conversationBanner.setSubtitle(context.getResources().getQuantityString(R.plurals.MessageRequestProfileView_members, memberCount,
                                                                                   memberCount));
@@ -1612,7 +1629,7 @@ public class ConversationFragment extends LoggingFragment implements Multiselect
         startActivity(StoryViewerActivity.createIntent(
             requireContext(),
             messageRecord.getQuote().getAuthor(),
-            messageRecord.getParentStoryId().serialize(),
+            messageRecord.getParentStoryId().asMessageId().getId(),
             Recipient.resolved(messageRecord.getQuote().getAuthor()).shouldHideStory(),
             null,
             null,
@@ -1950,6 +1967,19 @@ public class ConversationFragment extends LoggingFragment implements Multiselect
       if (getParentFragment() == null) return;
 
       RecipientBottomSheetDialogFragment.create(target, recipient.get().getGroupId().orElse(null)).show(getParentFragmentManager(), "BOTTOM");
+    }
+
+    @Override
+    public void onViewGiftBadgeClicked(@NonNull MessageRecord messageRecord) {
+      if (!MessageRecordUtil.hasGiftBadge(messageRecord)) {
+        return;
+      }
+
+      if (messageRecord.isOutgoing()) {
+        ViewSentGiftBottomSheet.show(getChildFragmentManager(), (MmsMessageRecord) messageRecord);
+      } else {
+        ViewReceivedGiftBottomSheet.show(getChildFragmentManager(), (MmsMessageRecord) messageRecord);
+      }
     }
   }
 

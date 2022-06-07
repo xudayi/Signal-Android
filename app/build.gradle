@@ -63,8 +63,8 @@ ktlint {
     version = "0.43.2"
 }
 
-def canonicalVersionCode = 1058
-def canonicalVersionName = "5.39.2"
+def canonicalVersionCode = 1064
+def canonicalVersionName = "5.40.4"
 
 def postFixSize = 100
 def abiPostFix = ['universal'   : 0,
@@ -455,6 +455,7 @@ dependencies {
     implementation project(':image-editor')
     implementation project(':donations')
     implementation project(':contacts')
+    implementation project(':qr')
 
     implementation libs.libsignal.android
     implementation libs.google.protobuf.javalite

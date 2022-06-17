@@ -2171,13 +2171,17 @@ public class ConversationParentFragment extends Fragment
     sendButton.setOnClickListener(sendButtonListener);
     sendButton.setEnabled(true);
     sendButton.addOnSelectionChangedListener((newMessageSendType, manuallySelected) -> {
+      if (getContext() == null) {
+        Log.w(TAG, "onSelectionChanged called in detached state. Ignoring.");
+        return;
+      }
+
       calculateCharactersRemaining();
       updateLinkPreviewState();
       linkPreviewViewModel.onTransportChanged(newMessageSendType.usesSmsTransport());
       composeText.setMessageSendType(newMessageSendType);
 
-      buttonToggle.getBackground().setColorFilter(getButtonToggleBackgroundColor(newMessageSendType), PorterDuff.Mode.MULTIPLY);
-      buttonToggle.getBackground().invalidateSelf();
+      updateSendButtonColor(newMessageSendType);
 
       if (manuallySelected) recordTransportPreference(newMessageSendType);
     });
@@ -2223,18 +2227,23 @@ public class ConversationParentFragment extends Fragment
 
     material3OnScrollHelper = new Material3OnScrollHelper(requireActivity(), Collections.singletonList(toolbarBackground), Collections.emptyList()) {
       @Override
-      public int getActiveColorRes() {
-        return getActiveToolbarColor(wallpaper.getDrawable() != null);
+      public @NonNull ColorSet getActiveColorSet() {
+        return new ColorSet(getActiveToolbarColor(wallpaper.getDrawable() != null));
       }
 
       @Override
-      public int getInactiveColorRes() {
-        return getInactiveToolbarColor(wallpaper.getDrawable() != null);
+      public @NonNull ColorSet getInactiveColorSet() {
+        return new ColorSet(getInactiveToolbarColor(wallpaper.getDrawable() != null));
       }
     };
   }
 
-  private @ColorInt int getButtonToggleBackgroundColor(MessageSendType newTransport) {
+  private void updateSendButtonColor(MessageSendType newMessageSendType) {
+    buttonToggle.getBackground().setColorFilter(getSendButtonColor(newMessageSendType), PorterDuff.Mode.MULTIPLY);
+    buttonToggle.getBackground().invalidateSelf();
+  }
+
+  private @ColorInt int getSendButtonColor(MessageSendType newTransport) {
     if (newTransport.usesSmsTransport()) {
       return getResources().getColor(newTransport.getBackgroundColorRes());
     } else if (recipient != null) {
@@ -2268,6 +2277,8 @@ public class ConversationParentFragment extends Fragment
       toolbar.setTitleTextColor(toolbarTextAndIconColor);
       setToolbarActionItemTint(toolbar, toolbarTextAndIconColor);
 
+      WindowUtil.setNavigationBarColor(requireActivity().getWindow(), 0);
+      WindowUtil.setLightNavigationBar(requireActivity().getWindow());
     } else {
       wallpaper.setImageDrawable(null);
       wallpaperDim.setVisibility(View.GONE);
@@ -2280,6 +2291,9 @@ public class ConversationParentFragment extends Fragment
       int toolbarTextAndIconColor = getResources().getColor(R.color.signal_colorOnSurface);
       toolbar.setTitleTextColor(toolbarTextAndIconColor);
       setToolbarActionItemTint(toolbar, toolbarTextAndIconColor);
+
+      WindowUtil.setNavigationBarColor(requireActivity().getWindow(), ContextCompat.getColor(requireContext(), R.color.signal_colorBackground));
+      WindowUtil.setLightNavigationBarFromTheme(requireActivity());
     }
     fragment.onWallpaperChanged(chatWallpaper);
     messageRequestBottomView.setWallpaperEnabled(chatWallpaper != null);
@@ -2626,6 +2640,7 @@ public class ConversationParentFragment extends Fragment
     updateReminders();
     updateDefaultSubscriptionId(recipient.getDefaultSubscriptionId());
     updatePaymentsAvailable();
+    updateSendButtonColor(sendButton.getSelectedSendType());
     initializeSecurity(isSecureText, isDefaultSms);
 
     if (searchViewItem == null || !searchViewItem.isActionViewExpanded()) {
@@ -4287,23 +4302,23 @@ public class ConversationParentFragment extends Fragment
     {
       Log.d(TAG, "[presentMessageRequestState] Have extra, so ignoring provided state.");
       messageRequestBottomView.setVisibility(View.GONE);
-      inputPanel.setVisibility(View.VISIBLE);
+      inputPanel.setHideForMessageRequestState(false);
     } else if (isPushGroupV1Conversation() && !isActiveGroup()) {
       Log.d(TAG, "[presentMessageRequestState] Inactive push group V1, so ignoring provided state.");
       messageRequestBottomView.setVisibility(View.GONE);
-      inputPanel.setVisibility(View.VISIBLE);
+      inputPanel.setHideForMessageRequestState(false);
     } else if (messageData == null) {
       Log.d(TAG, "[presentMessageRequestState] Null messageData. Ignoring.");
     } else if (messageData.getMessageState() == MessageRequestState.NONE) {
       Log.d(TAG, "[presentMessageRequestState] No message request necessary.");
       messageRequestBottomView.setVisibility(View.GONE);
-      inputPanel.setVisibility(View.VISIBLE);
+      inputPanel.setHideForMessageRequestState(false);
     } else {
       Log.d(TAG, "[presentMessageRequestState] " + messageData.getMessageState());
       messageRequestBottomView.setMessageData(messageData);
       messageRequestBottomView.setVisibility(View.VISIBLE);
       noLongerMemberBanner.setVisibility(View.GONE);
-      inputPanel.setVisibility(View.GONE);
+      inputPanel.setHideForMessageRequestState(true);
     }
 
     invalidateOptionsMenu();

@@ -406,6 +406,7 @@ public class ConversationParentFragment extends Fragment
   private   MessageRequestsBottomView    messageRequestBottomView;
   private   ConversationReactionDelegate reactionDelegate;
   private   Stub<FrameLayout>            voiceNotePlayerViewStub;
+  private   View                         navigationBarBackground;
 
   private   AttachmentManager        attachmentManager;
   private   AudioRecorder            audioRecorder;
@@ -1197,6 +1198,7 @@ public class ConversationParentFragment extends Fragment
       reactionDelegate.hide();
     } else if (container.isInputOpen()) {
       container.hideCurrentInput(composeText);
+      navigationBarBackground.setVisibility(View.GONE);
     } else if (isSearchRequested) {
       if (searchViewItem != null) {
         searchViewItem.collapseActionView();
@@ -1213,6 +1215,7 @@ public class ConversationParentFragment extends Fragment
       emojiDrawerStub.get().hide(true);
     }
     if (attachmentKeyboardStub.resolved() && attachmentKeyboardStub.get().isShowing()) {
+      navigationBarBackground.setVisibility(View.GONE);
       attachmentKeyboardStub.get().hide(true);
     }
   }
@@ -1550,6 +1553,7 @@ public class ConversationParentFragment extends Fragment
         updatePaymentsAvailable();
 
         container.show(composeText, attachmentKeyboardStub.get());
+        navigationBarBackground.setVisibility(View.VISIBLE);
 
         viewModel.onAttachmentKeyboardOpen();
       }
@@ -2136,6 +2140,7 @@ public class ConversationParentFragment extends Fragment
     wallpaper                = view.findViewById(R.id.conversation_wallpaper);
     wallpaperDim             = view.findViewById(R.id.conversation_wallpaper_dim);
     voiceNotePlayerViewStub  = ViewUtil.findStubById(view, R.id.voice_note_player_stub);
+    navigationBarBackground  = view.findViewById(R.id.navbar_background);
 
     ImageButton quickCameraToggle      = view.findViewById(R.id.quick_camera_toggle);
     ImageButton inlineAttachmentButton = view.findViewById(R.id.inline_attachment_button);
@@ -2276,9 +2281,6 @@ public class ConversationParentFragment extends Fragment
       int toolbarTextAndIconColor = getResources().getColor(R.color.signal_colorNeutralInverse);
       toolbar.setTitleTextColor(toolbarTextAndIconColor);
       setToolbarActionItemTint(toolbar, toolbarTextAndIconColor);
-
-      WindowUtil.setNavigationBarColor(requireActivity().getWindow(), 0);
-      WindowUtil.setLightNavigationBar(requireActivity().getWindow());
     } else {
       wallpaper.setImageDrawable(null);
       wallpaperDim.setVisibility(View.GONE);
@@ -2291,9 +2293,6 @@ public class ConversationParentFragment extends Fragment
       int toolbarTextAndIconColor = getResources().getColor(R.color.signal_colorOnSurface);
       toolbar.setTitleTextColor(toolbarTextAndIconColor);
       setToolbarActionItemTint(toolbar, toolbarTextAndIconColor);
-
-      WindowUtil.setNavigationBarColor(requireActivity().getWindow(), ContextCompat.getColor(requireContext(), R.color.signal_colorBackground));
-      WindowUtil.setLightNavigationBarFromTheme(requireActivity());
     }
     fragment.onWallpaperChanged(chatWallpaper);
     messageRequestBottomView.setWallpaperEnabled(chatWallpaper != null);
@@ -3888,6 +3887,9 @@ public class ConversationParentFragment extends Fragment
     reactionDelegate.setOnActionSelectedListener(onActionSelectedListener);
     reactionDelegate.setOnHideListener(onHideListener);
     reactionDelegate.show(requireActivity(), recipient.get(), conversationMessage, groupViewModel.isNonAdminInAnnouncementGroup(), selectedConversationModel);
+    if (attachmentKeyboardStub.resolved()) {
+      attachmentKeyboardStub.get().hide(true);
+    }
   }
 
   @Override
@@ -3963,6 +3965,16 @@ public class ConversationParentFragment extends Fragment
   @Override
   public boolean isKeyboardOpen() {
     return container.isKeyboardOpen();
+  }
+
+  @Override
+  public boolean isAttachmentKeyboardOpen() {
+    return attachmentKeyboardStub.resolved() && attachmentKeyboardStub.get().isShowing();
+  }
+
+  @Override
+  public void openAttachmentKeyboard() {
+    attachmentKeyboardStub.get().show(container.getKeyboardHeight(), true);
   }
 
   @Override
@@ -4063,19 +4075,6 @@ public class ConversationParentFragment extends Fragment
     handleSecurityChange(isSecureText, isDefaultSms);
     updateToggleButtonState();
     updateLinkPreviewState();
-  }
-
-  private int inputAreaHeight() {
-    int height = panelParent.getMeasuredHeight();
-
-    if (attachmentKeyboardStub.resolved()) {
-      View keyboard = attachmentKeyboardStub.get();
-      if (keyboard.getVisibility() == View.VISIBLE) {
-        return height + keyboard.getMeasuredHeight();
-      }
-    }
-
-    return height;
   }
 
   private void onMessageRequestDeleteClicked(@NonNull MessageRequestViewModel requestModel) {

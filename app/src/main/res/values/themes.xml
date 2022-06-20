@@ -20,6 +20,14 @@
         <!-- leave empty to allow overriding -->
     </style>
 
+    <style name="TextSecure.LightNoActionBar.TransparentNavigationBar">
+        <!-- leave empty to allow overriding -->
+    </style>
+
+    <style name="TextSecure.DarkNoActionBar.TransparentNavigationBar">
+        <!-- leave empty to allow overriding -->
+    </style>
+
     <style name="TextSecure.BaseLightNoActionBar" parent="@style/TextSecure.LightTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -513,6 +521,14 @@
         <item name="cornerSizeTopLeft">12dp</item>
         <item name="cornerSizeBottomLeft">12dp</item>
         <item name="cornerSizeBottomRight">12dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Signal.WallpaperPreview.ChatContainer" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.Signal.MediaSelection" parent="">

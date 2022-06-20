@@ -124,7 +124,6 @@ public class AttachmentKeyboard extends FrameLayout implements InputAwareLayout.
     buttonAdapter.setWallpaperEnabled(wallpaperEnabled);
   }
 
-
   @Override
   public void show(int height, boolean immediate) {
     ViewGroup.LayoutParams params = getLayoutParams();

@@ -175,17 +175,25 @@
   <string name="ContactsDatabase_message_s">Сообщение %s</string>
   <string name="ContactsDatabase_signal_call_s">Позвонить через Signal на %s</string>
   <!--ContactNameEditActivity-->
+  <!--Toolbar title for contact name edit activity-->
+  <string name="ContactNameEditActivity__edit_name">Изменить имя</string>
   <string name="ContactNameEditActivity_given_name">Имя</string>
   <string name="ContactNameEditActivity_family_name">Фамилия</string>
   <string name="ContactNameEditActivity_prefix">Префикс</string>
   <string name="ContactNameEditActivity_suffix">Суффикс</string>
   <string name="ContactNameEditActivity_middle_name">Отчество</string>
   <!--ContactShareEditActivity-->
+  <!--ContactShareEditActivity toolbar title-->
+  <string name="ContactShareEditActivity__send_contact">Отправить контакт</string>
   <string name="ContactShareEditActivity_type_home">Домашний</string>
   <string name="ContactShareEditActivity_type_mobile">Мобильный</string>
   <string name="ContactShareEditActivity_type_work">Рабочий</string>
   <string name="ContactShareEditActivity_type_missing">Другой</string>
   <string name="ContactShareEditActivity_invalid_contact">Выбранный контакт недействителен</string>
+  <!--Content descrption for name edit button on contact share edit activity-->
+  <string name="ContactShareEditActivity__edit_name">Изменить имя</string>
+  <!--Content description for user avatar in edit activity-->
+  <string name="ContactShareEditActivity__avatar">Аватар</string>
   <!--ConversationItem-->
   <string name="ConversationItem_error_not_sent_tap_for_details">Не отправлено. Подробнее…</string>
   <string name="ConversationItem_error_partially_not_delivered">Частично отправлено. Подробнее…</string>
@@ -1703,6 +1711,8 @@
   <string name="ThreadRecord__you_sent_a_gift">Вы отправили подарок</string>
   <!--Displayed in the notification when the user has opened a received gift-->
   <string name="ThreadRecord__you_redeemed_a_gift_badge">Вы приняли значок, полученный в подарок</string>
+  <!--Displayed in the conversation list when someone reacted to your story-->
+  <!--Displayed in the conversation list when you reacted to someone\'s story-->
   <!--UpdateApkReadyListener-->
   <string name="UpdateApkReadyListener_Signal_update">Обновление Signal</string>
   <string name="UpdateApkReadyListener_a_new_version_of_signal_is_available_tap_to_update">Доступна новая версия Signal. Обновиться?</string>
@@ -2474,6 +2484,7 @@
   <string name="preferences_enter_proxy_address">Введите адрес прокси</string>
   <string name="configurable_single_select__customize_option">Настроить опцию</string>
   <!--Internal only preferences-->
+  <string name="preferences__internal_clears_onboarding_flag_and_triggers_download_of_onboarding_stories">Clears onboarding flag and triggers download of onboarding stories.</string>
   <!--Payments-->
   <string name="PaymentsActivityFragment__all_activity">Вся активность</string>
   <string name="PaymentsAllActivityFragment__all">Все</string>
@@ -3157,6 +3168,9 @@
   <string name="CallParticipant__you">Вы</string>
   <string name="CallParticipant__you_on_another_device">Вы (на другом устройстве)</string>
   <string name="CallParticipant__s_on_another_device">%1$s (на другом устройстве)</string>
+  <!--WifiToCellularPopupWindow-->
+  <!--Message shown during a call when the WiFi network is unusable, and cellular data starts to be used for the call instead.-->
+  <string name="WifiToCellularPopupWindow__weak_wifi_switched_to_cellular">Слабое Wi-Fi соединение. Выполнено переключение на сотовую связь.</string>
   <!--DeleteAccountFragment-->
   <string name="DeleteAccountFragment__deleting_your_account_will">Удаление вашей учётной записи приведёт к:</string>
   <string name="DeleteAccountFragment__enter_your_phone_number">Введите свой номер телефона</string>
@@ -3639,7 +3653,7 @@
   <string name="MultiselectForwardFragment__add_a_message">Добавьте сообщение</string>
   <string name="MultiselectForwardFragment__faster_forwards">Более быстрая пересылка</string>
   <!--Displayed when user selects a video that will be clipped before sharing to a story-->
-  <string name="MultiselectForwardFragment__videos_will_be_trimmed">Видео будут обрезаны до 30-секундных клипов и отправлены в виде нескольких историй.</string>
+  <string name="MultiselectForwardFragment__videos_will_be_trimmed">Видео будут сокращены до 30-секундных клипов и отправлены в виде нескольких историй.</string>
   <!--Displayed when user selects a video that cannot be sent as a story-->
   <string name="MultiselectForwardFragment__videos_sent_to_stories_cant">Видео, отправленные в истории, не могут быть длиннее 30 секунд.</string>
   <string name="MultiselectForwardFragment__forwarded_messages_are_now">Пересылаемые сообщения теперь отправляются сразу.</string>
@@ -4067,6 +4081,8 @@
   <string name="StoriesLandingItem__share">Поделиться…</string>
   <!--Context menu option to go to story chat-->
   <string name="StoriesLandingItem__go_to_chat">Перейти к чату</string>
+  <!--Context menu option to go to story info-->
+  <string name="StoriesLandingItem__info">Информация</string>
   <!--Label when a story is pending sending-->
   <string name="StoriesLandingItem__sending">Отправляется…</string>
   <!--Label when multiple stories are pending sending-->
@@ -4353,7 +4369,7 @@
   <!--Content description for expand contacts chevron-->
   <string name="ExpandModel__view_more">Просмотреть больше</string>
   <string name="StoriesLinkPopup__visit_link">Посетить ссылку</string>
-  <!--Duration and price information-->
+  <!--Gift price and duration, formatted as: {price} dot {n} day duration-->
   <plurals name="GiftRowItem_s_dot_d_day_duration">
     <item quantity="one">%1$s · действует %2$d день</item>
     <item quantity="few">%1$s · действует %2$d дня</item>
@@ -4490,6 +4506,7 @@
   <!--Title of safety number changes bottom sheet when not showing individual records and user has seen review screen-->
   <string name="SafetyNumberBottomSheetFragment__safety_number_checkup_complete">Проверка кода безопасности завершена</string>
   <!--Message of safety number changes bottom sheet when not showing individual records and user has seen review screen-->
+  <string name="SafetyNumberBottomSheetFragment__all_connections_have_been_reviewed">Все контакты были проверены, нажмите «отправить», чтобы продолжить.</string>
   <!--Message of safety number changes bottom sheet when not showing individual records-->
   <string name="SafetyNumberBottomSheetFragment__you_have_d_connections">У вас есть контакты (%1$d), которые, возможно, переустановили Signal или сменили устройства. Прежде чем поделиться с ними своей историей, просмотрите их коды безопасности или подумайте о том, чтобы удалить их из своей истории.</string>
   <!--Menu action to launch safety number verification screen-->
@@ -4507,7 +4524,12 @@
   <!--Title of safety number review fragment-->
   <string name="SafetyNumberReviewConnectionsFragment__safety_number_changes">Изменения кодов безопасности</string>
   <!--Message of safety number review fragment-->
-  <string name="SafetyNumberReviewConnectionsFragment__d_recipients_may_have">Следующие получатели (%1$d), возможно, переустановили Signal или сменили устройство. Нажмите на получателя, чтобы подтвердить новый код безопасности. Это необязательно.</string>
+  <plurals name="SafetyNumberReviewConnectionsFragment__d_recipients_may_have">
+    <item quantity="one">Следующие получатели (%1$d), возможно, переустановили Signal или сменили устройство. Нажмите на получателя, чтобы подтвердить новый код безопасности. Это необязательно.</item>
+    <item quantity="few">Следующие получатели (%1$d), возможно, переустановили Signal или сменили устройство. Нажмите на получателя, чтобы подтвердить новый код безопасности. Это необязательно.</item>
+    <item quantity="many">Следующие получатели (%1$d), возможно, переустановили Signal или сменили устройство. Нажмите на получателя, чтобы подтвердить новый код безопасности. Это необязательно.</item>
+    <item quantity="other">Следующие получатели (%1$d), возможно, переустановили Signal или сменили устройство. Нажмите на получателя, чтобы подтвердить новый код безопасности. Это необязательно.</item>
+  </plurals>
   <!--Section header for 1:1 contacts in review fragment-->
   <string name="SafetyNumberBucketRowItem__contacts">Контакты</string>
   <!--Context menu label for distribution list headers in review fragment-->
@@ -4524,5 +4546,17 @@
   <string name="ChooseInitialMyStoryMembershipFragment__all_signal_connections_except">Все контакты Signal, кроме…</string>
   <!--Only with selected connections option for initial My Story settings configuration shown when sending to My Story for the first time-->
   <string name="ChooseInitialMyStoryMembershipFragment__only_share_with">Поделиться только с…</string>
+  <!--Story info header sent heading-->
+  <string name="StoryInfoHeader__sent">Отправленные</string>
+  <!--Story info header received heading-->
+  <string name="StoryInfoHeader__received">Полученные</string>
+  <!--Story info header file size heading-->
+  <string name="StoryInfoHeader__file_size">Размер файла</string>
+  <!--Story info "Sent to" header-->
+  <string name="StoryInfoBottomSheetDialogFragment__sent_to">Отправлено</string>
+  <!--Story info "Sent from" header-->
+  <string name="StoryInfoBottomSheetDialogFragment__sent_from">Отправитель</string>
+  <!--Story Info context menu label-->
+  <string name="StoryInfoBottomSheetDialogFragment__info">Информация</string>
   <!--EOF-->
 </resources>

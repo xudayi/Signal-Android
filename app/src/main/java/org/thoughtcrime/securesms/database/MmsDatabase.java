@@ -613,7 +613,7 @@ public class MmsDatabase extends MessageDatabase {
       whereArgs = SqlUtil.buildArgs(recipientId);
     } else {
       where += " AND " + THREAD_ID_WHERE;
-      whereArgs = SqlUtil.buildArgs(1, 0, threadId);
+      whereArgs = SqlUtil.buildArgs(threadId);
     }
 
     return new Reader(rawQuery(where, whereArgs));
@@ -798,7 +798,8 @@ public class MmsDatabase extends MessageDatabase {
   }
 
   @Override
-  public @NonNull List<StoryResult> getOrderedStoryRecipientsAndIds() {
+  public @NonNull List<StoryResult> getOrderedStoryRecipientsAndIds(boolean isOutgoingOnly) {
+    String         where = "WHERE is_story > 0 AND remote_deleted = 0" + (isOutgoingOnly ? " AND is_outgoing != 0" : "") + "\n";
     SQLiteDatabase db    = getReadableDatabase();
     String         query = "SELECT\n"
                            + " mms.date AS sent_timestamp,\n"
@@ -812,7 +813,7 @@ public class MmsDatabase extends MessageDatabase {
                            + "FROM mms\n"
                            + "JOIN thread\n"
                            + "ON mms.thread_id = thread._id\n"
-                           + "WHERE is_story > 0 AND remote_deleted = 0\n"
+                           + where
                            + "ORDER BY\n"
                            + "is_unread DESC,\n"
                            + "CASE\n"
@@ -829,7 +830,8 @@ public class MmsDatabase extends MessageDatabase {
         while (cursor.moveToNext()) {
           results.add(new StoryResult(RecipientId.from(CursorUtil.requireLong(cursor, ThreadDatabase.RECIPIENT_ID)),
                                            CursorUtil.requireLong(cursor, "mms_id"),
-                                           CursorUtil.requireLong(cursor, "sent_timestamp")));
+                                           CursorUtil.requireLong(cursor, "sent_timestamp"),
+                                           CursorUtil.requireBoolean(cursor, "is_outgoing")));
         }
 
         return results;
@@ -898,16 +900,35 @@ public class MmsDatabase extends MessageDatabase {
   }
 
   @Override
-  public @Nullable Long getOldestStorySendTimestamp() {
-    SQLiteDatabase db        = databaseHelper.getSignalReadableDatabase();
-    String[]       columns   = new String[]{DATE_SENT};
-    String         where     = IS_STORY_CLAUSE;
-    String         orderBy   = DATE_SENT + " ASC";
-    String         limit     = "1";
+  public @Nullable Long getOldestStorySendTimestamp(boolean hasSeenReleaseChannelStories) {
+    long           releaseChannelThreadId = getReleaseChannelThreadId(hasSeenReleaseChannelStories);
+    SQLiteDatabase db                     = databaseHelper.getSignalReadableDatabase();
+    String[]       columns                = new String[] { DATE_SENT };
+    String         where                  = IS_STORY_CLAUSE + " AND " + THREAD_ID + " != ?";
+    String         orderBy                = DATE_SENT + " ASC";
+    String         limit                  = "1";
 
-    try (Cursor cursor = db.query(TABLE_NAME, columns, where, null, null, null, orderBy, limit)) {
+    try (Cursor cursor = db.query(TABLE_NAME, columns, where, SqlUtil.buildArgs(releaseChannelThreadId), null, null, orderBy, limit)) {
       return cursor != null && cursor.moveToNext() ? cursor.getLong(0) : null;
     }
+  }
+
+  private static long getReleaseChannelThreadId(boolean hasSeenReleaseChannelStories) {
+    if (hasSeenReleaseChannelStories) {
+      return -1L;
+    }
+
+    RecipientId releaseChannelRecipientId = SignalStore.releaseChannelValues().getReleaseChannelRecipientId();
+    if (releaseChannelRecipientId == null) {
+      return -1L;
+    }
+
+    Long releaseChannelThreadId = SignalDatabase.threads().getThreadIdFor(releaseChannelRecipientId);
+    if (releaseChannelThreadId == null) {
+      return -1L;
+    }
+
+    return releaseChannelThreadId;
   }
 
   @Override
@@ -924,8 +945,7 @@ public class MmsDatabase extends MessageDatabase {
 
     db.beginTransaction();
     try {
-      RecipientId releaseChannelRecipient     = hasSeenReleaseChannelStories ? null : SignalStore.releaseChannelValues().getReleaseChannelRecipientId();
-      long        releaseChannelThreadId      = releaseChannelRecipient != null ? SignalDatabase.threads().getOrCreateThreadIdFor(Recipient.resolved(releaseChannelRecipient)) : -1;
+      long        releaseChannelThreadId      = getReleaseChannelThreadId(hasSeenReleaseChannelStories);
       String      storiesBeforeTimestampWhere = IS_STORY_CLAUSE + " AND " + DATE_SENT + " < ? AND " + THREAD_ID + " != ?";
       String[]    sharedArgs                  = SqlUtil.buildArgs(timestamp, releaseChannelThreadId);
       String      deleteStoryRepliesQuery     = "DELETE FROM " + TABLE_NAME + " " +

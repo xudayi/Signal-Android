@@ -348,6 +348,7 @@ class StoryGroupReplyFragment :
 
           override fun onReactionSelected(emoji: String) {
             dialog.dismiss()
+            findListener<Callback>()?.onReactionEmojiSelected(emoji)
             sendReaction(emoji)
           }
 
@@ -436,8 +437,8 @@ class StoryGroupReplyFragment :
           annotations
         } else {
 
-          val validRecipientIds: Set<String> = recipient.participants
-            .map { r -> MentionAnnotation.idToMentionAnnotationValue(r.id) }
+          val validRecipientIds: Set<String> = recipient.participantIds
+            .map { id -> MentionAnnotation.idToMentionAnnotationValue(id) }
             .toSet()
 
           annotations
@@ -541,5 +542,6 @@ class StoryGroupReplyFragment :
   interface Callback {
     fun onStartDirectReply(recipientId: RecipientId)
     fun requestFullScreen(fullscreen: Boolean)
+    fun onReactionEmojiSelected(emoji: String)
   }
 }

@@ -173,17 +173,25 @@
   <string name="ContactsDatabase_message_s">ارسال پیام به  %s</string>
   <string name="ContactsDatabase_signal_call_s">تماس سیگنال با %s</string>
   <!--ContactNameEditActivity-->
+  <!--Toolbar title for contact name edit activity-->
+  <string name="ContactNameEditActivity__edit_name">ویرایش نام</string>
   <string name="ContactNameEditActivity_given_name">نام</string>
   <string name="ContactNameEditActivity_family_name">نام خانوادگی</string>
   <string name="ContactNameEditActivity_prefix">پیشوند</string>
   <string name="ContactNameEditActivity_suffix">پسوند</string>
   <string name="ContactNameEditActivity_middle_name">نام میانی</string>
   <!--ContactShareEditActivity-->
+  <!--ContactShareEditActivity toolbar title-->
+  <string name="ContactShareEditActivity__send_contact">ارسال مخاطب</string>
   <string name="ContactShareEditActivity_type_home">خانه</string>
   <string name="ContactShareEditActivity_type_mobile">موبایل</string>
   <string name="ContactShareEditActivity_type_work">کار</string>
   <string name="ContactShareEditActivity_type_missing">سایر</string>
   <string name="ContactShareEditActivity_invalid_contact">مخاطب انتخاب شده نامعتبر بود</string>
+  <!--Content descrption for name edit button on contact share edit activity-->
+  <string name="ContactShareEditActivity__edit_name">ویرایش نام</string>
+  <!--Content description for user avatar in edit activity-->
+  <string name="ContactShareEditActivity__avatar">عکس</string>
   <!--ConversationItem-->
   <string name="ConversationItem_error_not_sent_tap_for_details">ارسال نشد، برای جزئیات ضربه بزنید</string>
   <string name="ConversationItem_error_partially_not_delivered">به صورت کامل ارسال نشد، برای جزئیات ضربه بزنید</string>
@@ -1562,6 +1570,8 @@
   <string name="ThreadRecord__you_sent_a_gift">شما یک هدیه فرستادید</string>
   <!--Displayed in the notification when the user has opened a received gift-->
   <string name="ThreadRecord__you_redeemed_a_gift_badge">یک نشان هدیه آزادسازی کردید</string>
+  <!--Displayed in the conversation list when someone reacted to your story-->
+  <!--Displayed in the conversation list when you reacted to someone\'s story-->
   <!--UpdateApkReadyListener-->
   <string name="UpdateApkReadyListener_Signal_update">به‌روزرسانی سیگنال</string>
   <string name="UpdateApkReadyListener_a_new_version_of_signal_is_available_tap_to_update">یک نسخهٔ جدید از سیگنال موجود است، برای به‌روزرسانی ضربه بزنید</string>
@@ -2307,6 +2317,7 @@
   <string name="preferences_enter_proxy_address">نشانی پروکسی را وارد کنید</string>
   <string name="configurable_single_select__customize_option">گزینهٔ سفارشی‌سازی</string>
   <!--Internal only preferences-->
+  <string name="preferences__internal_clears_onboarding_flag_and_triggers_download_of_onboarding_stories">Clears onboarding flag and triggers download of onboarding stories.</string>
   <!--Payments-->
   <string name="PaymentsActivityFragment__all_activity">همهٔ فعالیت‌ها</string>
   <string name="PaymentsAllActivityFragment__all">همه</string>
@@ -2970,6 +2981,9 @@
   <string name="CallParticipant__you">شما</string>
   <string name="CallParticipant__you_on_another_device">شما (روی دستگاه دیگر)</string>
   <string name="CallParticipant__s_on_another_device">%1$s (روی دستگاه دیگر)</string>
+  <!--WifiToCellularPopupWindow-->
+  <!--Message shown during a call when the WiFi network is unusable, and cellular data starts to be used for the call instead.-->
+  <string name="WifiToCellularPopupWindow__weak_wifi_switched_to_cellular">وای‌فای ضعیف است. به داده تلفن همراه تغییر کرد.</string>
   <!--DeleteAccountFragment-->
   <string name="DeleteAccountFragment__deleting_your_account_will">حذف حساب کاربری شما:</string>
   <string name="DeleteAccountFragment__enter_your_phone_number">شماره‌تلفن خود را وارد کنید</string>
@@ -3864,6 +3878,8 @@
   <string name="StoriesLandingItem__share">اشتراک‌گذاری…</string>
   <!--Context menu option to go to story chat-->
   <string name="StoriesLandingItem__go_to_chat">به چت بروید</string>
+  <!--Context menu option to go to story info-->
+  <string name="StoriesLandingItem__info">اطلاعات</string>
   <!--Label when a story is pending sending-->
   <string name="StoriesLandingItem__sending">در حال ارسال…</string>
   <!--Label when multiple stories are pending sending-->
@@ -4138,7 +4154,7 @@
   <!--Content description for expand contacts chevron-->
   <string name="ExpandModel__view_more">مشاهدۀ بیشتر</string>
   <string name="StoriesLinkPopup__visit_link">بازدید از پیوند</string>
-  <!--Duration and price information-->
+  <!--Gift price and duration, formatted as: {price} dot {n} day duration-->
   <plurals name="GiftRowItem_s_dot_d_day_duration">
     <item quantity="one">%1$s · به مدت %2$d روز</item>
     <item quantity="other">%1$s · به مدت %2$d روز</item>
@@ -4251,7 +4267,7 @@
   <!--Content description for vertical context menu button in safety number sheet rows-->
   <string name="SafetyNumberRecipientRowItem__open_context_menu">باز کردن منوی زمینه</string>
   <!--Sub-line when a user is verified.-->
-  <string name="SafetyNumberRecipientRowItem__s_dot_verified">%1$s · تایید شده</string>
+  <string name="SafetyNumberRecipientRowItem__s_dot_verified">%1$s · تاییدشده</string>
   <!--Sub-line when a user is verified.-->
   <string name="SafetyNumberRecipientRowItem__verified">تأیید شده</string>
   <!--Title of safety number changes bottom sheet when showing individual records-->
@@ -4263,6 +4279,7 @@
   <!--Title of safety number changes bottom sheet when not showing individual records and user has seen review screen-->
   <string name="SafetyNumberBottomSheetFragment__safety_number_checkup_complete">بررسی شمارهٔ ایمنی کامل شد</string>
   <!--Message of safety number changes bottom sheet when not showing individual records and user has seen review screen-->
+  <string name="SafetyNumberBottomSheetFragment__all_connections_have_been_reviewed">تمام آشنایان بررسی شده‌اند، برای ادامه روی ارسال ضربه بزنید.</string>
   <!--Message of safety number changes bottom sheet when not showing individual records-->
   <string name="SafetyNumberBottomSheetFragment__you_have_d_connections">شما %1$d آشنا دارید که ممکن است سیگنال را دوباره نصب کرده باشند یا دستگاه خود را تغییر داده باشند. قبل از به اشتراک گذاشتن استوری خود با آنها، شماره ایمنی آنها را بررسی کنید یا آنها را از استوری خود حذف کنید.</string>
   <!--Menu action to launch safety number verification screen-->
@@ -4272,7 +4289,7 @@
   <!--Action button at bottom of SafetyNumberBottomSheetFragment to send anyway-->
   <string name="SafetyNumberBottomSheetFragment__send_anyway">در هر صورت ارسال کن</string>
   <!--Action button at bottom of SafetyNumberBottomSheetFragment to review connections-->
-  <string name="SafetyNumberBottomSheetFragment__review_connections">حذف آشنایان</string>
+  <string name="SafetyNumberBottomSheetFragment__review_connections">بررسی آشنایان</string>
   <!--Empty state copy for SafetyNumberBottomSheetFragment-->
   <string name="SafetyNumberBottomSheetFragment__no_more_recipients_to_show">گیرندۀ دیگری برای نمایش وجود ندارد</string>
   <!--Done button on safety number review fragment-->
@@ -4280,7 +4297,10 @@
   <!--Title of safety number review fragment-->
   <string name="SafetyNumberReviewConnectionsFragment__safety_number_changes">تغییرات شمارهٔ ایمنی</string>
   <!--Message of safety number review fragment-->
-  <string name="SafetyNumberReviewConnectionsFragment__d_recipients_may_have">ممکن است %1$d گیرنده سیگنال را دوباره نصب کرده باشند یا دستگاه‌شان را تغییر داده باشند. برای تایید شمارهٔ ایمنی جدید روی یکی از گیرنده‌ها ضربه بزنید. انجام این کار انتخابی است.</string>
+  <plurals name="SafetyNumberReviewConnectionsFragment__d_recipients_may_have">
+    <item quantity="one">ممکن است %1$d گیرنده، سیگنال را دوباره نصب کرده باشد یا دستگاهش را تغییر داده باشد. برای تایید شمارهٔ ایمنی جدید روی یکی از گیرنده‌ها ضربه بزنید. انجام این کار انتخابی است.</item>
+    <item quantity="other">ممکن است %1$d گیرنده، سیگنال را دوباره نصب کرده باشند یا دستگاه‌شان را تغییر داده باشند. برای تایید شمارهٔ ایمنی جدید روی یکی از گیرنده‌ها ضربه بزنید. انجام این کار اختیاری است.</item>
+  </plurals>
   <!--Section header for 1:1 contacts in review fragment-->
   <string name="SafetyNumberBucketRowItem__contacts">مخاطبین</string>
   <!--Context menu label for distribution list headers in review fragment-->
@@ -4290,12 +4310,24 @@
   <!--Title of initial My Story settings configuration shown when sending to My Story for the first time-->
   <string name="ChooseInitialMyStoryMembershipFragment__my_story_privacy">حریم خصوصی استوری من</string>
   <!--Subtitle of initial My Story settings configuration shown when sending to My Story for the first time-->
-  <string name="ChooseInitialMyStoryMembershipFragment__choose_who_can_see_posts_to_my_story_you_can_always_make_changes_in_settings">انتخاب کنید چه کسی می‌تواند پست‌های استوری من را ببیند. همیشه می‌توانید تغییراتی در تنظیمات ایجاد کنید.</string>
+  <string name="ChooseInitialMyStoryMembershipFragment__choose_who_can_see_posts_to_my_story_you_can_always_make_changes_in_settings">انتخاب کنید چه کسی می‌تواند پست‌های استوری من را ببیند. همیشه می‌توانید تنظیمات مربوطه را تغییر دهید.</string>
   <!--All connections option for initial My Story settings configuration shown when sending to My Story for the first time-->
   <string name="ChooseInitialMyStoryMembershipFragment__all_signal_connections">تمام آشنایان در سیگنال</string>
   <!--All connections except option for initial My Story settings configuration shown when sending to My Story for the first time-->
   <string name="ChooseInitialMyStoryMembershipFragment__all_signal_connections_except">تمام آشنایان سیگنال به جز…</string>
   <!--Only with selected connections option for initial My Story settings configuration shown when sending to My Story for the first time-->
   <string name="ChooseInitialMyStoryMembershipFragment__only_share_with">تنها اشتراک‌گذاری شود با…</string>
+  <!--Story info header sent heading-->
+  <string name="StoryInfoHeader__sent">ارسال شد</string>
+  <!--Story info header received heading-->
+  <string name="StoryInfoHeader__received">دریافت شد</string>
+  <!--Story info header file size heading-->
+  <string name="StoryInfoHeader__file_size">حجم فایل</string>
+  <!--Story info "Sent to" header-->
+  <string name="StoryInfoBottomSheetDialogFragment__sent_to">ارسال شد به</string>
+  <!--Story info "Sent from" header-->
+  <string name="StoryInfoBottomSheetDialogFragment__sent_from">ارسال شد از</string>
+  <!--Story Info context menu label-->
+  <string name="StoryInfoBottomSheetDialogFragment__info">اطلاعات</string>
   <!--EOF-->
 </resources>

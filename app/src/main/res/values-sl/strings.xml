@@ -175,17 +175,25 @@
   <string name="ContactsDatabase_message_s">Sporočilo %s</string>
   <string name="ContactsDatabase_signal_call_s">Klic Signal: %s</string>
   <!--ContactNameEditActivity-->
+  <!--Toolbar title for contact name edit activity-->
+  <string name="ContactNameEditActivity__edit_name">Uredi ime</string>
   <string name="ContactNameEditActivity_given_name">Ime</string>
   <string name="ContactNameEditActivity_family_name">Priimek</string>
   <string name="ContactNameEditActivity_prefix">Predpona</string>
   <string name="ContactNameEditActivity_suffix">Pripona</string>
   <string name="ContactNameEditActivity_middle_name">Srednje ime</string>
   <!--ContactShareEditActivity-->
+  <!--ContactShareEditActivity toolbar title-->
+  <string name="ContactShareEditActivity__send_contact">Pošlji stik</string>
   <string name="ContactShareEditActivity_type_home">Doma</string>
   <string name="ContactShareEditActivity_type_mobile">Mobilno</string>
   <string name="ContactShareEditActivity_type_work">Služba</string>
   <string name="ContactShareEditActivity_type_missing">Drugo</string>
   <string name="ContactShareEditActivity_invalid_contact">Izbrani kontakt ni veljaven</string>
+  <!--Content descrption for name edit button on contact share edit activity-->
+  <string name="ContactShareEditActivity__edit_name">Uredi ime</string>
+  <!--Content description for user avatar in edit activity-->
+  <string name="ContactShareEditActivity__avatar">Avatar</string>
   <!--ConversationItem-->
   <string name="ConversationItem_error_not_sent_tap_for_details">Ni poslano. Tapnite za več informacij</string>
   <string name="ConversationItem_error_partially_not_delivered">Delno poslano. Tapnite za več informacij</string>
@@ -1701,6 +1709,8 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="ThreadRecord__you_sent_a_gift">Poslali ste darilo</string>
   <!--Displayed in the notification when the user has opened a received gift-->
   <string name="ThreadRecord__you_redeemed_a_gift_badge">Vnovčili ste darilni bedž</string>
+  <!--Displayed in the conversation list when someone reacted to your story-->
+  <!--Displayed in the conversation list when you reacted to someone\'s story-->
   <!--UpdateApkReadyListener-->
   <string name="UpdateApkReadyListener_Signal_update">Nadgradnja aplikacije Signal</string>
   <string name="UpdateApkReadyListener_a_new_version_of_signal_is_available_tap_to_update">Na voljo je nova različica aplikacije Signal. Tapnite za nadgradnjo.</string>
@@ -2472,6 +2482,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="preferences_enter_proxy_address">Vnesite naslov proksi</string>
   <string name="configurable_single_select__customize_option">Nastavitve po meri</string>
   <!--Internal only preferences-->
+  <string name="preferences__internal_clears_onboarding_flag_and_triggers_download_of_onboarding_stories">Clears onboarding flag and triggers download of onboarding stories.</string>
   <!--Payments-->
   <string name="PaymentsActivityFragment__all_activity">Vse dejavnosti</string>
   <string name="PaymentsAllActivityFragment__all">Vse</string>
@@ -3155,6 +3166,9 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="CallParticipant__you">Vi</string>
   <string name="CallParticipant__you_on_another_device">Vi (na drugi napravi)</string>
   <string name="CallParticipant__s_on_another_device">%1$s (na drugi napravi)</string>
+  <!--WifiToCellularPopupWindow-->
+  <!--Message shown during a call when the WiFi network is unusable, and cellular data starts to be used for the call instead.-->
+  <string name="WifiToCellularPopupWindow__weak_wifi_switched_to_cellular">Šibka Wi-Fi povezava. Preklopljeno na mobilno omrežje.</string>
   <!--DeleteAccountFragment-->
   <string name="DeleteAccountFragment__deleting_your_account_will">Z izbrisom vašega računa boste:</string>
   <string name="DeleteAccountFragment__enter_your_phone_number">Vnesite svojo telefonsko številko</string>
@@ -4065,6 +4079,8 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="StoriesLandingItem__share">Deli …</string>
   <!--Context menu option to go to story chat-->
   <string name="StoriesLandingItem__go_to_chat">Pojdi na pogovor</string>
+  <!--Context menu option to go to story info-->
+  <string name="StoriesLandingItem__info">Info</string>
   <!--Label when a story is pending sending-->
   <string name="StoriesLandingItem__sending">Pošiljanje …</string>
   <!--Label when multiple stories are pending sending-->
@@ -4351,7 +4367,7 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <!--Content description for expand contacts chevron-->
   <string name="ExpandModel__view_more">Več</string>
   <string name="StoriesLinkPopup__visit_link">Obišči povezavo</string>
-  <!--Duration and price information-->
+  <!--Gift price and duration, formatted as: {price} dot {n} day duration-->
   <plurals name="GiftRowItem_s_dot_d_day_duration">
     <item quantity="one">%1$s · %2$d dan trajanja</item>
     <item quantity="two">%1$s · %2$d dneva trajanja</item>
@@ -4506,7 +4522,12 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <!--Title of safety number review fragment-->
   <string name="SafetyNumberReviewConnectionsFragment__safety_number_changes">Spremembe varnostne številke</string>
   <!--Message of safety number review fragment-->
-  <string name="SafetyNumberReviewConnectionsFragment__d_recipients_may_have">%1$d prejemnikov je morda znova namestilo Signal ali zamenjalo napravo. Tapnite na prejemnika, da potrdite novo varnostno številko. Potrditev ni obvezna.</string>
+  <plurals name="SafetyNumberReviewConnectionsFragment__d_recipients_may_have">
+    <item quantity="one">%1$d prejemnik_ca je morda znova namestil_a Signal ali zamenjal_a napravo. Tapnite na prejemnika_co, da potrdite novo varnostno številko. Potrditev ni obvezna.</item>
+    <item quantity="two">%1$d prejemnika_ci sta morda znova namestila_i Signal ali zamenjala_i napravo. Tapnite na prejemnika_co, da potrdite novo varnostno številko. Potrditev ni obvezna.</item>
+    <item quantity="few">%1$d prejemniki_ce so morda znova namestili_e Signal ali zamenjali_e napravo. Tapnite na prejemnika_co, da potrdite novo varnostno številko. Potrditev ni obvezna.</item>
+    <item quantity="other">%1$d prejemnikov_c je morda znova namestilo Signal ali zamenjalo napravo. Tapnite na prejemnika_co, da potrdite novo varnostno številko. Potrditev ni obvezna.</item>
+  </plurals>
   <!--Section header for 1:1 contacts in review fragment-->
   <string name="SafetyNumberBucketRowItem__contacts">Stiki</string>
   <!--Context menu label for distribution list headers in review fragment-->
@@ -4523,5 +4544,17 @@ Prejeto sporočilo za izmenjavo ključev za napačno različico protokola.</stri
   <string name="ChooseInitialMyStoryMembershipFragment__all_signal_connections_except">Vse Signal povezave razen …</string>
   <!--Only with selected connections option for initial My Story settings configuration shown when sending to My Story for the first time-->
   <string name="ChooseInitialMyStoryMembershipFragment__only_share_with">Deli le s/z …</string>
+  <!--Story info header sent heading-->
+  <string name="StoryInfoHeader__sent">Poslano:</string>
+  <!--Story info header received heading-->
+  <string name="StoryInfoHeader__received">Prejeto</string>
+  <!--Story info header file size heading-->
+  <string name="StoryInfoHeader__file_size">Velikost datoteke</string>
+  <!--Story info "Sent to" header-->
+  <string name="StoryInfoBottomSheetDialogFragment__sent_to">Poslano uporabniku_ci</string>
+  <!--Story info "Sent from" header-->
+  <string name="StoryInfoBottomSheetDialogFragment__sent_from">Poslal_a uporabnik_ca</string>
+  <!--Story Info context menu label-->
+  <string name="StoryInfoBottomSheetDialogFragment__info">Info</string>
   <!--EOF-->
 </resources>

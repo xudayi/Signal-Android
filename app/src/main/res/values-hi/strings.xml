@@ -1346,9 +1346,9 @@
     <!-- Update item message shown in the release channel when someone is already a sustainer so we ask them if they want to boost. -->
     <string name="MessageRecord_like_this_new_feature_help_support_signal_with_a_one_time_donation">यह नया फ़ीचर पसंद आया? एक बार दान देकर Signal को सहयोग देने में मदद करें।</string>
     <!-- Update item message shown when we merge two threads together -->
-    <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">Your message history with %1$s and their number %2$s has been merged.</string>
+    <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">%1$s के साथ आपके मेसेज के इतिहास को उनके नंबर %2$s के साथ जोड़ दिया गया है।</string>
     <!-- Update item message shown when we merge two threads together and we don't know the phone number of the other thread -->
-    <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">Your message history with %1$s and another chat that belonged to them has been merged.</string>
+    <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">%1$s के साथ आपके मेसेज के इतिहास को उनके साथ ही किसी अन्य चैट के साथ जोड़ दिया गया है।</string>
 
     <!-- Group Calling update messages -->
     <string name="MessageRecord_s_started_a_group_call_s">%1$s ने एक ग्रुप कॉल शुरू की · %2$s</string>
@@ -1960,6 +1960,7 @@
     <string name="MediaPreviewActivity_s_to_you">%1$s से आपको</string>
     <string name="MediaPreviewActivity_media_no_longer_available">मीडिया अब उपलब्ध नहीं है।</string>
     <string name="MediaPreviewActivity_cant_find_an_app_able_to_share_this_media">इस मीडिया को शेयर करने के लिए कोई ऐप नहीं मिल रही।</string>
+    <string name="MediaPreviewActivity_dismiss_due_to_error">बंद करो</string>
 
     <!-- MessageNotifier -->
     <string name="MessageNotifier_d_new_messages_in_d_conversations">%2$d संवाद में %1$d नए मेसेज</string>
@@ -2748,10 +2749,14 @@
     <string name="configurable_single_select__customize_option">अनुकूलित करने का विकल्प</string>
 
     <!-- Internal only preferences -->
+    <string name="preferences__internal_turn_off_stories_with_stories_on_disk" translatable="false">Turn off stories (with stories on disk)</string>
+    <string name="preferences__internal_turn_off_stories" translatable="false">Turn off stories</string>
+    <string name="preferences__internal_delete_private_story" translatable="false">Delete private story</string>
     <string name="preferences__internal_hide_story" translatable="false">Hide story</string>
     <string name="preferences__internal_story_or_profile_selector" translatable="false">Story or profile selector</string>
     <string name="preferences__internal_stories_dialog_launcher" translatable="false">Stories dialog launcher</string>
     <string name="preferences__internal_retry_send" translatable="false">Retry send</string>
+    <string name="preferences__internal_remove_group_story" translatable="false">Remove group story</string>
     <string name="preferences__internal_clear_onboarding_state" translatable="false">Clear onboarding state</string>
     <string name="preferences__internal_clears_onboarding_flag_and_triggers_download_of_onboarding_stories" translatable="false">Clears onboarding flag and triggers download of onboarding stories.</string>
     <string name="preferences__internal_preferences" translatable="false">Internal Preferences</string>
@@ -2903,6 +2908,26 @@
     <string name="PaymentsHomeFragment__enable">शुरु करें</string>
     <!-- Alert dialog button to not enable payment lock for now -->
     <string name="PaymentsHomeFragment__not_now">अभी नहीं</string>
+
+    <!-- PaymentsSecuritySetupFragment -->
+    <!-- Toolbar title -->
+    <string name="PaymentsSecuritySetupFragment__security_setup">Security setup</string>
+    <!-- Title to enable payment lock -->
+    <string name="PaymentsSecuritySetupFragment__protect_your_funds">Protect your funds</string>
+    <!-- Description as to why payment lock is required -->
+    <string name="PaymentsSecuritySetupFragment__help_prevent">Help prevent a person with your phone from accessing your funds by adding another layer of security. You can disable this option in Settings.</string>
+    <!-- Option to enable payment lock -->
+    <string name="PaymentsSecuritySetupFragment__enable_payment_lock">Enable payment lock</string>
+    <!-- Option to cancel -->
+    <string name="PaymentsSecuritySetupFragment__not_now">अभी नहीं</string>
+    <!-- Dialog title to confirm skipping the step -->
+    <string name="PaymentsSecuritySetupFragment__skip_this_step">Skip this step?</string>
+    <!-- Dialog description to let users know why payment lock is required -->
+    <string name="PaymentsSecuritySetupFragment__skipping_this_step">Skipping this step could allow anyone who has physical access to your phone to transfer funds or view your recovery phrase.</string>
+    <!-- Dialog option to cancel -->
+    <string name="PaymentsSecuritySetupFragment__cancel">रद्द करें</string>
+    <!-- Dialog option to skip -->
+    <string name="PaymentsSecuritySetupFragment__skip">छोड़ दे</string>
 
     <!-- PaymentsAddMoneyFragment -->
     <string name="PaymentsAddMoneyFragment__add_funds">धन जोड़ें</string>
@@ -3743,10 +3768,10 @@
     <string name="payment_info_card_hide_this_card">यह कार्ड छिपाएँ?</string>
     <string name="payment_info_card_hide">छुपा दें</string>
     <!-- Title of save recovery phrase card -->
-    <string name="payment_info_card_save_recovery_phrase">Save recovery phrase</string>
+    <string name="payment_info_card_save_recovery_phrase">रिकवरी वाक्य सहेजें</string>
     <string name="payment_info_card_your_recovery_phrase_gives_you">आपका रिकवरी फ़्रेज़ आपको अपना भुगतान खाता रीस्टोर करने का एक और तरीका प्रदान करता है।</string>
     <!-- Button in save recovery phrase card -->
-    <string name="payment_info_card_save_your_phrase">Save your phrase</string>
+    <string name="payment_info_card_save_your_phrase">अपना वाक्य सहेजें</string>
     <string name="payment_info_card_update_your_pin">अपना PIN अपडेट करें</string>
     <string name="payment_info_card_with_a_high_balance">अधिक बैलेंस होने पर, अपने खाते को ज़्यादा सुरक्षित करने के लिए आपको एक अक्षरों और अंकों वाले PIN पर अपडेट करना चाहिए।</string>
     <string name="payment_info_card_update_pin">पिन अपडेट करें</string>
@@ -3771,23 +3796,23 @@
     <string name="PaymentsRecoveryStartFragment__recovery_phrase">रिकवरी फ़्रेज़</string>
     <string name="PaymentsRecoveryStartFragment__view_recovery_phrase">रिकवरी फ़्रेज़ देखें</string>
     <!-- Title in save recovery phrase screen -->
-    <string name="PaymentsRecoveryStartFragment__save_recovery_phrase">Save recovery phrase</string>
+    <string name="PaymentsRecoveryStartFragment__save_recovery_phrase">रिकवरी वाक्य सहेजें</string>
     <string name="PaymentsRecoveryStartFragment__enter_recovery_phrase">रिकवरी फ़्रेज़ दर्ज करें</string>
     <string name="PaymentsRecoveryStartFragment__your_balance_will_automatically_restore">आपके द्वारा Signal फिर से इंस्टॉल करते समय यदि आप अपने Signal PIN की पुष्टि करते हैं तो आपका बैलेंस अपने आप रीस्टोर हो जाएगा। आप रिकवरी फ़्रेज़ का उपयोग करके भी अपना बैलेंस रीस्टोर कर सकते हैं, जो आपके लिए अनोखा %1$d-शब्द का वाक्यांश होता है। इसे लिख लें और किसी सुरक्षित स्थान पर रखें।</string>
     <!-- Description in save recovery phrase screen which shows up when user has non zero balance -->
-    <string name="PaymentsRecoveryStartFragment__got_balance">You’ve got a balance! Time to save your recovery phrase—a 24-word key you can use to restore your balance.</string>
+    <string name="PaymentsRecoveryStartFragment__got_balance">आपने संतुलन बना लिया है! समय है अपने रिकवरी वाक्य को सहेजने का—24 शब्दों की एक कुंजी जिसके इस्तेमाल से आप अपना संतुलन वापस पा सकते हैं।</string>
     <!-- Description in save recovery phrase screen which shows up when user navigates from info card -->
-    <string name="PaymentsRecoveryStartFragment__time_to_save">Time to save your recovery phrase—a 24-word key you can use to restore your balance. Learn more</string>
+    <string name="PaymentsRecoveryStartFragment__time_to_save">समय है अपने रिकवरी वाक्य को सहेजने का—24 शब्दों की एक कुंजी जिसके इस्तेमाल से आप अपना संतुलन वापस पा सकते हैं। अधिक जानें</string>
     <string name="PaymentsRecoveryStartFragment__your_recovery_phrase_is_a">आपका रिकवरी फ़्रेज़ आपके लिए एक अनोखा %1$d-शब्द का वाक्यांश होता है। अपना बैलेंस रीस्टोर करने के लिए इस वाक्यांश का उपयोग करें।</string>
     <string name="PaymentsRecoveryStartFragment__start">शुरू</string>
     <string name="PaymentsRecoveryStartFragment__enter_manually">मैन्युअल रूप से दर्ज करें</string>
     <string name="PaymentsRecoveryStartFragment__paste_from_clipboard">क्लिपबोर्ड से पेस्ट करें</string>
     <!-- Alert dialog title which asks before going back if user wants to save recovery phrase -->
-    <string name="PaymentsRecoveryStartFragment__continue_without_saving">Continue Without Saving?</string>
+    <string name="PaymentsRecoveryStartFragment__continue_without_saving">बिना सहेजे जारी रखना है?</string>
     <!-- Alert dialog description to let user know why recovery phrase needs to be saved -->
-    <string name="PaymentsRecoveryStartFragment__your_recovery_phrase">Your recovery phrase lets you restore your balance in a worst-case scenario. We strongly recommend you save it.</string>
+    <string name="PaymentsRecoveryStartFragment__your_recovery_phrase">आपके रिकवरी वाक्य से आप खराब-से-खराब परिस्थिति में भी अपना संतुलन वापस पा सकते हैं। हम इसकी पुरजोर सलाह देते हैं कि आप इसे सहेज लें।</string>
     <!-- Alert dialog option to skip recovery phrase -->
-    <string name="PaymentsRecoveryStartFragment__skip_recovery_phrase">Skip Recovery Phrase</string>
+    <string name="PaymentsRecoveryStartFragment__skip_recovery_phrase">रिकवरी वाक्य छोड़ें</string>
     <!-- Alert dialog option to cancel dialog-->
     <string name="PaymentsRecoveryStartFragment__cancel">रद्द करें</string>
 
@@ -3943,9 +3968,9 @@
     <!-- Preference title to delete sms -->
     <string name="SmsSettingsFragment__remove_sms_messages">एसएमएस मेसेज हटाएँ</string>
     <!-- Snackbar text to confirm deletion -->
-    <string name="SmsSettingsFragment__removing_sms_messages_from_signal">Removing SMS messages from Signal…</string>
+    <string name="SmsSettingsFragment__removing_sms_messages_from_signal">Signal से SMS मेसेज हटाए जा रहे हैं…</string>
     <!-- Snackbar text to indicate can delete later -->
-    <string name="SmsSettingsFragment__you_can_remove_sms_messages_from_signal_in_settings">You can remove SMS messages from Signal in Settings at any time.</string>
+    <string name="SmsSettingsFragment__you_can_remove_sms_messages_from_signal_in_settings">आप सेटिंग्स में जा कर किसी भी समय Signal से SMS मेसेज हटा सकते हैं।</string>
 
     <!-- NotificationsSettingsFragment -->
     <string name="NotificationsSettingsFragment__messages">मेसेज</string>
@@ -4195,17 +4220,17 @@
     <!-- Dialog title when removing a contact -->
     <string name="NewConversationActivity__remove_s">%1$s को हटाना है?</string>
     <!-- Dialog message when removing a contact -->
-    <string name="NewConversationActivity__you_wont_see_this_person">You won\'t see this person when searching. You\'ll get a message request if they message you in the future.</string>
+    <string name="NewConversationActivity__you_wont_see_this_person">ढूँढ़ते समय आपको यह व्यक्ति नहीं दिखेगा। यदि वे भविष्य में आपको मेसेज भेजते हैं तो आपको एक मेसेज अनुरोध प्राप्त होगा।</string>
     <!-- Snackbar message after removing a contact -->
-    <string name="NewConversationActivity__s_has_been_removed">%1$s has been removed</string>
+    <string name="NewConversationActivity__s_has_been_removed">%1$s को हटा दिया गया है</string>
     <!-- Snackbar message after blocking a contact -->
-    <string name="NewConversationActivity__s_has_been_blocked">%1$s has been blocked</string>
+    <string name="NewConversationActivity__s_has_been_blocked">%1$s को ब्लॉक कर दिया गया है</string>
     <!-- Dialog title when remove target contact is in system contacts -->
-    <string name="NewConversationActivity__unable_to_remove_s">Unable to remove %1$s</string>
+    <string name="NewConversationActivity__unable_to_remove_s">%1$s को नहीं हटाया जा सकता</string>
     <!-- Dialog message when remove target contact is in system contacts -->
-    <string name="NewConversationActivity__this_person_is_saved_to_your">This person is saved to your device\'s Contacts. Delete them from your Contacts and try again.</string>
+    <string name="NewConversationActivity__this_person_is_saved_to_your">आपके डिवाइस के संपर्कों में इस व्यक्ति को सहेजा जा चुका है। उन्हें अपने संपर्कों में से डिलीट करके फिर से प्रयास करें।</string>
     <!-- Dialog action to view contact when they can't be removed otherwise -->
-    <string name="NewConversationActivity__view_contact">View contact</string>
+    <string name="NewConversationActivity__view_contact">संपर्क देखें</string>
 
     <!-- ContactFilterView -->
     <string name="ContactFilterView__search_name_or_number">नाम या नंबर खोजें</string>
@@ -4709,7 +4734,7 @@
     <!-- Subtitle for "My Stories" row item when user has not added stories -->
     <string name="StoriesLandingFragment__tap_to_add_a_story">कोई स्टोरी जोड़ने के लिए टैप करें</string>
     <!-- Displayed when there are no stories to display -->
-    <string name="StoriesLandingFragment__no_recent_updates_to_show_right_now">No recent updates to show right now.</string>
+    <string name="StoriesLandingFragment__no_recent_updates_to_show_right_now">अभी दिखाने के लिए कोई हालिया अपडेट नहीं है।</string>
     <!-- Context menu option to hide a story -->
     <string name="StoriesLandingItem__hide_story">स्टोरी छिपाएँ</string>
     <!-- Context menu option to unhide a story -->
@@ -4799,6 +4824,8 @@
     <string name="StoryViewItem__remove_viewer">व्यूअर को हटाएँ</string>
     <!-- Displayed when a story has no replies yet -->
     <string name="StoryGroupReplyFragment__no_replies_yet">कोई जवाब नहीं</string>
+    <!-- Displayed when no longer a group member -->
+    <string name="StoryGroupReplyFragment__you_cant_reply">You can\'t reply to this story because you\'re no longer a member of this group.</string>
     <!-- Displayed for each user that reacted to a story when viewing replies -->
     <string name="StoryGroupReactionReplyItem__reacted_to_the_story">स्टोरी पर प्रतिक्रिया दी</string>
     <!-- Label for story views tab -->
@@ -4817,6 +4844,13 @@
     <string name="StoryGroupReplyItem__delete">डिलीट करें</string>
     <!-- Page title for My Story options -->
     <string name="MyStorySettingsFragment__my_story">मेरी स्टोरी</string>
+    <!-- Number of total signal connections displayed in "All connections" row item -->
+    <plurals name="MyStorySettingsFragment__viewers">
+        <item quantity="one">%1$d viewer</item>
+        <item quantity="other">%1$d viewers</item>
+    </plurals>
+    <!-- Button on all signal connections row to view all signal connections. Please keep as short as possible. -->
+    <string name="MyStorySettingsFragment__view">View</string>
     <!-- Section heading for story visibility -->
     <string name="MyStorySettingsFragment__who_can_view_this_story">यह स्टोरी कौन देख सकता है</string>
     <!-- Clickable option for selecting people to hide your story from -->
@@ -4911,6 +4945,22 @@
     <string name="ChangeMyStoryMembershipFragment__only_share_with">केवल इनके साथ शेयर करें…</string>
     <!-- Done button label for hide story from screen -->
     <string name="HideStoryFromFragment__done">पूर्ण</string>
+    <!-- Dialog title for removing a group story -->
+    <string name="StoryDialogs__remove_group_story">ग्रुप स्टोरी हटानी है?</string>
+    <!-- Dialog message for removing a group story -->
+    <string name="StoryDialogs__s_will_be_removed">\"%1$s\" will be removed.</string>
+    <!-- Dialog positive action for removing a group story -->
+    <string name="StoryDialogs__remove">हटा दें</string>
+    <!-- Dialog title for deleting a private story -->
+    <string name="StoryDialogs__delete_private_story">निजी स्टोरी डिलीट करनी है?</string>
+    <!-- Dialog message for deleting a private story -->
+    <string name="StoryDialogs__s_and_updates_shared">\"%1$s\" and updates shared to this story will be deleted.</string>
+    <!-- Dialog positive action for deleting a private story -->
+    <string name="StoryDialogs__delete">डिलीट करें</string>
+    <!-- Dialog title for first time sending something to a beta story -->
+    <string name="StoryDialogs__stories_is_available_to">Stories is available to Signal beta users only.</string>
+    <!-- Dialog message for first time sending something to a beta story -->
+    <string name="StoryDialogs__if_you_share_a_story">If you share a story, it will only be available to people who are on Signal beta.</string>
     <!-- Dialog title for first time adding something to a story -->
     <string name="StoryDialogs__add_to_story_q">स्टोरी में जोड़ना है?</string>
     <!-- Dialog message for first time adding something to a story -->
@@ -4923,6 +4973,8 @@
     <string name="StoryDialogs__story_could_not_be_sent">स्टोरी नहीं भेजी जा सकी। अपना कनेक्शन जाँचें और फिर से प्रयास करें।</string>
     <!-- Error message dialog button to resend a previously failed story send -->
     <string name="StoryDialogs__send">भेजें</string>
+    <!-- Action button for turning off stories when stories are present on the device -->
+    <string name="StoryDialogs__turn_off_and_delete">Turn off and delete</string>
     <!-- Privacy Settings toggle title for stories -->
     <string name="PrivacySettingsFragment__share_and_view_stories">शेयर करें और स्टोरीज़ देखें</string>
     <!-- Privacy Settings toggle summary for stories -->
@@ -5071,6 +5123,11 @@
         <item quantity="one">ग्रुप स्टोरी · %1$d व्यूअर</item>
         <item quantity="other">ग्रुप स्टोरी · %1$d वयूअर</item>
     </plurals>
+    <!-- Label under name for groups -->
+    <plurals name="ContactSearchItems__group_d_members">
+        <item quantity="one">%1$d मेंबर</item>
+        <item quantity="other">%1$d मेंबर्स</item>
+    </plurals>
     <!-- Label under name for my story -->
     <plurals name="ContactSearchItems__my_story_s_dot_d_viewers">
         <item quantity="one">%1$s · %2$d व्यूअर</item>
@@ -5206,7 +5263,7 @@
     <!-- Dialog title to turn off stories -->
     <string name="StoriesPrivacySettingsFragment__turn_off_stories_question">स्टोरीज़ बंद करनी हैं?</string>
     <!-- Dialog message to turn off stories -->
-    <string name="StoriesPrivacySettingsFragment__you_will_no_longer_be_able_to">आप स्टोरीज़ न तो शेयर कर पाएंगे, न ही उन्हें देख पाएंगे। फिर भी हाल ही में भेजी गई आपकी कोई भी स्टोरी, समाप्त होने तक दूसरों को दिखेंगी।</string>
+    <string name="StoriesPrivacySettingsFragment__you_will_no_longer_be_able_to_share">You will no longer be able to share or view stories. Story updates you have recently shared will also be deleted.</string>
     <!-- Page title when launched from stories landing screen -->
     <string name="StoriesPrivacySettingsFragment__story_privacy">स्टोरी की निजता</string>
 
@@ -5229,7 +5286,7 @@
     <!-- Title of the screen -->
     <string name="ExportYourSmsMessagesFragment__export_your_sms_messages">अपने एसएमएस मेसेज एक्सपोर्ट कर दें</string>
     <!-- Message of the screen -->
-    <string name="ExportYourSmsMessagesFragment__you_can_export_your_sms_messages_to_your_phones_sms_database">You can export your SMS messages to your phone\'s SMS database. This allows other SMS apps on your phone to access and import them. This does not create a shareable file of your SMS message history.</string>
+    <string name="ExportYourSmsMessagesFragment__you_can_export_your_sms_messages_to_your_phones_sms_database">आप अपने SMS मेसेज अपने फ़ोन के SMS डेटाबेस को निर्यात कर सकते हैं। इससे आपके फ़ोन के अन्य SMS ऐप उन्हें ऐक्सेस व उनका आयात कर पाएँगे। इससे आपके SMS मेसेज इतिहास की कोई साझा करने योग्य फ़ाइल नहीं बनती है।</string>
     <!-- Button label to begin export -->
     <string name="ExportYourSmsMessagesFragment__continue">जारी रखें</string>
 
@@ -5255,17 +5312,17 @@
     <!-- Fourth step number/bullet for choose new default sms app instructions -->
     <string name="ChooseANewDefaultSmsAppFragment__bullet_4">4</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__tap_continue_to_open_the_defaults_apps_screen_in_settings">Tap \"Continue\" to open the \"Default apps\" screen in Settings</string>
+    <string name="ChooseANewDefaultSmsAppFragment__tap_continue_to_open_the_defaults_apps_screen_in_settings">सेटिंग्स में \"डीफॉल्ट ऐप\" स्क्रीन को खोलने के लिए \"जारी रखें\" पर टैप करें</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__select_sms_app_from_the_list">Select \"SMS app\" from the list</string>
+    <string name="ChooseANewDefaultSmsAppFragment__select_sms_app_from_the_list">सूची से \"SMS ऐप\" चुनें</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__choose_another_app_to_use_for_sms_messaging">Choose another app to use for SMS messaging</string>
+    <string name="ChooseANewDefaultSmsAppFragment__choose_another_app_to_use_for_sms_messaging">SMS मेसेज भेजने व प्राप्त करने के लिए कोई अन्य ऐप चुनें</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__return_to_signal">Return to Signal</string>
+    <string name="ChooseANewDefaultSmsAppFragment__return_to_signal">Signal पर वापस जाएँ</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__open_your_phones_settings_app">Open your phone\'s Settings app</string>
+    <string name="ChooseANewDefaultSmsAppFragment__open_your_phones_settings_app">अपने फ़ोन की सेटिंग्स का ऐप खोलें</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__navigate_to_apps_default_apps_sms_app">Navigate to \"Apps\" &gt; \"Default apps\" &gt; \"SMS app\"</string>
+    <string name="ChooseANewDefaultSmsAppFragment__navigate_to_apps_default_apps_sms_app">नैविगेट करके \"ऐप\" &gt; \"डीफॉल्ट ऐप\" &gt; \"SMS ऐप\" पर जाएँ</string>
 
     <!-- RemoveSmsMessagesDialogFragment -->
     <!-- Action button to keep messages -->
@@ -5275,13 +5332,13 @@
     <!-- Title of dialog -->
     <string name="RemoveSmsMessagesDialogFragment__remove_sms_messages">Signal से मेसेज हटाने हैं?</string>
     <!-- Message of dialog -->
-    <string name="RemoveSmsMessagesDialogFragment__you_can_now_remove_sms_messages_from_signal">You can now remove SMS messages from Signal to clear up storage space. They will still be available to other SMS apps on your phone even if you remove them.</string>
+    <string name="RemoveSmsMessagesDialogFragment__you_can_now_remove_sms_messages_from_signal">अब आप Signal से SMS मेसेज हटाकर स्टोरेज की जगह खाली कर सकते हैं। आप उन्हें हटा भी दें फिर भी वे आपके फ़ोन के अन्य SMS ऐप पर उपलब्ध रहेंगे।</string>
 
     <!-- SetSignalAsDefaultSmsAppFragment -->
     <!-- Title of the screen -->
-    <string name="SetSignalAsDefaultSmsAppFragment__set_signal_as_the_default_sms_app">Set Signal as the default SMS app</string>
+    <string name="SetSignalAsDefaultSmsAppFragment__set_signal_as_the_default_sms_app">Signal को डीफॉल्ट SMS ऐप के तौर पर सेट करें</string>
     <!-- Message of the screen -->
-    <string name="SetSignalAsDefaultSmsAppFragment__to_export_your_sms_messages">To export your SMS messages, you need to set Signal as the default SMS app.</string>
+    <string name="SetSignalAsDefaultSmsAppFragment__to_export_your_sms_messages">अपने SMS मेसेज निर्यात करने के लिए आपको Signal को अपने डीफॉल्ट SMS ऐप के तौर पर सेट करना होगा।</string>
     <!-- Button label to start export -->
     <string name="SetSignalAsDefaultSmsAppFragment__next">अगला</string>
 

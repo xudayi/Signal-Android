@@ -1288,9 +1288,9 @@
     <!-- Update item message shown in the release channel when someone is already a sustainer so we ask them if they want to boost. -->
     <string name="MessageRecord_like_this_new_feature_help_support_signal_with_a_one_time_donation">喜欢这个新功能吗？请通过单次捐款支持 Signal 吧。</string>
     <!-- Update item message shown when we merge two threads together -->
-    <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">Your message history with %1$s and their number %2$s has been merged.</string>
+    <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">您与%1$s的消息历史记录和对方的号码 %2$s 已合并。</string>
     <!-- Update item message shown when we merge two threads together and we don't know the phone number of the other thread -->
-    <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">Your message history with %1$s and another chat that belonged to them has been merged.</string>
+    <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">您与%1$s的消息历史记录和属于对方的其他聊天已合并。</string>
 
     <!-- Group Calling update messages -->
     <string name="MessageRecord_s_started_a_group_call_s">%1$s发起了群组通话 · %2$s</string>
@@ -1800,7 +1800,7 @@
 
     <!-- UsernameEditFragment -->
     <!-- Toolbar title when entering from registration -->
-    <string name="UsernameEditFragment__add_a_username">Add a username</string>
+    <string name="UsernameEditFragment__add_a_username">添加用户名</string>
     <!-- Instructional text at the top of the username edit screen -->
     <string name="UsernameEditFragment__choose_your_username">选择您的用户名</string>
     <string name="UsernameEditFragment_username">用户名</string>
@@ -1886,6 +1886,7 @@
     <string name="MediaPreviewActivity_s_to_you">%1$s发送给您</string>
     <string name="MediaPreviewActivity_media_no_longer_available">媒体已失效。</string>
     <string name="MediaPreviewActivity_cant_find_an_app_able_to_share_this_media">未找到可分享此媒体的应用。</string>
+    <string name="MediaPreviewActivity_dismiss_due_to_error">关闭</string>
 
     <!-- MessageNotifier -->
     <string name="MessageNotifier_d_new_messages_in_d_conversations">%2$d 个对话中有 %1$d 条新消息</string>
@@ -2662,10 +2663,14 @@
     <string name="configurable_single_select__customize_option">自定义选项</string>
 
     <!-- Internal only preferences -->
+    <string name="preferences__internal_turn_off_stories_with_stories_on_disk" translatable="false">Turn off stories (with stories on disk)</string>
+    <string name="preferences__internal_turn_off_stories" translatable="false">Turn off stories</string>
+    <string name="preferences__internal_delete_private_story" translatable="false">Delete private story</string>
     <string name="preferences__internal_hide_story" translatable="false">Hide story</string>
     <string name="preferences__internal_story_or_profile_selector" translatable="false">Story or profile selector</string>
     <string name="preferences__internal_stories_dialog_launcher" translatable="false">Stories dialog launcher</string>
     <string name="preferences__internal_retry_send" translatable="false">Retry send</string>
+    <string name="preferences__internal_remove_group_story" translatable="false">Remove group story</string>
     <string name="preferences__internal_clear_onboarding_state" translatable="false">Clear onboarding state</string>
     <string name="preferences__internal_clears_onboarding_flag_and_triggers_download_of_onboarding_stories" translatable="false">Clears onboarding flag and triggers download of onboarding stories.</string>
     <string name="preferences__internal_preferences" translatable="false">Internal Preferences</string>
@@ -2817,6 +2822,26 @@
     <string name="PaymentsHomeFragment__enable">开启</string>
     <!-- Alert dialog button to not enable payment lock for now -->
     <string name="PaymentsHomeFragment__not_now">以后再说</string>
+
+    <!-- PaymentsSecuritySetupFragment -->
+    <!-- Toolbar title -->
+    <string name="PaymentsSecuritySetupFragment__security_setup">Security setup</string>
+    <!-- Title to enable payment lock -->
+    <string name="PaymentsSecuritySetupFragment__protect_your_funds">Protect your funds</string>
+    <!-- Description as to why payment lock is required -->
+    <string name="PaymentsSecuritySetupFragment__help_prevent">Help prevent a person with your phone from accessing your funds by adding another layer of security. You can disable this option in Settings.</string>
+    <!-- Option to enable payment lock -->
+    <string name="PaymentsSecuritySetupFragment__enable_payment_lock">Enable payment lock</string>
+    <!-- Option to cancel -->
+    <string name="PaymentsSecuritySetupFragment__not_now">稍后再说</string>
+    <!-- Dialog title to confirm skipping the step -->
+    <string name="PaymentsSecuritySetupFragment__skip_this_step">Skip this step?</string>
+    <!-- Dialog description to let users know why payment lock is required -->
+    <string name="PaymentsSecuritySetupFragment__skipping_this_step">Skipping this step could allow anyone who has physical access to your phone to transfer funds or view your recovery phrase.</string>
+    <!-- Dialog option to cancel -->
+    <string name="PaymentsSecuritySetupFragment__cancel">取消</string>
+    <!-- Dialog option to skip -->
+    <string name="PaymentsSecuritySetupFragment__skip">跳过</string>
 
     <!-- PaymentsAddMoneyFragment -->
     <string name="PaymentsAddMoneyFragment__add_funds">添加资金</string>
@@ -3646,10 +3671,10 @@
     <string name="payment_info_card_hide_this_card">是否隐藏该卡片？</string>
     <string name="payment_info_card_hide">隐藏</string>
     <!-- Title of save recovery phrase card -->
-    <string name="payment_info_card_save_recovery_phrase">Save recovery phrase</string>
+    <string name="payment_info_card_save_recovery_phrase">保存恢复短语</string>
     <string name="payment_info_card_your_recovery_phrase_gives_you">恢复短语提供了另一种方式，可用于还原您的付款帐户。</string>
     <!-- Button in save recovery phrase card -->
-    <string name="payment_info_card_save_your_phrase">Save your phrase</string>
+    <string name="payment_info_card_save_your_phrase">保存您的短语</string>
     <string name="payment_info_card_update_your_pin">更新 PIN 码</string>
     <string name="payment_info_card_with_a_high_balance">余额较高时，可升级为字母数字 PIN 码，更好地保护您的帐号。</string>
     <string name="payment_info_card_update_pin">更新 PIN</string>
@@ -3674,23 +3699,23 @@
     <string name="PaymentsRecoveryStartFragment__recovery_phrase">恢复短语</string>
     <string name="PaymentsRecoveryStartFragment__view_recovery_phrase">查看恢复短语</string>
     <!-- Title in save recovery phrase screen -->
-    <string name="PaymentsRecoveryStartFragment__save_recovery_phrase">Save recovery phrase</string>
+    <string name="PaymentsRecoveryStartFragment__save_recovery_phrase">保存恢复短语</string>
     <string name="PaymentsRecoveryStartFragment__enter_recovery_phrase">输入恢复短语</string>
     <string name="PaymentsRecoveryStartFragment__your_balance_will_automatically_restore">重新安装 Signal 并确认 Signal PIN 码后，将自动还原您的余额。另外，还可使用恢复短语，来还原您的余额。该短语包含 %1$d 个单词，并且对您是唯一的。请将其记下并妥善保存。</string>
     <!-- Description in save recovery phrase screen which shows up when user has non zero balance -->
-    <string name="PaymentsRecoveryStartFragment__got_balance">You’ve got a balance! Time to save your recovery phrase—a 24-word key you can use to restore your balance.</string>
+    <string name="PaymentsRecoveryStartFragment__got_balance">您还有一部分余额！是时候保存您的恢复短语了——这是一个 24 字/词的密钥，可以用来恢复您的余额。</string>
     <!-- Description in save recovery phrase screen which shows up when user navigates from info card -->
-    <string name="PaymentsRecoveryStartFragment__time_to_save">Time to save your recovery phrase—a 24-word key you can use to restore your balance. Learn more</string>
+    <string name="PaymentsRecoveryStartFragment__time_to_save">是时候保存您的恢复短语了——这是一个 24 字/词的密钥，可以用来恢复您的余额。了解详情</string>
     <string name="PaymentsRecoveryStartFragment__your_recovery_phrase_is_a">恢复短语包含 %1$d 个单词，并且对您是唯一的，可用于还原您的余额。</string>
     <string name="PaymentsRecoveryStartFragment__start">开始</string>
     <string name="PaymentsRecoveryStartFragment__enter_manually">手动输入</string>
     <string name="PaymentsRecoveryStartFragment__paste_from_clipboard">从剪贴板粘贴</string>
     <!-- Alert dialog title which asks before going back if user wants to save recovery phrase -->
-    <string name="PaymentsRecoveryStartFragment__continue_without_saving">Continue Without Saving?</string>
+    <string name="PaymentsRecoveryStartFragment__continue_without_saving">是否在不保存的情况下继续？</string>
     <!-- Alert dialog description to let user know why recovery phrase needs to be saved -->
-    <string name="PaymentsRecoveryStartFragment__your_recovery_phrase">Your recovery phrase lets you restore your balance in a worst-case scenario. We strongly recommend you save it.</string>
+    <string name="PaymentsRecoveryStartFragment__your_recovery_phrase">您的恢复短语可以让您在最坏的情况下恢复您的余额。我们强烈建议您保存您的恢复短语。</string>
     <!-- Alert dialog option to skip recovery phrase -->
-    <string name="PaymentsRecoveryStartFragment__skip_recovery_phrase">Skip Recovery Phrase</string>
+    <string name="PaymentsRecoveryStartFragment__skip_recovery_phrase">跳过恢复短语</string>
     <!-- Alert dialog option to cancel dialog-->
     <string name="PaymentsRecoveryStartFragment__cancel">取消</string>
 
@@ -3846,9 +3871,9 @@
     <!-- Preference title to delete sms -->
     <string name="SmsSettingsFragment__remove_sms_messages">移除短信消息</string>
     <!-- Snackbar text to confirm deletion -->
-    <string name="SmsSettingsFragment__removing_sms_messages_from_signal">Removing SMS messages from Signal…</string>
+    <string name="SmsSettingsFragment__removing_sms_messages_from_signal">正在从 Signal 中移除短信消息…</string>
     <!-- Snackbar text to indicate can delete later -->
-    <string name="SmsSettingsFragment__you_can_remove_sms_messages_from_signal_in_settings">You can remove SMS messages from Signal in Settings at any time.</string>
+    <string name="SmsSettingsFragment__you_can_remove_sms_messages_from_signal_in_settings">您可以随时在设置中将短信消息从 Signal 中移除。</string>
 
     <!-- NotificationsSettingsFragment -->
     <string name="NotificationsSettingsFragment__messages">消息</string>
@@ -4096,17 +4121,17 @@
     <!-- Dialog title when removing a contact -->
     <string name="NewConversationActivity__remove_s">要移除%1$s吗？</string>
     <!-- Dialog message when removing a contact -->
-    <string name="NewConversationActivity__you_wont_see_this_person">You won\'t see this person when searching. You\'ll get a message request if they message you in the future.</string>
+    <string name="NewConversationActivity__you_wont_see_this_person">您在搜索时将不会看到此用户。如果对方在日后给您发送消息，您将会收到消息请求。</string>
     <!-- Snackbar message after removing a contact -->
-    <string name="NewConversationActivity__s_has_been_removed">%1$s has been removed</string>
+    <string name="NewConversationActivity__s_has_been_removed">已移除 %1$s</string>
     <!-- Snackbar message after blocking a contact -->
-    <string name="NewConversationActivity__s_has_been_blocked">%1$s has been blocked</string>
+    <string name="NewConversationActivity__s_has_been_blocked">已屏蔽 %1$s</string>
     <!-- Dialog title when remove target contact is in system contacts -->
-    <string name="NewConversationActivity__unable_to_remove_s">Unable to remove %1$s</string>
+    <string name="NewConversationActivity__unable_to_remove_s">无法移除 %1$s</string>
     <!-- Dialog message when remove target contact is in system contacts -->
-    <string name="NewConversationActivity__this_person_is_saved_to_your">This person is saved to your device\'s Contacts. Delete them from your Contacts and try again.</string>
+    <string name="NewConversationActivity__this_person_is_saved_to_your">此用户已保存到您设备的通讯录中。请在通讯录中删除对方并重试。</string>
     <!-- Dialog action to view contact when they can't be removed otherwise -->
-    <string name="NewConversationActivity__view_contact">View contact</string>
+    <string name="NewConversationActivity__view_contact">查看联系人</string>
 
     <!-- ContactFilterView -->
     <string name="ContactFilterView__search_name_or_number">搜索名字或号码</string>
@@ -4605,7 +4630,7 @@
     <!-- Subtitle for "My Stories" row item when user has not added stories -->
     <string name="StoriesLandingFragment__tap_to_add_a_story">点击添加动态</string>
     <!-- Displayed when there are no stories to display -->
-    <string name="StoriesLandingFragment__no_recent_updates_to_show_right_now">No recent updates to show right now.</string>
+    <string name="StoriesLandingFragment__no_recent_updates_to_show_right_now">目前没有可显示的更新。</string>
     <!-- Context menu option to hide a story -->
     <string name="StoriesLandingItem__hide_story">隐藏动态</string>
     <!-- Context menu option to unhide a story -->
@@ -4671,9 +4696,9 @@
     <!-- Displayed when viewing a post from another user with no replies -->
     <string name="StoryViewerPageFragment__reply">回复</string>
     <!-- Displayed when viewing a post that has failed to send to some users -->
-    <string name="StoryViewerPageFragment__partially_sent">Partially sent. Tap for details</string>
+    <string name="StoryViewerPageFragment__partially_sent">未完全发送。点击查看详情</string>
     <!-- Displayed when viewing a post that has failed to send -->
-    <string name="StoryViewerPageFragment__send_failed">Send failed. Tap to retry</string>
+    <string name="StoryViewerPageFragment__send_failed">发送失败。点击重试</string>
     <!-- Label for the reply button in story viewer, which will launch the group story replies bottom sheet. -->
     <string name="StoryViewerPageFragment__reply_to_group">回复群组</string>
     <!-- Displayed when a story has no views -->
@@ -4692,6 +4717,8 @@
     <string name="StoryViewItem__remove_viewer">移除访客</string>
     <!-- Displayed when a story has no replies yet -->
     <string name="StoryGroupReplyFragment__no_replies_yet">未有回复</string>
+    <!-- Displayed when no longer a group member -->
+    <string name="StoryGroupReplyFragment__you_cant_reply">You can\'t reply to this story because you\'re no longer a member of this group.</string>
     <!-- Displayed for each user that reacted to a story when viewing replies -->
     <string name="StoryGroupReactionReplyItem__reacted_to_the_story">已回应此动态</string>
     <!-- Label for story views tab -->
@@ -4710,6 +4737,12 @@
     <string name="StoryGroupReplyItem__delete">删除</string>
     <!-- Page title for My Story options -->
     <string name="MyStorySettingsFragment__my_story">我的动态</string>
+    <!-- Number of total signal connections displayed in "All connections" row item -->
+    <plurals name="MyStorySettingsFragment__viewers">
+        <item quantity="other">%1$d viewers</item>
+    </plurals>
+    <!-- Button on all signal connections row to view all signal connections. Please keep as short as possible. -->
+    <string name="MyStorySettingsFragment__view">View</string>
     <!-- Section heading for story visibility -->
     <string name="MyStorySettingsFragment__who_can_view_this_story">谁可以看到此动态</string>
     <!-- Clickable option for selecting people to hide your story from -->
@@ -4802,6 +4835,22 @@
     <string name="ChangeMyStoryMembershipFragment__only_share_with">只分享给……</string>
     <!-- Done button label for hide story from screen -->
     <string name="HideStoryFromFragment__done">完成</string>
+    <!-- Dialog title for removing a group story -->
+    <string name="StoryDialogs__remove_group_story">要移除群组动态吗？</string>
+    <!-- Dialog message for removing a group story -->
+    <string name="StoryDialogs__s_will_be_removed">\"%1$s\" will be removed.</string>
+    <!-- Dialog positive action for removing a group story -->
+    <string name="StoryDialogs__remove">删除</string>
+    <!-- Dialog title for deleting a private story -->
+    <string name="StoryDialogs__delete_private_story">要删除私密动态吗？</string>
+    <!-- Dialog message for deleting a private story -->
+    <string name="StoryDialogs__s_and_updates_shared">\"%1$s\" and updates shared to this story will be deleted.</string>
+    <!-- Dialog positive action for deleting a private story -->
+    <string name="StoryDialogs__delete">删除</string>
+    <!-- Dialog title for first time sending something to a beta story -->
+    <string name="StoryDialogs__stories_is_available_to">Stories is available to Signal beta users only.</string>
+    <!-- Dialog message for first time sending something to a beta story -->
+    <string name="StoryDialogs__if_you_share_a_story">If you share a story, it will only be available to people who are on Signal beta.</string>
     <!-- Dialog title for first time adding something to a story -->
     <string name="StoryDialogs__add_to_story_q">要添加到动态吗？</string>
     <!-- Dialog message for first time adding something to a story -->
@@ -4814,6 +4863,8 @@
     <string name="StoryDialogs__story_could_not_be_sent">动态无法发送。请检查您的网络连接并重试。</string>
     <!-- Error message dialog button to resend a previously failed story send -->
     <string name="StoryDialogs__send">发送</string>
+    <!-- Action button for turning off stories when stories are present on the device -->
+    <string name="StoryDialogs__turn_off_and_delete">Turn off and delete</string>
     <!-- Privacy Settings toggle title for stories -->
     <string name="PrivacySettingsFragment__share_and_view_stories">分享和浏览动态</string>
     <!-- Privacy Settings toggle summary for stories -->
@@ -4958,6 +5009,10 @@
     <plurals name="ContactSearchItems__group_story_d_viewers">
         <item quantity="other">群组动态 · %1$d 位访客</item>
     </plurals>
+    <!-- Label under name for groups -->
+    <plurals name="ContactSearchItems__group_d_members">
+        <item quantity="other">%1$d位成员</item>
+    </plurals>
     <!-- Label under name for my story -->
     <plurals name="ContactSearchItems__my_story_s_dot_d_viewers">
         <item quantity="other">%1$s · %2$d 位访客</item>
@@ -5088,7 +5143,7 @@
     <!-- Dialog title to turn off stories -->
     <string name="StoriesPrivacySettingsFragment__turn_off_stories_question">要关闭动态吗？</string>
     <!-- Dialog message to turn off stories -->
-    <string name="StoriesPrivacySettingsFragment__you_will_no_longer_be_able_to">您将无法再分享或浏览动态。您最近发布的任何动态在到期之前仍然对其他人可见。</string>
+    <string name="StoriesPrivacySettingsFragment__you_will_no_longer_be_able_to_share">You will no longer be able to share or view stories. Story updates you have recently shared will also be deleted.</string>
     <!-- Page title when launched from stories landing screen -->
     <string name="StoriesPrivacySettingsFragment__story_privacy">动态隐私</string>
 
@@ -5111,7 +5166,7 @@
     <!-- Title of the screen -->
     <string name="ExportYourSmsMessagesFragment__export_your_sms_messages">导出您的短信消息</string>
     <!-- Message of the screen -->
-    <string name="ExportYourSmsMessagesFragment__you_can_export_your_sms_messages_to_your_phones_sms_database">You can export your SMS messages to your phone\'s SMS database. This allows other SMS apps on your phone to access and import them. This does not create a shareable file of your SMS message history.</string>
+    <string name="ExportYourSmsMessagesFragment__you_can_export_your_sms_messages_to_your_phones_sms_database">您可以将您的短信消息导出到您手机的短信数据库中。这样一来您手机上的其他短信应用就可以访问和导入这些消息。此操作不会为您的短信消息历史记录创建共享文件。</string>
     <!-- Button label to begin export -->
     <string name="ExportYourSmsMessagesFragment__continue">继续</string>
 
@@ -5137,17 +5192,17 @@
     <!-- Fourth step number/bullet for choose new default sms app instructions -->
     <string name="ChooseANewDefaultSmsAppFragment__bullet_4">4</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__tap_continue_to_open_the_defaults_apps_screen_in_settings">Tap \"Continue\" to open the \"Default apps\" screen in Settings</string>
+    <string name="ChooseANewDefaultSmsAppFragment__tap_continue_to_open_the_defaults_apps_screen_in_settings">点击“继续”以便在设置中打开“默认应用”页面</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__select_sms_app_from_the_list">Select \"SMS app\" from the list</string>
+    <string name="ChooseANewDefaultSmsAppFragment__select_sms_app_from_the_list">从列表中选择“短信应用”</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__choose_another_app_to_use_for_sms_messaging">Choose another app to use for SMS messaging</string>
+    <string name="ChooseANewDefaultSmsAppFragment__choose_another_app_to_use_for_sms_messaging">选择另一个应用来使用短信消息</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__return_to_signal">Return to Signal</string>
+    <string name="ChooseANewDefaultSmsAppFragment__return_to_signal">返回 Signal</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__open_your_phones_settings_app">Open your phone\'s Settings app</string>
+    <string name="ChooseANewDefaultSmsAppFragment__open_your_phones_settings_app">打开您手机的设置应用</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__navigate_to_apps_default_apps_sms_app">Navigate to \"Apps\" &gt; \"Default apps\" &gt; \"SMS app\"</string>
+    <string name="ChooseANewDefaultSmsAppFragment__navigate_to_apps_default_apps_sms_app">前往“应用”&gt;“默认应用”&gt;“短信应用”</string>
 
     <!-- RemoveSmsMessagesDialogFragment -->
     <!-- Action button to keep messages -->
@@ -5157,13 +5212,13 @@
     <!-- Title of dialog -->
     <string name="RemoveSmsMessagesDialogFragment__remove_sms_messages">要从 Signal 将短信消息移除吗？</string>
     <!-- Message of dialog -->
-    <string name="RemoveSmsMessagesDialogFragment__you_can_now_remove_sms_messages_from_signal">You can now remove SMS messages from Signal to clear up storage space. They will still be available to other SMS apps on your phone even if you remove them.</string>
+    <string name="RemoveSmsMessagesDialogFragment__you_can_now_remove_sms_messages_from_signal">您现在可以从 Signal 中移除短信消息，以清理您的存储空间。移除后，您手机上的其他短信应用仍可以使用这些消息。</string>
 
     <!-- SetSignalAsDefaultSmsAppFragment -->
     <!-- Title of the screen -->
-    <string name="SetSignalAsDefaultSmsAppFragment__set_signal_as_the_default_sms_app">Set Signal as the default SMS app</string>
+    <string name="SetSignalAsDefaultSmsAppFragment__set_signal_as_the_default_sms_app">将 Signal 设为默认的短信应用</string>
     <!-- Message of the screen -->
-    <string name="SetSignalAsDefaultSmsAppFragment__to_export_your_sms_messages">To export your SMS messages, you need to set Signal as the default SMS app.</string>
+    <string name="SetSignalAsDefaultSmsAppFragment__to_export_your_sms_messages">如要导出您的短信消息，您需要将 Signal 设为默认的短信应用。</string>
     <!-- Button label to start export -->
     <string name="SetSignalAsDefaultSmsAppFragment__next">下一步</string>
 

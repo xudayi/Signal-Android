@@ -141,6 +141,7 @@ class FullSignalAudioManagerApi31(context: Context, eventListener: EventListener
     Log.i(TAG, "startIncomingRinger(): uri: ${if (ringtoneUri != null) "present" else "null"} vibrate: $vibrate")
     androidAudioManager.mode = AudioManager.MODE_RINGTONE
     setMicrophoneMute(false)
+    setDefaultAudioDevice(null, AudioDevice.SPEAKER_PHONE, false)
     incomingRinger.start(ringtoneUri, vibrate)
   }
 
@@ -166,7 +167,12 @@ class FullSignalAudioManagerApi31(context: Context, eventListener: EventListener
   private fun updateAudioDeviceState() {
     handler.assertHandlerThread()
 
-    currentAudioDevice = AudioDeviceMapping.fromPlatformType(androidAudioManager.communicationDevice.type)
+    val communicationDevice: AudioDeviceInfo? = androidAudioManager.communicationDevice
+    currentAudioDevice = if (communicationDevice == null) {
+      AudioDevice.NONE
+    } else {
+      AudioDeviceMapping.fromPlatformType(communicationDevice.type)
+    }
     val availableCommunicationDevices: List<AudioDeviceInfo> = androidAudioManager.availableCommunicationDevices
     hasBluetoothHeadset = availableCommunicationDevices.any { AudioDeviceMapping.fromPlatformType(it.type) == AudioDevice.BLUETOOTH }
     hasWiredHeadset = availableCommunicationDevices.any { AudioDeviceMapping.fromPlatformType(it.type) == AudioDevice.WIRED_HEADSET }

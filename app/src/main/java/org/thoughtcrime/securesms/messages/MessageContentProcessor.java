@@ -1641,6 +1641,10 @@ public final class MessageContentProcessor {
         Recipient        threadRecipient = Objects.requireNonNull(SignalDatabase.threads().getRecipientForThreadId(story.getThreadId()));
         boolean          groupStory      = threadRecipient.isActiveGroup();
 
+        if (!groupStory) {
+          threadRecipient = senderRecipient;
+        }
+
         handlePossibleExpirationUpdate(content, message, threadRecipient.getGroupId(), senderRecipient, threadRecipient, receivedTime);
 
         if (message.getGroupContext().isPresent() ) {
@@ -1935,7 +1939,7 @@ public final class MessageContentProcessor {
         }
 
         quoteModel      = new QuoteModel(storyContext.getSentTimestamp(), storyAuthorRecipient, quoteBody, false, story.getSlideDeck().asAttachments(), Collections.emptyList(), QuoteModel.Type.NORMAL);
-        expiresInMillis = TimeUnit.SECONDS.toMillis(message.getExpirationStartTimestamp());
+        expiresInMillis = TimeUnit.SECONDS.toMillis(message.getDataMessage().get().getExpiresInSeconds());
       } else {
         warn(envelopeTimestamp, "Story has replies disabled. Dropping reply.");
         return -1L;
@@ -3007,8 +3011,13 @@ public final class MessageContentProcessor {
   }
 
   private Recipient getMessageDestination(@NonNull SignalServiceContent content) throws BadGroupIdException {
-    SignalServiceDataMessage message = content.getDataMessage().orElse(null);
-    return getGroupRecipient(message != null ? message.getGroupContext() : Optional.empty()).orElseGet(() -> Recipient.externalPush(content.getSender()));
+    if (content.getStoryMessage().isPresent()) {
+      SignalServiceStoryMessage message = content.getStoryMessage().get();
+      return getGroupRecipient(message.getGroupContext()).orElseGet(() -> Recipient.externalPush(content.getSender()));
+    } else {
+      SignalServiceDataMessage message = content.getDataMessage().orElse(null);
+      return getGroupRecipient(message != null ? message.getGroupContext() : Optional.empty()).orElseGet(() -> Recipient.externalPush(content.getSender()));
+    }
   }
 
   private Optional<Recipient> getGroupRecipient(Optional<SignalServiceGroupV2> message) {

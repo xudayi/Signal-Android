@@ -1346,9 +1346,9 @@
     <!-- Update item message shown in the release channel when someone is already a sustainer so we ask them if they want to boost. -->
     <string name="MessageRecord_like_this_new_feature_help_support_signal_with_a_one_time_donation">Liker du denne nye funksjonen? Vil du støtte Signal med et engangsbeløp?</string>
     <!-- Update item message shown when we merge two threads together -->
-    <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">Your message history with %1$s and their number %2$s has been merged.</string>
+    <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">Telefonnummeret til %1$s (%2$s) og vedkommendes meldingslogg har blitt slått sammen.</string>
     <!-- Update item message shown when we merge two threads together and we don't know the phone number of the other thread -->
-    <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">Your message history with %1$s and another chat that belonged to them has been merged.</string>
+    <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">Meldingsloggen din med %1$s har blitt slått sammen med en annen samtale som tilhørte vedkommende.</string>
 
     <!-- Group Calling update messages -->
     <string name="MessageRecord_s_started_a_group_call_s">%1$s startet en gruppesamtale · %2$s</string>
@@ -1960,6 +1960,7 @@
     <string name="MediaPreviewActivity_s_to_you">Fra %1$s til deg</string>
     <string name="MediaPreviewActivity_media_no_longer_available">Media er ikke lenger tilgjengelig.</string>
     <string name="MediaPreviewActivity_cant_find_an_app_able_to_share_this_media">Kan ikke finne app som er i stand til å dele dette mediet.</string>
+    <string name="MediaPreviewActivity_dismiss_due_to_error">Lukk</string>
 
     <!-- MessageNotifier -->
     <string name="MessageNotifier_d_new_messages_in_d_conversations">%1$d nye meldinger i %2$d samtaler</string>
@@ -2748,10 +2749,14 @@
     <string name="configurable_single_select__customize_option">Tilpass opsjon</string>
 
     <!-- Internal only preferences -->
+    <string name="preferences__internal_turn_off_stories_with_stories_on_disk" translatable="false">Turn off stories (with stories on disk)</string>
+    <string name="preferences__internal_turn_off_stories" translatable="false">Turn off stories</string>
+    <string name="preferences__internal_delete_private_story" translatable="false">Delete private story</string>
     <string name="preferences__internal_hide_story" translatable="false">Hide story</string>
     <string name="preferences__internal_story_or_profile_selector" translatable="false">Story or profile selector</string>
     <string name="preferences__internal_stories_dialog_launcher" translatable="false">Stories dialog launcher</string>
     <string name="preferences__internal_retry_send" translatable="false">Retry send</string>
+    <string name="preferences__internal_remove_group_story" translatable="false">Remove group story</string>
     <string name="preferences__internal_clear_onboarding_state" translatable="false">Clear onboarding state</string>
     <string name="preferences__internal_clears_onboarding_flag_and_triggers_download_of_onboarding_stories" translatable="false">Clears onboarding flag and triggers download of onboarding stories.</string>
     <string name="preferences__internal_preferences" translatable="false">Internal Preferences</string>
@@ -2903,6 +2908,26 @@
     <string name="PaymentsHomeFragment__enable">Slå på</string>
     <!-- Alert dialog button to not enable payment lock for now -->
     <string name="PaymentsHomeFragment__not_now">Ikke nå</string>
+
+    <!-- PaymentsSecuritySetupFragment -->
+    <!-- Toolbar title -->
+    <string name="PaymentsSecuritySetupFragment__security_setup">Security setup</string>
+    <!-- Title to enable payment lock -->
+    <string name="PaymentsSecuritySetupFragment__protect_your_funds">Protect your funds</string>
+    <!-- Description as to why payment lock is required -->
+    <string name="PaymentsSecuritySetupFragment__help_prevent">Help prevent a person with your phone from accessing your funds by adding another layer of security. You can disable this option in Settings.</string>
+    <!-- Option to enable payment lock -->
+    <string name="PaymentsSecuritySetupFragment__enable_payment_lock">Enable payment lock</string>
+    <!-- Option to cancel -->
+    <string name="PaymentsSecuritySetupFragment__not_now">Ikke nå</string>
+    <!-- Dialog title to confirm skipping the step -->
+    <string name="PaymentsSecuritySetupFragment__skip_this_step">Skip this step?</string>
+    <!-- Dialog description to let users know why payment lock is required -->
+    <string name="PaymentsSecuritySetupFragment__skipping_this_step">Skipping this step could allow anyone who has physical access to your phone to transfer funds or view your recovery phrase.</string>
+    <!-- Dialog option to cancel -->
+    <string name="PaymentsSecuritySetupFragment__cancel">Avbryt</string>
+    <!-- Dialog option to skip -->
+    <string name="PaymentsSecuritySetupFragment__skip">Hopp over</string>
 
     <!-- PaymentsAddMoneyFragment -->
     <string name="PaymentsAddMoneyFragment__add_funds">Legg til penger</string>
@@ -3743,10 +3768,10 @@
     <string name="payment_info_card_hide_this_card">Vil du skjule dette kortet?</string>
     <string name="payment_info_card_hide">Skjul</string>
     <!-- Title of save recovery phrase card -->
-    <string name="payment_info_card_save_recovery_phrase">Save recovery phrase</string>
+    <string name="payment_info_card_save_recovery_phrase">Lagre gjenopprettingsfrasen</string>
     <string name="payment_info_card_your_recovery_phrase_gives_you">Gjenopprettingspassordet ditt gjør det mulig å gjenopprette betalingskontoen din.</string>
     <!-- Button in save recovery phrase card -->
-    <string name="payment_info_card_save_your_phrase">Save your phrase</string>
+    <string name="payment_info_card_save_your_phrase">Lagre frasen</string>
     <string name="payment_info_card_update_your_pin">Oppdater PIN-koden din</string>
     <string name="payment_info_card_with_a_high_balance">Når du har en høy kontosaldo kan det være lurt å velge en sikrere PIN-kode som består av både tall og bokstaver.</string>
     <string name="payment_info_card_update_pin">Oppdater PIN</string>
@@ -3771,23 +3796,23 @@
     <string name="PaymentsRecoveryStartFragment__recovery_phrase">Gjenopprettingsfrase</string>
     <string name="PaymentsRecoveryStartFragment__view_recovery_phrase">Se gjenopprettingsfrasen</string>
     <!-- Title in save recovery phrase screen -->
-    <string name="PaymentsRecoveryStartFragment__save_recovery_phrase">Save recovery phrase</string>
+    <string name="PaymentsRecoveryStartFragment__save_recovery_phrase">Lagre gjenopprettingsfrasen</string>
     <string name="PaymentsRecoveryStartFragment__enter_recovery_phrase">Skriv inn gjenopprettingsfrasen</string>
     <string name="PaymentsRecoveryStartFragment__your_balance_will_automatically_restore">Saldoen din gjenopprettes automatisk når du installerer Signal på nytt og bekrefter med PIN-koden din. Du kan også gjenopprette saldoen din med et gjenopprettingspassord, som er en setning på %1$d ord som du velger selv. Skriv den ned og oppbevar den på et trygt sted.</string>
     <!-- Description in save recovery phrase screen which shows up when user has non zero balance -->
-    <string name="PaymentsRecoveryStartFragment__got_balance">You’ve got a balance! Time to save your recovery phrase—a 24-word key you can use to restore your balance.</string>
+    <string name="PaymentsRecoveryStartFragment__got_balance">Du har penger på kontoen din! Det er på tide å lage en gjenopprettingsfrase som du kan bruke til å få tilgang til kontoen din.</string>
     <!-- Description in save recovery phrase screen which shows up when user navigates from info card -->
-    <string name="PaymentsRecoveryStartFragment__time_to_save">Time to save your recovery phrase—a 24-word key you can use to restore your balance. Learn more</string>
+    <string name="PaymentsRecoveryStartFragment__time_to_save">Det er på tide å lage en gjenopprettingsfrase som du kan bruke til å få tilgang til kontoen din. Lær mer</string>
     <string name="PaymentsRecoveryStartFragment__your_recovery_phrase_is_a">Gjenopprettingspassordet ditt er en setning på %1$d ord som du velger selv. Det kan brukes til å gjenopprette saldoen din.</string>
     <string name="PaymentsRecoveryStartFragment__start">Start</string>
     <string name="PaymentsRecoveryStartFragment__enter_manually">Skriv inn manuelt</string>
     <string name="PaymentsRecoveryStartFragment__paste_from_clipboard">Lim inn fra utklippstavlen</string>
     <!-- Alert dialog title which asks before going back if user wants to save recovery phrase -->
-    <string name="PaymentsRecoveryStartFragment__continue_without_saving">Continue Without Saving?</string>
+    <string name="PaymentsRecoveryStartFragment__continue_without_saving">Fortsett uten å lagre?</string>
     <!-- Alert dialog description to let user know why recovery phrase needs to be saved -->
-    <string name="PaymentsRecoveryStartFragment__your_recovery_phrase">Your recovery phrase lets you restore your balance in a worst-case scenario. We strongly recommend you save it.</string>
+    <string name="PaymentsRecoveryStartFragment__your_recovery_phrase">Gjenopprettingsfrasen gjør det mulig å få tilgang til kontoen din når uhellet er ute. Vi anbefaler på det sterkeste at du lagrer den.</string>
     <!-- Alert dialog option to skip recovery phrase -->
-    <string name="PaymentsRecoveryStartFragment__skip_recovery_phrase">Skip Recovery Phrase</string>
+    <string name="PaymentsRecoveryStartFragment__skip_recovery_phrase">Hopp over gjenopprettingsfrasen</string>
     <!-- Alert dialog option to cancel dialog-->
     <string name="PaymentsRecoveryStartFragment__cancel">Avbryt</string>
 
@@ -3943,9 +3968,9 @@
     <!-- Preference title to delete sms -->
     <string name="SmsSettingsFragment__remove_sms_messages">Fjern SMS-meldingene</string>
     <!-- Snackbar text to confirm deletion -->
-    <string name="SmsSettingsFragment__removing_sms_messages_from_signal">Removing SMS messages from Signal…</string>
+    <string name="SmsSettingsFragment__removing_sms_messages_from_signal">Fjerner SMS-ene fra Signal …</string>
     <!-- Snackbar text to indicate can delete later -->
-    <string name="SmsSettingsFragment__you_can_remove_sms_messages_from_signal_in_settings">You can remove SMS messages from Signal in Settings at any time.</string>
+    <string name="SmsSettingsFragment__you_can_remove_sms_messages_from_signal_in_settings">Du kan når som helst fjerne SMS-meldinger fra Signal i Innstillinger.</string>
 
     <!-- NotificationsSettingsFragment -->
     <string name="NotificationsSettingsFragment__messages">Meldinger</string>
@@ -4195,17 +4220,17 @@
     <!-- Dialog title when removing a contact -->
     <string name="NewConversationActivity__remove_s">Vil du fjerne %1$s?</string>
     <!-- Dialog message when removing a contact -->
-    <string name="NewConversationActivity__you_wont_see_this_person">You won\'t see this person when searching. You\'ll get a message request if they message you in the future.</string>
+    <string name="NewConversationActivity__you_wont_see_this_person">Du vil ikke se denne personen når du søker. Du får en meldingsforespørsel hvis vedkommende sender deg en melding.</string>
     <!-- Snackbar message after removing a contact -->
-    <string name="NewConversationActivity__s_has_been_removed">%1$s has been removed</string>
+    <string name="NewConversationActivity__s_has_been_removed">%1$s er fjernet</string>
     <!-- Snackbar message after blocking a contact -->
-    <string name="NewConversationActivity__s_has_been_blocked">%1$s has been blocked</string>
+    <string name="NewConversationActivity__s_has_been_blocked">%1$s er blokkert</string>
     <!-- Dialog title when remove target contact is in system contacts -->
-    <string name="NewConversationActivity__unable_to_remove_s">Unable to remove %1$s</string>
+    <string name="NewConversationActivity__unable_to_remove_s">Kan ikke fjerne %1$s</string>
     <!-- Dialog message when remove target contact is in system contacts -->
-    <string name="NewConversationActivity__this_person_is_saved_to_your">This person is saved to your device\'s Contacts. Delete them from your Contacts and try again.</string>
+    <string name="NewConversationActivity__this_person_is_saved_to_your">Denne personen er lagret i kontaktlisten på enheten din. Slett vedkommende fra kontaktlisten, og prøv igjen.</string>
     <!-- Dialog action to view contact when they can't be removed otherwise -->
-    <string name="NewConversationActivity__view_contact">View contact</string>
+    <string name="NewConversationActivity__view_contact">Åpne kontakt</string>
 
     <!-- ContactFilterView -->
     <string name="ContactFilterView__search_name_or_number">Søk etter navn eller nummer</string>
@@ -4709,7 +4734,7 @@
     <!-- Subtitle for "My Stories" row item when user has not added stories -->
     <string name="StoriesLandingFragment__tap_to_add_a_story">Trykk for å legge til en ny story</string>
     <!-- Displayed when there are no stories to display -->
-    <string name="StoriesLandingFragment__no_recent_updates_to_show_right_now">No recent updates to show right now.</string>
+    <string name="StoriesLandingFragment__no_recent_updates_to_show_right_now">Ingen nylige oppdateringer å vise.</string>
     <!-- Context menu option to hide a story -->
     <string name="StoriesLandingItem__hide_story">Skjul story</string>
     <!-- Context menu option to unhide a story -->
@@ -4799,6 +4824,8 @@
     <string name="StoryViewItem__remove_viewer">Fjern seer</string>
     <!-- Displayed when a story has no replies yet -->
     <string name="StoryGroupReplyFragment__no_replies_yet">Ingen svar ennå</string>
+    <!-- Displayed when no longer a group member -->
+    <string name="StoryGroupReplyFragment__you_cant_reply">You can\'t reply to this story because you\'re no longer a member of this group.</string>
     <!-- Displayed for each user that reacted to a story when viewing replies -->
     <string name="StoryGroupReactionReplyItem__reacted_to_the_story">Reagerte på storyen</string>
     <!-- Label for story views tab -->
@@ -4817,6 +4844,13 @@
     <string name="StoryGroupReplyItem__delete">Slett</string>
     <!-- Page title for My Story options -->
     <string name="MyStorySettingsFragment__my_story">Min story</string>
+    <!-- Number of total signal connections displayed in "All connections" row item -->
+    <plurals name="MyStorySettingsFragment__viewers">
+        <item quantity="one">%1$d viewer</item>
+        <item quantity="other">%1$d viewers</item>
+    </plurals>
+    <!-- Button on all signal connections row to view all signal connections. Please keep as short as possible. -->
+    <string name="MyStorySettingsFragment__view">View</string>
     <!-- Section heading for story visibility -->
     <string name="MyStorySettingsFragment__who_can_view_this_story">Disse kan se denne storyen</string>
     <!-- Clickable option for selecting people to hide your story from -->
@@ -4911,6 +4945,22 @@
     <string name="ChangeMyStoryMembershipFragment__only_share_with">Del kun med …</string>
     <!-- Done button label for hide story from screen -->
     <string name="HideStoryFromFragment__done">Ferdig</string>
+    <!-- Dialog title for removing a group story -->
+    <string name="StoryDialogs__remove_group_story">Vil du fjerne gruppestoryen?</string>
+    <!-- Dialog message for removing a group story -->
+    <string name="StoryDialogs__s_will_be_removed">\"%1$s\" will be removed.</string>
+    <!-- Dialog positive action for removing a group story -->
+    <string name="StoryDialogs__remove">Fjern</string>
+    <!-- Dialog title for deleting a private story -->
+    <string name="StoryDialogs__delete_private_story">Vil du slette den private storyen?</string>
+    <!-- Dialog message for deleting a private story -->
+    <string name="StoryDialogs__s_and_updates_shared">\"%1$s\" and updates shared to this story will be deleted.</string>
+    <!-- Dialog positive action for deleting a private story -->
+    <string name="StoryDialogs__delete">Slett</string>
+    <!-- Dialog title for first time sending something to a beta story -->
+    <string name="StoryDialogs__stories_is_available_to">Stories is available to Signal beta users only.</string>
+    <!-- Dialog message for first time sending something to a beta story -->
+    <string name="StoryDialogs__if_you_share_a_story">If you share a story, it will only be available to people who are on Signal beta.</string>
     <!-- Dialog title for first time adding something to a story -->
     <string name="StoryDialogs__add_to_story_q">Legge til i story?</string>
     <!-- Dialog message for first time adding something to a story -->
@@ -4923,6 +4973,8 @@
     <string name="StoryDialogs__story_could_not_be_sent">Storyen kunne ikke sendes. Sjekk internettilkoblingen din og prøv igjen.</string>
     <!-- Error message dialog button to resend a previously failed story send -->
     <string name="StoryDialogs__send">Send</string>
+    <!-- Action button for turning off stories when stories are present on the device -->
+    <string name="StoryDialogs__turn_off_and_delete">Turn off and delete</string>
     <!-- Privacy Settings toggle title for stories -->
     <string name="PrivacySettingsFragment__share_and_view_stories">Del og se storyer</string>
     <!-- Privacy Settings toggle summary for stories -->
@@ -5071,6 +5123,11 @@
         <item quantity="one">Gruppestory · Sett av %1$d</item>
         <item quantity="other">Gruppestory · Sett av %1$d</item>
     </plurals>
+    <!-- Label under name for groups -->
+    <plurals name="ContactSearchItems__group_d_members">
+        <item quantity="one">%1$d medlem</item>
+        <item quantity="other">%1$d medlemmer</item>
+    </plurals>
     <!-- Label under name for my story -->
     <plurals name="ContactSearchItems__my_story_s_dot_d_viewers">
         <item quantity="one">%1$s · Sett av %2$d</item>
@@ -5206,7 +5263,7 @@
     <!-- Dialog title to turn off stories -->
     <string name="StoriesPrivacySettingsFragment__turn_off_stories_question">Vil du skru av stories?</string>
     <!-- Dialog message to turn off stories -->
-    <string name="StoriesPrivacySettingsFragment__you_will_no_longer_be_able_to">Du vil ikke lenger kunne se og dele stories. Storiesene du har delt vil fortsatt være synlige for kontaktene dine til de utløper.</string>
+    <string name="StoriesPrivacySettingsFragment__you_will_no_longer_be_able_to_share">You will no longer be able to share or view stories. Story updates you have recently shared will also be deleted.</string>
     <!-- Page title when launched from stories landing screen -->
     <string name="StoriesPrivacySettingsFragment__story_privacy">Personvern for stories</string>
 
@@ -5229,7 +5286,7 @@
     <!-- Title of the screen -->
     <string name="ExportYourSmsMessagesFragment__export_your_sms_messages">Overfør SMS-meldingene dine</string>
     <!-- Message of the screen -->
-    <string name="ExportYourSmsMessagesFragment__you_can_export_your_sms_messages_to_your_phones_sms_database">You can export your SMS messages to your phone\'s SMS database. This allows other SMS apps on your phone to access and import them. This does not create a shareable file of your SMS message history.</string>
+    <string name="ExportYourSmsMessagesFragment__you_can_export_your_sms_messages_to_your_phones_sms_database">Du kan eksportere SMS-meldingene dine til minnet på telefonen din. Dette gir andre SMS-apper på telefonen din tilgang til og mulighet til å importere dem. Dette oppretter ikke en delbar fil av SMS-meldingsloggen din.</string>
     <!-- Button label to begin export -->
     <string name="ExportYourSmsMessagesFragment__continue">Fortsett</string>
 
@@ -5255,17 +5312,17 @@
     <!-- Fourth step number/bullet for choose new default sms app instructions -->
     <string name="ChooseANewDefaultSmsAppFragment__bullet_4">4</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__tap_continue_to_open_the_defaults_apps_screen_in_settings">Tap \"Continue\" to open the \"Default apps\" screen in Settings</string>
+    <string name="ChooseANewDefaultSmsAppFragment__tap_continue_to_open_the_defaults_apps_screen_in_settings">Trykk på «Fortsett» for å åpne skjermen «Standardapper» i Innstillinger.</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__select_sms_app_from_the_list">Select \"SMS app\" from the list</string>
+    <string name="ChooseANewDefaultSmsAppFragment__select_sms_app_from_the_list">Velg «SMS-app» fra listen.</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__choose_another_app_to_use_for_sms_messaging">Choose another app to use for SMS messaging</string>
+    <string name="ChooseANewDefaultSmsAppFragment__choose_another_app_to_use_for_sms_messaging">Velg en annen app å bruke for SMS-meldinger.</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__return_to_signal">Return to Signal</string>
+    <string name="ChooseANewDefaultSmsAppFragment__return_to_signal">Gå tilbake til Signal.</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__open_your_phones_settings_app">Open your phone\'s Settings app</string>
+    <string name="ChooseANewDefaultSmsAppFragment__open_your_phones_settings_app">Åpne Innstillinger på telefonen din.</string>
     <!-- Instruction step for choosing a new default sms app -->
-    <string name="ChooseANewDefaultSmsAppFragment__navigate_to_apps_default_apps_sms_app">Navigate to \"Apps\" &gt; \"Default apps\" &gt; \"SMS app\"</string>
+    <string name="ChooseANewDefaultSmsAppFragment__navigate_to_apps_default_apps_sms_app">Gå til Apper &gt; Standardapper &gt; SMS-app.</string>
 
     <!-- RemoveSmsMessagesDialogFragment -->
     <!-- Action button to keep messages -->
@@ -5275,13 +5332,13 @@
     <!-- Title of dialog -->
     <string name="RemoveSmsMessagesDialogFragment__remove_sms_messages">Vil du fjerne disse SMS-meldingene fra Signal?</string>
     <!-- Message of dialog -->
-    <string name="RemoveSmsMessagesDialogFragment__you_can_now_remove_sms_messages_from_signal">You can now remove SMS messages from Signal to clear up storage space. They will still be available to other SMS apps on your phone even if you remove them.</string>
+    <string name="RemoveSmsMessagesDialogFragment__you_can_now_remove_sms_messages_from_signal">Nå kan du fjerne SMS-meldinger fra Signal for å få mer lagringsplass. De vil fortsatt være tilgjengelige for andre SMS-apper på telefonen din selv om du fjerner dem.</string>
 
     <!-- SetSignalAsDefaultSmsAppFragment -->
     <!-- Title of the screen -->
-    <string name="SetSignalAsDefaultSmsAppFragment__set_signal_as_the_default_sms_app">Set Signal as the default SMS app</string>
+    <string name="SetSignalAsDefaultSmsAppFragment__set_signal_as_the_default_sms_app">Velg Signal som standardapp for SMS</string>
     <!-- Message of the screen -->
-    <string name="SetSignalAsDefaultSmsAppFragment__to_export_your_sms_messages">To export your SMS messages, you need to set Signal as the default SMS app.</string>
+    <string name="SetSignalAsDefaultSmsAppFragment__to_export_your_sms_messages">For å eksportere SMS-meldingene må du velge Signal som standardapp for SMS.</string>
     <!-- Button label to start export -->
     <string name="SetSignalAsDefaultSmsAppFragment__next">Neste</string>
 

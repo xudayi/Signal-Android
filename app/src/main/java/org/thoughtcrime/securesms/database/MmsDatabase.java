@@ -636,6 +636,17 @@ public class MmsDatabase extends MessageDatabase {
   }
 
   @Override
+  public @NonNull MessageDatabase.Reader getAllIncomingStoriesExceptOnboarding() {
+    RecipientId onboardingRecipientId = SignalStore.releaseChannelValues().getReleaseChannelRecipientId();
+    String where = IS_STORY_CLAUSE + " AND NOT (" + getOutgoingTypeClause() + ")";
+    if (onboardingRecipientId != null) {
+      where += " AND " + RECIPIENT_ID + " != " + onboardingRecipientId.serialize();
+    }
+
+    return new Reader(rawQuery(where, null, false, -1L));
+  }
+
+  @Override
   public @NonNull MessageDatabase.Reader getAllOutgoingStoriesAt(long sentTimestamp) {
     String   where      = IS_STORY_CLAUSE + " AND " + DATE_SENT + " = ? AND (" + getOutgoingTypeClause() + ")";
     String[] whereArgs  = SqlUtil.buildArgs(sentTimestamp);
@@ -1841,6 +1852,8 @@ public class MmsDatabase extends MessageDatabase {
 
     ContentValues contentValues = new ContentValues();
 
+    boolean silentUpdate = (mailbox & Types.GROUP_UPDATE_BIT) > 0;
+
     contentValues.put(DATE_SENT, retrieved.getSentTimeMillis());
     contentValues.put(DATE_SERVER, retrieved.getServerTimeMillis());
     contentValues.put(RECIPIENT_ID, retrieved.getFrom().serialize());
@@ -1857,7 +1870,7 @@ public class MmsDatabase extends MessageDatabase {
     contentValues.put(VIEW_ONCE, retrieved.isViewOnce() ? 1 : 0);
     contentValues.put(STORY_TYPE, retrieved.getStoryType().getCode());
     contentValues.put(PARENT_STORY_ID, retrieved.getParentStoryId() != null ? retrieved.getParentStoryId().serialize() : 0);
-    contentValues.put(READ, retrieved.isExpirationUpdate() ? 1 : 0);
+    contentValues.put(READ, (silentUpdate || retrieved.isExpirationUpdate()) ? 1 : 0);
     contentValues.put(UNIDENTIFIED, retrieved.isUnidentified());
     contentValues.put(SERVER_GUID, retrieved.getServerGuid());
 

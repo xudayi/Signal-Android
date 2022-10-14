@@ -579,6 +579,11 @@ public class MmsDatabase extends MessageDatabase {
   }
 
   @Override
+  public void insertSmsExportMessage(@NonNull RecipientId recipientId, long threadId) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public void endTransaction(SQLiteDatabase database) {
     database.endTransaction();
   }
@@ -633,17 +638,6 @@ public class MmsDatabase extends MessageDatabase {
     String where = IS_STORY_CLAUSE + " AND (" + getOutgoingTypeClause() + ")";
 
     return new Reader(rawQuery(where, null, reverse, limit));
-  }
-
-  @Override
-  public @NonNull MessageDatabase.Reader getAllIncomingStoriesExceptOnboarding() {
-    RecipientId onboardingRecipientId = SignalStore.releaseChannelValues().getReleaseChannelRecipientId();
-    String where = IS_STORY_CLAUSE + " AND NOT (" + getOutgoingTypeClause() + ")";
-    if (onboardingRecipientId != null) {
-      where += " AND " + RECIPIENT_ID + " != " + onboardingRecipientId.serialize();
-    }
-
-    return new Reader(rawQuery(where, null, false, -1L));
   }
 
   @Override
@@ -2465,17 +2459,6 @@ public class MmsDatabase extends MessageDatabase {
         false,
         limit
     );
-  }
-
-  @Override
-  public int getInsecureMessageCount() {
-    try (Cursor cursor = getWritableDatabase().query(TABLE_NAME, SqlUtil.COUNT, getInsecureMessageClause(), null, null, null, null)) {
-      if (cursor.moveToFirst()) {
-        return cursor.getInt(0);
-      }
-    }
-
-    return 0;
   }
 
   @Override

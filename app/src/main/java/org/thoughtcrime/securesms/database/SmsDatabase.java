@@ -33,11 +33,13 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 import net.zetetic.database.sqlcipher.SQLiteStatement;
 
+import org.signal.core.util.CursorExtensionsKt;
 import org.signal.core.util.CursorUtil;
 import org.signal.core.util.SQLiteDatabaseExtensionsKt;
 import org.signal.core.util.SqlUtil;
 import org.signal.core.util.logging.Log;
 import org.signal.libsignal.protocol.util.Pair;
+import org.thoughtcrime.securesms.components.settings.app.chats.sms.SmsExportState;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatch;
 import org.thoughtcrime.securesms.database.documents.IdentityKeyMismatchSet;
 import org.thoughtcrime.securesms.database.documents.NetworkFailure;
@@ -48,6 +50,7 @@ import org.thoughtcrime.securesms.database.model.MessageRecord;
 import org.thoughtcrime.securesms.database.model.ParentStoryId;
 import org.thoughtcrime.securesms.database.model.SmsMessageRecord;
 import org.thoughtcrime.securesms.database.model.StoryResult;
+import org.thoughtcrime.securesms.database.model.StoryType;
 import org.thoughtcrime.securesms.database.model.StoryViewState;
 import org.thoughtcrime.securesms.database.model.databaseprotos.GroupCallUpdateDetails;
 import org.thoughtcrime.securesms.database.model.databaseprotos.MessageExportState;
@@ -513,7 +516,11 @@ public class SmsDatabase extends MessageDatabase {
   }
 
   @Override
-  public @NonNull Set<MessageUpdate> incrementReceiptCount(SyncMessageId messageId, long timestamp, @NonNull ReceiptType receiptType, boolean storiesOnly) {
+  public @NonNull Set<MessageUpdate> incrementReceiptCount(SyncMessageId messageId, long timestamp, @NonNull ReceiptType receiptType, @NonNull MessageQualifier messageQualifier) {
+    if (messageQualifier == MessageQualifier.STORY) {
+      return Collections.emptySet();
+    }
+
     if (receiptType == ReceiptType.VIEWED) {
       return Collections.emptySet();
     }
@@ -919,6 +926,16 @@ public class SmsDatabase extends MessageDatabase {
         false,
         limit
     );
+  }
+
+  @Override
+  public long getUnexportedInsecureMessagesEstimatedSize() {
+    Cursor cursor = SQLiteDatabaseExtensionsKt.select(getReadableDatabase(), "SUM(LENGTH(" + BODY + "))")
+                                              .from(TABLE_NAME)
+                                              .where(getInsecureMessageClause() + " AND " + EXPORTED + " < ?", MessageExportStatus.EXPORTED)
+                                              .run();
+
+    return CursorExtensionsKt.readToSingleLong(cursor);
   }
 
   @Override
@@ -1472,7 +1489,17 @@ public class SmsDatabase extends MessageDatabase {
   }
 
   @Override
+  public @NonNull List<MarkedMessageInfo> markAllIncomingStoriesRead() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public @NonNull List<StoryResult> getOrderedStoryRecipientsAndIds(boolean isOutgoingOnly) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void markOnboardingStoryRead() {
     throw new UnsupportedOperationException();
   }
 
@@ -1552,6 +1579,11 @@ public class SmsDatabase extends MessageDatabase {
 
   @Override
   public @NonNull List<MarkedMessageInfo> setGroupStoryMessagesReadSince(long threadId, long groupStoryId, long sinceTimestamp) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public @NonNull List<StoryType> getStoryTypes(@NonNull List<MessageId> messageIds) {
     throw new UnsupportedOperationException();
   }
 

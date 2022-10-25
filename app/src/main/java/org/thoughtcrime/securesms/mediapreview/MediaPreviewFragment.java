@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.exoplayer2.ui.PlayerControlView;
+
 import org.thoughtcrime.securesms.attachments.Attachment;
 import org.thoughtcrime.securesms.attachments.AttachmentId;
 import org.thoughtcrime.securesms.database.SignalDatabase;
@@ -85,9 +87,9 @@ public abstract class MediaPreviewFragment extends Fragment {
   public void pause() {
   }
 
-  public @Nullable View getPlaybackControls() {
-    return null;
-  }
+  abstract public void setShareButtonListener(View.OnClickListener listener);
+  abstract public void setForwardButtonListener(View.OnClickListener listener);
+  abstract public @Nullable View getBottomBarControls();
 
   private void checkMediaStillAvailable() {
     if (attachmentId == null) {
@@ -96,12 +98,12 @@ public abstract class MediaPreviewFragment extends Fragment {
 
     SimpleTask.run(getViewLifecycleOwner().getLifecycle(),
                    () -> SignalDatabase.attachments().hasAttachment(attachmentId),
-                   hasAttachment -> { if (!hasAttachment) events.mediaNotAvailable(); });
+                   hasAttachment -> { if (!hasAttachment) events.onMediaNotAvailable(); });
   }
 
   public interface Events {
     boolean singleTapOnMedia();
-    void mediaNotAvailable();
+    void onMediaNotAvailable();
     void onMediaReady();
     default @Nullable VideoControlsDelegate getVideoControlsDelegate() {
       return null;

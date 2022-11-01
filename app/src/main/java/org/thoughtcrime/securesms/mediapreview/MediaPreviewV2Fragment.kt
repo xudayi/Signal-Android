@@ -92,7 +92,7 @@ class MediaPreviewV2Fragment : Fragment(R.layout.fragment_media_preview_v2), Med
         }.show()
     }
     viewModel.initialize(args.showThread, args.allMediaInRail, args.leftIsRecent)
-    val sorting = MediaDatabase.Sorting.deserialize(args.sorting)
+    val sorting = MediaDatabase.Sorting.deserialize(args.sorting.ordinal)
     viewModel.fetchAttachments(PartAuthority.requireAttachmentId(args.initialMediaUri), args.threadId, sorting)
   }
 
@@ -163,7 +163,12 @@ class MediaPreviewV2Fragment : Fragment(R.layout.fragment_media_preview_v2), Med
     val fragmentAdapter = binding.mediaPager.adapter as MediaPreviewV2Adapter
 
     fragmentAdapter.setAutoPlayItemPosition(currentPosition)
-    fragmentAdapter.updateBackingItems(currentState.mediaRecords.mapNotNull { it.attachment })
+    val backingItems = currentState.mediaRecords.mapNotNull { it.attachment }
+    if (backingItems.isEmpty()) {
+      onMediaNotAvailable()
+      return
+    }
+    fragmentAdapter.updateBackingItems(backingItems)
 
     if (binding.mediaPager.currentItem != currentPosition) {
       binding.mediaPager.setCurrentItem(currentPosition, false)
@@ -176,6 +181,10 @@ class MediaPreviewV2Fragment : Fragment(R.layout.fragment_media_preview_v2), Med
    * {@link OnPageChangeCallback}.
    */
   private fun bindMediaReadyState(currentState: MediaPreviewV2State) {
+    if (currentState.mediaRecords.isEmpty()) {
+      onMediaNotAvailable()
+      return
+    }
     val currentPosition = currentState.position
     val currentItem: MediaDatabase.MediaRecord = currentState.mediaRecords[currentPosition]
 
@@ -283,10 +292,10 @@ class MediaPreviewV2Fragment : Fragment(R.layout.fragment_media_preview_v2), Med
     ViewCompat.setOnApplyWindowInsetsListener(viewToAnchor) { view: View, windowInsetsCompat: WindowInsetsCompat ->
       val layoutParams = view.layoutParams as MarginLayoutParams
       layoutParams.setMargins(
-        windowInsetsCompat.getSystemWindowInsetLeft(),
+        windowInsetsCompat.systemWindowInsetLeft,
         layoutParams.topMargin,
-        windowInsetsCompat.getSystemWindowInsetRight(),
-        windowInsetsCompat.getSystemWindowInsetBottom()
+        windowInsetsCompat.systemWindowInsetRight,
+        windowInsetsCompat.systemWindowInsetBottom
       )
       view.layoutParams = layoutParams
       windowInsetsCompat
@@ -431,7 +440,17 @@ class MediaPreviewV2Fragment : Fragment(R.layout.fragment_media_preview_v2), Med
     getMediaPreviewFragmentFromChildFragmentManager(binding.mediaPager.currentItem)?.pause()
   }
 
+  override fun onDestroyView() {
+    super.onDestroyView()
+    viewModel.onDestroyView()
+  }
+
   companion object {
     const val ARGS_KEY: String = "args"
+
+    @JvmStatic
+    fun isContentTypeSupported(contentType: String?): Boolean {
+      return MediaUtil.isImageType(contentType) || MediaUtil.isVideoType(contentType)
+    }
   }
 }

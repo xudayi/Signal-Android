@@ -26,10 +26,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ExposureState;
-import androidx.camera.core.FocusMeteringAction;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
@@ -94,6 +91,7 @@ public class CameraXFragment extends LoggingFragment implements CameraFragment {
   private Disposable                       mostRecentItemDisposable = Disposable.disposed();
   private CameraXModePolicy                cameraXModePolicy;
   private CameraScreenBrightnessController cameraScreenBrightnessController;
+  private boolean                          isMediaSelected;
 
   public static CameraXFragment newInstanceForAvatarCapture() {
     CameraXFragment fragment = new CameraXFragment();
@@ -136,8 +134,10 @@ public class CameraXFragment extends LoggingFragment implements CameraFragment {
   @SuppressLint("MissingPermission")
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    cameraScreenBrightnessController = new CameraScreenBrightnessController(requireActivity().getWindow());
-    getViewLifecycleOwner().getLifecycle().addObserver(cameraScreenBrightnessController);
+    cameraScreenBrightnessController = new CameraScreenBrightnessController(
+        requireActivity().getWindow(),
+        () -> cameraController.getCameraSelector() == CameraSelector.DEFAULT_FRONT_CAMERA
+    );
 
     ViewGroup cameraParent = view.findViewById(R.id.camerax_camera_parent);
 
@@ -276,6 +276,19 @@ public class CameraXFragment extends LoggingFragment implements CameraFragment {
       countButton.setCount(selectedMediaCount);
     } else {
       countButton.setVisibility(View.GONE);
+    }
+
+    isMediaSelected = selectedMediaCount > 0;
+    updateGalleryVisibility();
+  }
+
+  private void updateGalleryVisibility() {
+    View cameraGalleryContainer = controlsContainer.findViewById(R.id.camera_gallery_button_background);
+
+    if (isMediaSelected) {
+      cameraGalleryContainer.setVisibility(View.GONE);
+    } else {
+      cameraGalleryContainer.setVisibility(View.VISIBLE);
     }
   }
 
@@ -508,12 +521,14 @@ public class CameraXFragment extends LoggingFragment implements CameraFragment {
       return;
     }
 
+    getViewLifecycleOwner().getLifecycle().addObserver(cameraScreenBrightnessController);
     if (cameraController.hasCamera(CameraSelector.DEFAULT_FRONT_CAMERA) && cameraController.hasCamera(CameraSelector.DEFAULT_BACK_CAMERA)) {
       flipButton.setVisibility(View.VISIBLE);
       flipButton.setOnClickListener(v -> {
-        cameraController.setCameraSelector(cameraController.getCameraSelector() == CameraSelector.DEFAULT_FRONT_CAMERA
-                                           ? CameraSelector.DEFAULT_BACK_CAMERA
-                                           : CameraSelector.DEFAULT_FRONT_CAMERA);
+        CameraSelector cameraSelector = cameraController.getCameraSelector() == CameraSelector.DEFAULT_FRONT_CAMERA
+                                        ? CameraSelector.DEFAULT_BACK_CAMERA
+                                        : CameraSelector.DEFAULT_FRONT_CAMERA;
+        cameraController.setCameraSelector(cameraSelector);
         TextSecurePreferences.setDirectCaptureCameraId(getContext(), CameraXUtil.toCameraDirectionInt(cameraController.getCameraSelector()));
 
         Animation animation = new RotateAnimation(0, -180, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
@@ -522,6 +537,7 @@ public class CameraXFragment extends LoggingFragment implements CameraFragment {
         flipButton.startAnimation(animation);
         flashButton.setAutoFlashEnabled(cameraController.getImageCaptureFlashMode() >= ImageCapture.FLASH_MODE_AUTO);
         flashButton.setFlash(cameraController.getImageCaptureFlashMode());
+        cameraScreenBrightnessController.onCameraDirectionChanged(cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA);
       });
 
       GestureDetector gestureDetector = new GestureDetector(requireContext(), new GestureDetector.SimpleOnGestureListener() {

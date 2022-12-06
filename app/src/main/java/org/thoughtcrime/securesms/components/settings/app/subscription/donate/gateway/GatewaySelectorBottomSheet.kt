@@ -16,9 +16,9 @@ import org.thoughtcrime.securesms.components.settings.DSLSettingsIcon
 import org.thoughtcrime.securesms.components.settings.DSLSettingsText
 import org.thoughtcrime.securesms.components.settings.NO_TINT
 import org.thoughtcrime.securesms.components.settings.app.subscription.DonationPaymentComponent
-import org.thoughtcrime.securesms.components.settings.app.subscription.InAppDonations
 import org.thoughtcrime.securesms.components.settings.app.subscription.donate.DonateToSignalType
 import org.thoughtcrime.securesms.components.settings.app.subscription.models.GooglePayButton
+import org.thoughtcrime.securesms.components.settings.app.subscription.models.PayPalButton
 import org.thoughtcrime.securesms.components.settings.configure
 import org.thoughtcrime.securesms.payments.FiatMoneyUtil
 import org.thoughtcrime.securesms.util.LifecycleDisposable
@@ -40,6 +40,7 @@ class GatewaySelectorBottomSheet : DSLSettingsBottomSheetFragment() {
   override fun bindAdapter(adapter: DSLSettingsAdapter) {
     BadgeDisplay112.register(adapter)
     GooglePayButton.register(adapter)
+    PayPalButton.register(adapter)
 
     lifecycleDisposable.bindTo(viewLifecycleOwner)
 
@@ -80,11 +81,23 @@ class GatewaySelectorBottomSheet : DSLSettingsBottomSheetFragment() {
         )
       }
 
-      // PayPal
+      if (state.isPayPalAvailable) {
+        space(8.dp)
 
-      // Credit Card
-      if (InAppDonations.isCreditCardAvailable()) {
-        space(12.dp)
+        customPref(
+          PayPalButton.Model(
+            onClick = {
+              findNavController().popBackStack()
+              val response = GatewayResponse(GatewayResponse.Gateway.PAYPAL, args.request)
+              setFragmentResult(REQUEST_KEY, bundleOf(REQUEST_KEY to response))
+            },
+            isEnabled = true
+          )
+        )
+      }
+
+      if (state.isCreditCardAvailable) {
+        space(8.dp)
 
         primaryButton(
           text = DSLSettingsText.from(R.string.GatewaySelectorBottomSheet__credit_or_debit_card),

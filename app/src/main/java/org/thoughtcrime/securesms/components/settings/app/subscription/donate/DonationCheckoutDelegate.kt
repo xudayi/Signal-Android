@@ -22,6 +22,7 @@ import org.thoughtcrime.securesms.components.settings.app.subscription.donate.ca
 import org.thoughtcrime.securesms.components.settings.app.subscription.donate.gateway.GatewayRequest
 import org.thoughtcrime.securesms.components.settings.app.subscription.donate.gateway.GatewayResponse
 import org.thoughtcrime.securesms.components.settings.app.subscription.donate.gateway.GatewaySelectorBottomSheet
+import org.thoughtcrime.securesms.components.settings.app.subscription.donate.paypal.PayPalPaymentInProgressFragment
 import org.thoughtcrime.securesms.components.settings.app.subscription.donate.stripe.StripePaymentInProgressFragment
 import org.thoughtcrime.securesms.components.settings.app.subscription.donate.stripe.StripePaymentInProgressViewModel
 import org.thoughtcrime.securesms.components.settings.app.subscription.errors.DonationError
@@ -77,13 +78,22 @@ class DonationCheckoutDelegate(
       val result: CreditCardResult = bundle.getParcelable(CreditCardFragment.REQUEST_KEY)!!
       handleCreditCardResult(result)
     }
+
+    fragment.setFragmentResultListener(PayPalPaymentInProgressFragment.REQUEST_KEY) { _, bundle ->
+      val result: DonationProcessorActionResult = bundle.getParcelable(PayPalPaymentInProgressFragment.REQUEST_KEY)!!
+      handleDonationProcessorActionResult(result)
+    }
   }
 
   private fun handleGatewaySelectionResponse(gatewayResponse: GatewayResponse) {
-    when (gatewayResponse.gateway) {
-      GatewayResponse.Gateway.GOOGLE_PAY -> launchGooglePay(gatewayResponse)
-      GatewayResponse.Gateway.PAYPAL -> error("PayPal is not currently supported.")
-      GatewayResponse.Gateway.CREDIT_CARD -> launchCreditCard(gatewayResponse)
+    if (InAppDonations.isPaymentSourceAvailable(gatewayResponse.gateway.toPaymentSourceType(), gatewayResponse.request.donateToSignalType)) {
+      when (gatewayResponse.gateway) {
+        GatewayResponse.Gateway.GOOGLE_PAY -> launchGooglePay(gatewayResponse)
+        GatewayResponse.Gateway.PAYPAL -> launchPayPal(gatewayResponse)
+        GatewayResponse.Gateway.CREDIT_CARD -> launchCreditCard(gatewayResponse)
+      }
+    } else {
+      error("Unsupported combination! ${gatewayResponse.gateway} ${gatewayResponse.request.donateToSignalType}")
     }
   }
 
@@ -124,6 +134,10 @@ class DonationCheckoutDelegate(
     }
   }
 
+  private fun launchPayPal(gatewayResponse: GatewayResponse) {
+    callback.navigateToPayPalPaymentInProgress(gatewayResponse.request)
+  }
+
   private fun launchGooglePay(gatewayResponse: GatewayResponse) {
     viewModel.provideGatewayRequestForGooglePay(gatewayResponse.request)
     donationPaymentComponent.stripeRepository.requestTokenFromGooglePay(
@@ -134,11 +148,7 @@ class DonationCheckoutDelegate(
   }
 
   private fun launchCreditCard(gatewayResponse: GatewayResponse) {
-    if (InAppDonations.isCreditCardAvailable()) {
-      callback.navigateToCreditCardForm(gatewayResponse.request)
-    } else {
-      error("Credit cards are not currently enabled.")
-    }
+    callback.navigateToCreditCardForm(gatewayResponse.request)
   }
 
   private fun registerGooglePayCallback() {
@@ -186,6 +196,7 @@ class DonationCheckoutDelegate(
 
   interface Callback {
     fun navigateToStripePaymentInProgress(gatewayRequest: GatewayRequest)
+    fun navigateToPayPalPaymentInProgress(gatewayRequest: GatewayRequest)
     fun navigateToCreditCardForm(gatewayRequest: GatewayRequest)
     fun onPaymentComplete(gatewayRequest: GatewayRequest)
     fun onProcessorActionProcessed()

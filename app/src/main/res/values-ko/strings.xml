@@ -224,6 +224,8 @@
     <string name="ContactsCursorLoader_recent_chats">최근 대화</string>
     <string name="ContactsCursorLoader_contacts">연락처</string>
     <string name="ContactsCursorLoader_groups">그룹</string>
+    <!-- Contact search header for individuals who the user has not started a conversation with but is in a group with -->
+    <string name="ContactsCursorLoader_group_members">그룹 멤버</string>
     <string name="ContactsCursorLoader_phone_number_search">전화번호 검색</string>
     <!-- Header for username search -->
     <string name="ContactsCursorLoader_find_by_username">사용자명으로 검색</string>
@@ -231,6 +233,10 @@
     <string name="ContactsCursorLoader_my_stories">내 스토리</string>
     <!-- Text for a button that brings up a bottom sheet to create a new story. -->
     <string name="ContactsCursorLoader_new">새 스토리</string>
+    <!-- Header for conversation search section labeled "Chats" -->
+    <string name="ContactsCursorLoader__chats">대화</string>
+    <!-- Header for conversation search section labeled "Messages" -->
+    <string name="ContactsCursorLoader__messages">메시지</string>
 
     <!-- ContactsDatabase -->
     <string name="ContactsDatabase_message_s">%1$s에 메시지 보내기</string>
@@ -573,6 +579,8 @@
     <string name="BackupsPreferenceFragment__create_backup">백업 생성</string>
     <string name="BackupsPreferenceFragment__last_backup">마지막 백업: %1$s</string>
     <string name="BackupsPreferenceFragment__backup_folder">백업 폴더</string>
+    <!-- Title for a preference item allowing the user to selected the hour of the day when their chats are backed up. -->
+    <string name="BackupsPreferenceFragment__backup_time">Backup time</string>
     <string name="BackupsPreferenceFragment__verify_backup_passphrase">백업 암호 인증</string>
     <string name="BackupsPreferenceFragment__test_your_backup_passphrase">백업 암호를 테스트하고 일치함을 인증</string>
     <string name="BackupsPreferenceFragment__turn_on">켜기</string>
@@ -602,6 +610,50 @@
     <string name="DateUtils_minutes_ago">%1$d분</string>
     <string name="DateUtils_today">오늘</string>
     <string name="DateUtils_yesterday">어제</string>
+    <!-- When scheduling a message, %1$s replaced with either today, tonight, or tomorrow. %2$s replaced with the time. e.g. Tonight at 9:00pm -->
+    <string name="DateUtils_schedule_at">%2$s의 %1$s</string>
+    <!-- Used when getting a time in the future. For example, Tomorrow at 9:00pm -->
+    <string name="DateUtils_tomorrow">Tomorrow</string>
+    <!-- Used in the context: Tonight at 9:00pm for example. Specifically this is after 7pm -->
+    <string name="DateUtils_tonight">Tonight</string>
+
+    <!-- Scheduled Messages -->
+    <!-- Title for dialog that shows all the users scheduled messages for a chat -->
+    <string name="ScheduledMessagesBottomSheet__schedules_messages">Scheduled messages</string>
+    <!-- Option when scheduling a message to select a specific date and time to send a message -->
+    <string name="ScheduledMessages_pick_time">Pick Date &amp; Time</string>
+    <!-- Title for dialog explaining to users how the scheduled messages work -->
+    <string name="ScheduleMessageFTUXBottomSheet__title">Scheduled messages</string>
+    <!-- Disclaimer text for scheduled messages explaining to users that the scheduled messages will only send if connected to the internet -->
+    <string name="ScheduleMessageFTUXBottomSheet__disclaimer">When you send a scheduled message, make sure your device will be on and connected to the internet at the time of sending. If not, your message will send when your device reconnects.</string>
+    <!-- Confirmation button text acknowledging the user understands the disclaimer -->
+    <string name="ScheduleMessageFTUXBottomSheet__okay">확인</string>
+    <!-- Title for section asking users to allow alarm permissions for scheduled messages -->
+    <string name="ScheduleMessageFTUXBottomSheet_enable_title">To enable message scheduling:</string>
+    <!-- Title for dialog asking users to allow alarm permissions for scheduled messages -->
+    <string name="ReenableScheduleMessagesDialogFragment_reenable_title">To re-enable message scheduling:</string>
+    <!-- Title of dialog with a calendar to select the date the user wants to schedule a message. -->
+    <string name="ScheduleMessageTimePickerBottomSheet__select_date_title">Select date</string>
+    <!-- Title of dialog with a clock to select the time at which the user wants to schedule a message. -->
+    <string name="ScheduleMessageTimePickerBottomSheet__select_time_title">Select time</string>
+    <!-- Title of dialog that allows user to set the time and day that their message will be sent -->
+    <string name="ScheduleMessageTimePickerBottomSheet__dialog_title">Schedule message</string>
+    <!-- Text for confirmation button when scheduling messages that allows the user to confirm and schedule the sending time -->
+    <string name="ScheduleMessageTimePickerBottomSheet__schedule_send">Schedule send</string>
+
+    <!-- Disclaimer in message scheduling dialog. %1$s replaced with a GMT offset (e.g. GMT-05:00), and %2$s is replaced with the time zone name (e.g. Eastern Standard Time) -->
+    <string name="ScheduleMessageTimePickerBottomSheet__timezone_disclaimer">All times in (%1$s) %2$s</string>
+
+    <!-- Context menu option to send a scheduled message now -->
+    <string name="ScheduledMessagesBottomSheet_menu_send_now">Send now</string>
+    <!-- Context menu option to reschedule a selected message -->
+    <string name="ScheduledMessagesBottomSheet_menu_reschedule">Reschedule</string>
+    <!-- Button in dialog asking user if they are sure they want to delete the selected scheduled message -->
+    <string name="ScheduledMessagesBottomSheet_delete_dialog_action">삭제</string>
+    <!-- Button in dialog asking user if they are sure they want to delete the selected scheduled message -->
+    <string name="ScheduledMessagesBottomSheet_delete_dialog_message">Delete selected scheduled message?</string>
+    <!-- Progress message shown while deleting selected scheduled message -->
+    <string name="ScheduledMessagesBottomSheet_deleting_progress_message">Deleting scheduled message…</string>
 
     <!-- DecryptionFailedDialog -->
     <string name="DecryptionFailedDialog_chat_session_refreshed">챗 세션 새로고침됨</string>
@@ -632,9 +684,6 @@
     <!-- ExpiredBuildReminder -->
     <string name="ExpiredBuildReminder_this_version_of_signal_has_expired">Signal 버전이 만료되었습니다. 메시지를 송수신 하기 위해 지금 업데이트 하십시오.</string>
     <string name="ExpiredBuildReminder_update_now">지금 업데이트하세요.</string>
-
-    <!-- A message in a banner shown at the top of the screen indicating that the user must upgrade their device to use signal. -->
-    <string name="ExpiredBuildReminder_api_19_message">Signal no longer works on this device. To use Signal again, update your device to a newer version of Android or switch to a newer device.</string>
 
     <!-- PendingGroupJoinRequestsReminder -->
     <plurals name="PendingGroupJoinRequestsReminder_d_pending_member_requests">
@@ -1309,10 +1358,12 @@
     <string name="MessageRecord_s_changed_their_phone_number">%1$s가 자신의 전화번호를 변경하였습니다.</string>
     <!-- Update item message shown in the release channel when someone is already a sustainer so we ask them if they want to boost. -->
     <string name="MessageRecord_like_this_new_feature_help_support_signal_with_a_one_time_donation">새로운 기능이 마음에 드시나요? 일회성 기부로 Signal을 지원해 주세요.</string>
-    <!-- Update item message shown when we merge two threads together -->
+    <!-- Update item message shown when we merge two threads together. First placeholder is a name, second placeholder is a phone number. -->
     <string name="MessageRecord_your_message_history_with_s_and_their_number_s_has_been_merged">%1$s 님과 해당 사용자 번호 %2$s의 메시지 기록을 병합했습니다.</string>
-    <!-- Update item message shown when we merge two threads together and we don\'t know the phone number of the other thread -->
+    <!-- Update item message shown when we merge two threads together and we don\'t know the phone number of the other thread. The placeholder is a person\'s name. -->
     <string name="MessageRecord_your_message_history_with_s_and_another_chat_has_been_merged">%1$s 님과의 메시지 기록과 해당 사용자가 속하는 다른 채팅의 메시지 기록을 병합했습니다.</string>
+    <!-- Update item message shown when you find out a phone number belongs to a person you had a conversation with. First placeholder is a phone number, second placeholder is a name. -->
+    <string name="MessageRecord_s_belongs_to_s">%1$s번은 %2$s 님의 전화번호입니다.</string>
     <!-- Message to notify sender that activate payments request has been sent to the recipient -->
     <string name="MessageRecord_you_sent_request">%1$s 님에게 결제를 활성화해달라는 요청을 보냈습니다.</string>
     <!-- Request message from recipient to activate payments -->
@@ -1627,8 +1678,7 @@
     <string name="RegistrationActivity_select_your_country">국가 선택</string>
     <string name="RegistrationActivity_you_must_specify_your_country_code">국가 번호를 입력해야 합니다.
     </string>
-    <string name="RegistrationActivity_you_must_specify_your_phone_number">전화번호를 입력해야 합니다.
-    </string>
+    <string name="RegistrationActivity_please_enter_a_valid_phone_number_to_register">유효한 전화번호를 입력하세요.</string>
     <string name="RegistrationActivity_invalid_number">잘못된 전화번호</string>
     <string name="RegistrationActivity_the_number_you_specified_s_is_invalid">입력한 전화번호 (%1$s)가 잘못되었습니다.
     </string>
@@ -1657,7 +1707,6 @@
     <string name="RegistrationActivity_next">다음</string>
     <string name="RegistrationActivity_continue">확인</string>
     <string name="RegistrationActivity_take_privacy_with_you_be_yourself_in_every_message">내 개인 정보는 내 손에서만.\n안전하게 메시지를 보내세요.</string>
-    <string name="RegistrationActivity_enter_your_phone_number_to_get_started">시작하려면 휴대 전화 번호를 입력하세요.</string>
     <string name="RegistrationActivity_enter_your_phone_number">전화번호를 입력하세요.</string>
     <string name="RegistrationActivity_you_will_receive_a_verification_code">인증 코드를 보내드립니다. 통신사 요금이 적용될 수 있습니다.</string>
     <string name="RegistrationActivity_enter_the_code_we_sent_to_s">%1$s 번호로 보낸 코드를 입력해 주세요.</string>
@@ -1665,7 +1714,10 @@
 
     <string name="RegistrationActivity_phone_number_description">전화번호</string>
     <string name="RegistrationActivity_country_code_description">국가 번호</string>
+    <string name="RegistrationActivity_country_code_hint">국가</string>
     <string name="RegistrationActivity_call">전화</string>
+    <string name="RegistrationActivity_verification_code">확인 코드</string>
+    <string name="RegistrationActivity_resend_code">코드 다시 보내기</string>
 
     <!-- RegistrationLockV2Dialog -->
     <string name="RegistrationLockV2Dialog_turn_on_registration_lock">등록 잠금을 켜시겠습니까?</string>
@@ -1819,11 +1871,11 @@
     <string name="ThreadRecord_video">동영상</string>
     <string name="ThreadRecord_chat_session_refreshed">챗 세션 새로고침됨</string>
     <!-- Displayed in the notification when the user is sent a gift -->
-    <string name="ThreadRecord__s_donated_for_you">%1$s donated for you</string>
+    <string name="ThreadRecord__s_donated_for_you">%1$s 님이 귀하를 대신해 기부했습니다.</string>
     <!-- Displayed in the notification when the user sends a gift -->
-    <string name="ThreadRecord__you_donated_for_s">You donated for %1$s</string>
+    <string name="ThreadRecord__you_donated_for_s">%1$s 님을 대신해 기부했습니다.</string>
     <!-- Displayed in the notification when the user has opened a received gift -->
-    <string name="ThreadRecord__you_redeemed_a_badge">You redeemed a badge</string>
+    <string name="ThreadRecord__you_redeemed_a_badge">배지를 사용했습니다.</string>
     <!-- Displayed in the conversation list when someone reacted to your story -->
     <string name="ThreadRecord__reacted_s_to_your_story">내 스토리에 %1$s 이모지로 반응했습니다.</string>
     <!-- Displayed in the conversation list when you reacted to someone\'s story -->
@@ -1936,6 +1988,8 @@
     <string name="MediaPreviewFragment_edit_media_error">미디어 오류</string>
     <!-- This is displayed as a toast notification when we encounter an error deleting a message, including potentially on other people\'s devices -->
     <string name="MediaPreviewFragment_media_delete_error">메시지 삭제 중 오류가 발생했습니다. 메시지가 삭제되지 않았을 수 있습니다.</string>
+    <!-- A suffix to be attached to truncated captions that the user may tap onto to view the entire text caption -->
+    <string name="MediaPreviewFragment_see_more">%1$s… <b>Read More</b></string>
 
     <!-- MessageNotifier -->
     <string name="MessageNotifier_d_new_messages_in_d_conversations">대화 %2$d개 내 새 메시지 %1$d개</string>
@@ -2122,6 +2176,8 @@
     <string name="conversation_activity__type_message_push">Signal 메시지</string>
     <string name="conversation_activity__type_message_sms_insecure">비보안 SMS</string>
     <string name="conversation_activity__type_message_mms_insecure">비보안 MMS</string>
+    <!-- Option in send button context menu to schedule the message instead of sending it directly -->
+    <string name="conversation_activity__option_schedule_message">Schedule message</string>
     <string name="conversation_activity__from_sim_name">%1$s에서</string>
     <string name="conversation_activity__sim_n">SIM %1$d</string>
     <string name="conversation_activity__send">보내기</string>
@@ -2194,7 +2250,7 @@
     <!-- Label indicating that the story being replied to no longer exists -->
     <string name="QuoteView_no_longer_available">더는 사용할 수 없음</string>
     <!-- Label for quoted gift -->
-    <string name="QuoteView__donation_for_a_friend">Donation for a friend</string>
+    <string name="QuoteView__donation_for_a_friend">친구 대신 기부</string>
 
     <!-- conversation_fragment -->
     <string name="conversation_fragment__scroll_to_the_bottom_content_description">하단으로 스크롤</string>
@@ -3001,6 +3057,15 @@
     <!-- conversation_callable_insecure -->
     <string name="conversation_add_to_contacts__menu_add_to_contacts">연락처에 추가</string>
 
+    <!-- conversation scheduled messages bar -->
+
+    <!-- Label for button in a banner to show all messages currently scheduled -->
+    <string name="conversation_scheduled_messages_bar__see_all">모두 보기</string>
+    <!-- Body text for banner to show all scheduled messages for the chat that tells the user how many scheduled messages there are -->
+    <plurals name="conversation_scheduled_messages_bar__number_of_messages">
+        <item quantity="other">%1$d messages scheduled</item>
+    </plurals>
+
     <!-- conversation_group_options -->
     <string name="convesation_group_options__recipients_list">수신자 목록</string>
     <string name="conversation_group_options__delivery">전송</string>
@@ -3091,11 +3156,13 @@
     <string name="CreateKbsPinFragment__create_a_new_pin">새 번호 생성</string>
     <string name="CreateKbsPinFragment__you_can_choose_a_new_pin_as_long_as_this_device_is_registered">기기가 등록된 동안은 PIN 번호를 언제든지 변경할 수 있습니다</string>
     <string name="CreateKbsPinFragment__create_your_pin">내 번호 생성</string>
-    <string name="CreateKbsPinFragment__pins_keep_information_stored_with_signal_encrypted">PIN은 Signal을 암호화하여 저장된 정보를 유지하므로 사용자만 액세스할 수 있습니다. 다시 설치하면 프로필, 설정 및 연락처가 복원됩니다. 앱을 여는 데는 PIN이 필요하지 않습니다.</string>
+    <string name="CreateKbsPinFragment__pins_can_help_you_restore_your_account">PINs can help you restore your account and keep your info encrypted with Signal. </string>
     <string name="CreateKbsPinFragment__choose_a_stronger_pin">더 강력한 PIN 번호 선택</string>
 
     <!-- ConfirmKbsPinFragment -->
     <string name="ConfirmKbsPinFragment__pins_dont_match">번호가 일치하지 않습니다. 다시 시도해 주세요.</string>
+    <!-- Prompt for the user to repeat entering the PIN in order to help them remember it correctly.   -->
+    <string name="ConfirmKbsPinFragment__re_enter_the_pin_you_just_created">Re-enter the PIN you just created.</string>
     <string name="ConfirmKbsPinFragment__confirm_your_pin">번호를 확인하세요.</string>
     <string name="ConfirmKbsPinFragment__pin_creation_failed">번호 생성 실패</string>
     <string name="ConfirmKbsPinFragment__your_pin_was_not_saved">번호가 저장되지 않았습니다. 번호를 생성할 수 있을 때 다시 알려드리겠습니다.</string>
@@ -3230,7 +3297,7 @@
     <!-- Error message shown if a very large attachment is encountered during the backup creation and causes the backup to fail -->
     <string name="LocalBackupJobApi29_your_backup_contains_a_very_large_file">백업에 대용량 파일이 포함되어 있습니다. 이 파일을 삭제하고 새로운 백업을 만드세요.</string>
     <string name="LocalBackupJobApi29_tap_to_manage_backups">탭하여 백업을 관리하세요.</string>
-    <string name="RegistrationActivity_wrong_number">잘못된 번호</string>
+    <string name="RegistrationActivity_wrong_number">번호가 잘못되었나요?</string>
     <string name="RegistrationActivity_call_me_instead_available_in">전화로 인증\n(%1$02d:%2$02d 이후 이용 가능)</string>
     <string name="RegistrationActivity_contact_signal_support">Signal 지원 팀에 문의</string>
     <string name="RegistrationActivity_code_support_subject">Signal 등록 - 안드로이드용 인증 코드</string>
@@ -4256,7 +4323,7 @@
     <!-- Preference heading for other ways to donate -->
     <string name="ManageDonationsFragment__other_ways_to_give">다른 기여 방법</string>
     <!-- Preference label to launch badge gifting -->
-    <string name="ManageDonationsFragment__donate_for_a_friend">Donate for a Friend</string>
+    <string name="ManageDonationsFragment__donate_for_a_friend">친구를 대신해 기부하세요.</string>
 
     <string name="Boost__enter_custom_amount">사용자 정의 금액 입력</string>
     <string name="Boost__one_time_contribution">1회성 기부</string>
@@ -4313,9 +4380,9 @@
     <!-- Displayed when badge credential couldn\'t be verified -->
     <string name="DonationsErrors__could_not_validate">서버 응답을 확인할 수 없습니다. 고객 지원팀으로 문의해 주세요.</string>
     <!-- Displayed as title when some generic error happens during sending donation on behalf of another user -->
-    <string name="DonationsErrors__donation_failed">Donation failed</string>
+    <string name="DonationsErrors__donation_failed">기부에 실패했습니다.</string>
     <!-- Displayed as message when some generic error happens during sending donation on behalf of another user -->
-    <string name="DonationsErrors__your_payment_was_processed_but">Your payment was processed but Signal could not send your donation message. Please contact support.</string>
+    <string name="DonationsErrors__your_payment_was_processed_but">결제를 처리했으나 Signal에서 귀하의 기부 메시지를 보내지 못했습니다. 고객 지원팀으로 문의하세요.</string>
     <string name="DonationsErrors__your_badge_could_not">배지를 계정에 추가하지 못했지만 요금이 청구됐을 수 있습니다. 고객 지원팀으로 문의해 주세요.</string>
     <string name="DonationsErrors__your_payment_is_still">구독을 아직 처리하는 중입니다. 연결 상태에 따라 몇 분이 소요될 수 있습니다.</string>
     <string name="DonationsErrors__failed_to_cancel_subscription">구독을 취소하지 못했습니다.</string>
@@ -4324,16 +4391,16 @@
     <string name="NetworkFailure__network_error_check_your_connection_and_try_again">네트워크 오류. 연결을 확인하고 다시 시도하세요.</string>
     <string name="NetworkFailure__retry">재시도</string>
     <!-- Displayed as a dialog title when the selected recipient for a gift doesn\'t support gifting -->
-    <string name="DonationsErrors__cannot_send_donation">Cannot send donation</string>
+    <string name="DonationsErrors__cannot_send_donation">기부를 보낼 수 없습니다.</string>
     <!-- Displayed as a dialog message when the selected recipient for a gift doesn\'t support gifting -->
-    <string name="DonationsErrors__this_user_cant_receive_donations_until">This user can\'t receive donations until they upgrade Signal.</string>
+    <string name="DonationsErrors__this_user_cant_receive_donations_until">이 사용자는 Signal을 업그레이드해야 기부를 받을 수 있습니다.</string>
     <!-- Displayed as a dialog message when the user\'s profile could not be fetched, likely due to lack of internet -->
-    <string name="DonationsErrors__your_donation_could_not_be_sent">Your donation could not be sent because of a network error. Check your connection and try again.</string>
+    <string name="DonationsErrors__your_donation_could_not_be_sent">네트워크 오류로 인해 기부를 보내지 못했습니다. 연결을 확인하고 다시 시도하세요.</string>
 
     <!-- Gift message view title -->
-    <string name="GiftMessageView__donation_to_s">Donation to %1$s</string>
+    <string name="GiftMessageView__donation_to_s">%1$s 님에게 기부</string>
     <!-- Gift message view title for incoming donations -->
-    <string name="GiftMessageView__s_donated_to_signal_on">%1$s donated to Signal on your behalf</string>
+    <string name="GiftMessageView__s_donated_to_signal_on">%1$s 님이 귀하를 대신해 Signal에 기부했습니다.</string>
     <!-- Gift badge redeem action label -->
     <string name="GiftMessageView__redeem">사용</string>
     <!-- Gift badge view action label -->
@@ -4544,7 +4611,7 @@
     <!-- Donation receipts one-time tab label -->
     <string name="DonationReceiptListFragment__one_time">1회성 기부</string>
     <!-- Donation receipts gift tab label -->
-    <string name="DonationReceiptListFragment__donation_for_a_friend">Donation for a friend</string>
+    <string name="DonationReceiptListFragment__donation_for_a_friend">친구 대신 기부</string>
     <!-- Donation receipts boost row label -->
     <!-- Donation receipts details title -->
     <!-- Donation receipts donation type heading -->
@@ -4887,21 +4954,21 @@
         <item quantity="other">%1$s · %2$d일</item>
     </plurals>
     <!-- Headline text on start fragment for gifting a badge -->
-    <string name="GiftFlowStartFragment__donate_for_a_friend">Donate for a Friend</string>
+    <string name="GiftFlowStartFragment__donate_for_a_friend">친구를 대신해 기부하세요.</string>
     <!-- Description text on start fragment for gifting a badge -->
     <plurals name="GiftFlowStartFragment__support_signal_by">
-        <item quantity="other">Support Signal by making a donation for a friend or family member who uses Signal. They\'ll receive a badge to display on their profile for %1$d days</item>
+        <item quantity="other">Signal을 사용하는 친구나 가족을 대신해 기부하여 Signal을 지지해 주세요. %1$d일 동안 프로필에 게시할 수 있는 배지가 제공됩니다.</item>
     </plurals>
     <!-- Action button label for start fragment for gifting a badge -->
     <string name="GiftFlowStartFragment__next">다음</string>
     <!-- Title text on choose recipient page for badge gifting -->
     <string name="GiftFlowRecipientSelectionFragment__choose_recipient">받는 사람 선택</string>
     <!-- Title text on confirm gift page -->
-    <string name="GiftFlowConfirmationFragment__confirm_donation">Confirm donation</string>
+    <string name="GiftFlowConfirmationFragment__confirm_donation">기부를 확인해 주세요.</string>
     <!-- Heading text specifying who the gift will be sent to -->
     <string name="GiftFlowConfirmationFragment__send_to">다음으로 보내기</string>
     <!-- Text explaining that gift will be sent to the chosen recipient -->
-    <string name="GiftFlowConfirmationFragment__the_recipient_will_be_notified">The recipient will be notified of the donation in a 1 on 1 message. Add your own message below.</string>
+    <string name="GiftFlowConfirmationFragment__the_recipient_will_be_notified">받는 사람에게 1대1 메시지로 기부 알림이 발송됩니다. 아래에 나만의 메시지를 추가하세요.</string>
     <!-- Text explaining that this gift is a one time donation -->
     <string name="GiftFlowConfirmationFragment__one_time_donation">일회성 기부</string>
     <!-- Hint for add message input -->
@@ -4909,27 +4976,27 @@
     <!-- Displayed in the dialog while verifying the chosen recipient -->
     <string name="GiftFlowConfirmationFragment__verifying_recipient">받는 사람 확인 중…</string>
     <!-- Title for sheet shown when opening a redeemed gift -->
-    <string name="ViewReceivedGiftBottomSheet__s_made_a_donation_for_you">%1$s made a donation for you</string>
+    <string name="ViewReceivedGiftBottomSheet__s_made_a_donation_for_you">%1$s 님이 귀하를 대신해 기부했습니다.</string>
     <!-- Title for sheet shown when opening a sent gift -->
     <string name="ViewSentGiftBottomSheet__thanks_for_your_support">지원해 주셔서 감사합니다!</string>
     <!-- Description for sheet shown when opening a redeemed gift -->
-    <string name="ViewReceivedGiftBottomSheet__s_made_a_donation_to_signal">%1$s made a donation to Signal on your behalf! Show your support for Signal on your profile.</string>
+    <string name="ViewReceivedGiftBottomSheet__s_made_a_donation_to_signal">%1$s 님이 귀하를 대신하여 Signal에 기부했습니다! 프로필에서 Signal에 대한 지지를 표현해 주세요.</string>
     <!-- Description for sheet shown when opening a sent gift -->
-    <string name="ViewSentGiftBottomSheet__youve_made_a_donation_to_signal">You\'ve made a donation to Signal on behalf of %1$s. They\'ll be given the option to show their support on their profile.</string>
+    <string name="ViewSentGiftBottomSheet__youve_made_a_donation_to_signal">%1$s 님을 대신하여 Signal에 기부했습니다. 프로필을 통해 지지를 표현할 옵션이 제공됩니다.</string>
     <!-- Primary action for pending gift sheet to redeem badge now -->
     <string name="ViewReceivedGiftSheet__redeem">사용</string>
     <!-- Primary action for pending gift sheet to redeem badge later -->
     <string name="ViewReceivedGiftSheet__not_now">나중에</string>
     <!-- Dialog text while redeeming a gift -->
-    <string name="ViewReceivedGiftSheet__redeeming_badge">Redeeming badge…</string>
+    <string name="ViewReceivedGiftSheet__redeeming_badge">배지를 사용하는 중…</string>
     <!-- Snackbar text when user presses "not now" on redemption sheet -->
     <string name="ConversationFragment__you_can_redeem_your_badge_later">배지를 나중에 사용할 수 있습니다.</string>
     <!-- Description text in gift thanks sheet -->
-    <string name="GiftThanksSheet__youve_made_a_donation">You’ve made a donation to Signal on behalf of %1$s. They’ll be given the option to show their support on their profile.</string>
+    <string name="GiftThanksSheet__youve_made_a_donation">%1$s 님을 대신하여 Signal에 기부했습니다. 프로필을 통해 지지를 표현할 옵션이 제공됩니다.</string>
     <!-- Expired gift sheet title -->
-    <string name="ExpiredGiftSheetConfiguration__your_badge_has_expired">Your badge has expired</string>
+    <string name="ExpiredGiftSheetConfiguration__your_badge_has_expired">배지가 만료되었습니다.</string>
     <!-- Expired gift sheet top description text -->
-    <string name="ExpiredGiftSheetConfiguration__your_badge_has_expired_and_is">Your badge has expired, and is no longer visible to others on your profile.</string>
+    <string name="ExpiredGiftSheetConfiguration__your_badge_has_expired_and_is">배지가 만료되어 더 이상 프로필에 표시되지 않습니다.</string>
     <!-- Expired gift sheet bottom description text -->
     <string name="ExpiredGiftSheetConfiguration__to_continue">사용자를 위해 설계된 기술을 계속 지원하고 싶다면 Signal의 월간 기여자가 되어주세요.</string>
     <!-- Expired gift sheet make a monthly donation button -->
@@ -5232,9 +5299,9 @@
     <!-- Phase 1 Small megaphone title indicating sms is going away -->
     <string name="SmsExportMegaphone__sms_support_going_away">SMS 지원 중단 예정</string>
     <!-- Phase 1 small megaphone description indicating sms is going away -->
-    <string name="SmsExportMegaphone__sms_support_will_be_removed_soon_to_focus_on_encrypted_messaging">암호화 메시지에 집중하기 위해 SMS 지원을 곧 중단합니다.</string>
+    <string name="SmsExportMegaphone__dont_worry_encrypted_signal_messages_will_continue_to_work">걱정 마세요, 암호화된 Signal 메시지는 계속 작동합니다.</string>
     <!-- Phase 1 small megaphone button that takes the user to the sms export flow -->
-    <string name="SmsExportMegaphone__export_sms">SMS 내보내기</string>
+    <string name="SmsExportMegaphone__continue">계속</string>
     <!-- Title for screen shown after sms export has completed -->
     <string name="ExportSmsCompleteFragment__export_complete">내보내기 완료</string>
     <!-- Button to continue to next screen -->
@@ -5290,7 +5357,7 @@
     <!-- Button label for paying with a credit card -->
     <string name="GatewaySelectorBottomSheet__credit_or_debit_card">신용 또는 직불 카드</string>
     <!-- Sheet summary when giving donating for a friend -->
-    <string name="GatewaySelectorBottomSheet__donate_for_a_friend">Donate for a friend</string>
+    <string name="GatewaySelectorBottomSheet__donate_for_a_friend">친구를 대신해 기부하세요.</string>
 
     <!-- StripePaymentInProgressFragment -->
     <string name="StripePaymentInProgressFragment__cancelling">취소하는 중…</string>
@@ -5341,6 +5408,7 @@
     <string name="GroupStoryEducationSheet__all_group_chat_members">모든 그룹 채팅 멤버가 스토리 답장을 볼 수 있습니다.</string>
     <!-- Button label to dismiss sheet -->
     <string name="GroupStoryEducationSheet__next">다음</string>
+    <string name="Registration_country_code_entry_hint">+0</string>
 
     <!-- EOF -->
 
@@ -5356,10 +5424,26 @@
     <!-- Displayed in the "clear filter" item in the chat feed if the user opened the filter from the overflow menu -->
     <string name="ChatFilter__tip_pull_down">팁: 아래로 당겨서 채팅 목록을 필터링하세요.</string>
 
-    <!-- Text for a banner that is shown at the top of the screen letting users know that they\'re version of signal will soon expire. The placeholder is a date. -->
-    <string name="API19Reminder_banner_message">Signal will no longer support your device\'s version of Android soon. To keep using Signal, update your device, or switch to a newer device by %1$s.</string>
+    <!-- Title for screen describing that sms support is going to be removed soon -->
+    <string name="SmsRemoval_title_going_away">SMS 지원이 곧 중단됩니다.</string>
+    <!-- Bullet point message shown on describing screen as first bullet why sms is being removed -->
+    <string name="SmsRemoval_info_bullet_1">Signal 앱의 SMS 메시지에 대한 지원이 곧 중단됩니다.</string>
+    <!-- Bullet point message shown on describing screen as second bullet why sms is being removed -->
+    <string name="SmsRemoval_info_bullet_2">SMS 메시지는 Signal 메시지와 다릅니다. <b>이 결정은 암호화된 Signal 메시지에는 영향을 미치지 않으며, 이 기능은 계속해서 작동합니다.</b></string>
+    <!-- Bullet point message shown on describing screen as third bullet why sms is being removed -->
+    <string name="SmsRemoval_info_bullet_3">SMS 메시지를 내보내고 새로운 SMS 앱을 선택할 수 있습니다.</string>
+    <!-- Bullet point message shown on describing screen as first bullet variant why sms is being removed when user is locked out of sms -->
+    <string name="SmsRemoval_info_bullet_1_phase_3">Signal이 SMS 메시지 보내기에 대한 지원을 중단했습니다.</string>
+    <!-- Button label on sms removal info/megaphone to start the export SMS flow -->
+    <string name="SmsRemoval_export_sms">SMS 내보내기</string>
 
-    <!-- Text for a button in a banner shown at the top of the screen that users can click on to get more information. -->
-    <string name="API19Reminder_learn_more">Learn more</string>
-
+    <!-- Text Formatting -->
+    <!-- Popup menu label for applying bold style -->
+    <string name="TextFormatting_bold">두껍게</string>
+    <!-- Popup menu label for applying italic style -->
+    <string name="TextFormatting_italic">Italic</string>
+    <!-- Popup menu label for applying strikethrough style -->
+    <string name="TextFormatting_strikethrough">Strikethrough</string>
+    <!-- Popup menu label for applying monospace font style -->
+    <string name="TextFormatting_monospace">Monospace</string>
 </resources>

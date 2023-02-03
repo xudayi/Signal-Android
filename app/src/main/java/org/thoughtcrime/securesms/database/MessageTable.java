@@ -127,6 +127,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Function;
 
+import kotlin.Unit;
+
 import static org.thoughtcrime.securesms.contactshare.Contact.Avatar;
 
 public class MessageTable extends DatabaseTable implements MessageTypes, RecipientIdDatabaseReference, ThreadIdDatabaseReference  {
@@ -1701,7 +1703,7 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
     SQLiteDatabase db                      = databaseHelper.getSignalReadableDatabase();
     String[]       projection              = SqlUtil.COUNT;
     SqlUtil.Query  meaningfulMessagesQuery = buildMeaningfulMessagesQuery(threadId);
-    String         where                   = meaningfulMessagesQuery.getWhere() + " AND " + DATE_RECEIVED + " >= ?";
+    String         where                   = meaningfulMessagesQuery.getWhere() + " AND " + DATE_RECEIVED + " >= ? AND NOT (" + getOutgoingTypeClause() + ")";
     String[]       whereArgs               = SqlUtil.appendArg(meaningfulMessagesQuery.getWhereArgs(), String.valueOf(afterTime));
 
     try (Cursor cursor = db.query(TABLE_NAME, projection, where, whereArgs, null, null, null, "1")) {
@@ -1925,7 +1927,7 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
 
       deletedAttachments = SignalDatabase.attachments().deleteAttachmentsForMessage(messageId);
       SignalDatabase.mentions().deleteMentionsForMessage(messageId);
-      SignalDatabase.messageLog().deleteAllRelatedToMessage(messageId, true);
+      SignalDatabase.messageLog().deleteAllRelatedToMessage(messageId);
       SignalDatabase.reactions().deleteReactions(new MessageId(messageId));
       deleteGroupStoryReplies(messageId);
       disassociateStoryQuotes(messageId);
@@ -3110,6 +3112,22 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
     ApplicationDependencies.getDatabaseObserver().notifyScheduledMessageObservers(threadId);
   }
 
+  public void deleteScheduledMessages(@NonNull RecipientId recipientId) {
+    Log.d(TAG, "deleteScheduledMessages(" + recipientId + ")");
+    Long threadId = SignalDatabase.threads().getThreadIdFor(recipientId);
+    if (threadId != null) {
+      SQLiteDatabaseExtensionsKt.withinTransaction(getWritableDatabase(), d -> {
+        List<MessageRecord> scheduledMessages = getScheduledMessagesInThread(threadId);
+        for (MessageRecord record : scheduledMessages) {
+          deleteScheduledMessage(record.getId());
+        }
+        return Unit.INSTANCE;
+      });
+    } else {
+      Log.i(TAG, "No thread exists for " + recipientId);
+    }
+  }
+
   public void deleteThread(long threadId) {
     Log.d(TAG, "deleteThread(" + threadId + ")");
     Set<Long> singleThreadSet = new HashSet<>();
@@ -3348,7 +3366,8 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
 
   public List<MessageRecord> getMessagesInThreadAfterInclusive(long threadId, long timestamp, long limit) {
     String   where = TABLE_NAME + "." + THREAD_ID + " = ? AND " +
-                     TABLE_NAME + "." + DATE_RECEIVED + " >= ?";
+                     TABLE_NAME + "." + DATE_RECEIVED + " >= ? AND " +
+                     TABLE_NAME + "." + SCHEDULED_DATE + " = -1";
     String[] args  = SqlUtil.buildArgs(threadId, timestamp);
 
     try (MmsReader reader = mmsReaderFor(rawQuery(where, args, false, limit))) {
@@ -4020,12 +4039,14 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
       order     = MessageTable.DATE_RECEIVED + " ASC";
       selection = MessageTable.THREAD_ID + " = " + threadId + " AND " +
                   MessageTable.DATE_RECEIVED + " < " + receivedTimestamp + " AND " +
-                  MessageTable.STORY_TYPE + " = 0 AND " + MessageTable.PARENT_STORY_ID + " = " + groupStoryId;
+                  MessageTable.STORY_TYPE + " = 0 AND " + MessageTable.PARENT_STORY_ID + " = " + groupStoryId + " AND " +
+                  MessageTable.SCHEDULED_DATE + " = -1";
     } else {
       order     = MessageTable.DATE_RECEIVED + " DESC";
       selection = MessageTable.THREAD_ID + " = " + threadId + " AND " +
                   MessageTable.DATE_RECEIVED + " > " + receivedTimestamp + " AND " +
-                  MessageTable.STORY_TYPE + " = 0 AND " + MessageTable.PARENT_STORY_ID + " <= 0";
+                  MessageTable.STORY_TYPE + " = 0 AND " + MessageTable.PARENT_STORY_ID + " <= 0 AND " +
+                  MessageTable.SCHEDULED_DATE + " = -1";
     }
 
     try (Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[] { "COUNT(*)" }, selection, null, null, null, order)) {
@@ -4039,7 +4060,7 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
   public long getTimestampForFirstMessageAfterDate(long date) {
     String[] projection = new String[] { MessageTable.DATE_RECEIVED };
     String   order      = MessageTable.DATE_RECEIVED + " ASC";
-    String   selection  = MessageTable.DATE_RECEIVED + " > " + date;
+    String   selection  = MessageTable.DATE_RECEIVED + " > " + date + " AND " + MessageTable.SCHEDULED_DATE + " = -1";
 
     try (Cursor cursor = getReadableDatabase().query(TABLE_NAME, projection, selection, null, null, null, order, "1")) {
       if (cursor != null && cursor.moveToFirst()) {
@@ -4051,7 +4072,7 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
   }
 
   public int getMessageCountBeforeDate(long date) {
-    String selection = MessageTable.DATE_RECEIVED + " < " + date;
+    String selection = MessageTable.DATE_RECEIVED + " < " + date + " AND " + MessageTable.SCHEDULED_DATE + " = -1";
 
     try (Cursor cursor = getReadableDatabase().query(TABLE_NAME, COUNT, selection, null, null, null, null)) {
       if (cursor != null && cursor.moveToFirst()) {
@@ -4075,7 +4096,8 @@ public class MessageTable extends DatabaseTable implements MessageTypes, Recipie
     String[] projection = new String[] { "COUNT(*)" };
     String   selection  = MessageTable.THREAD_ID + " = " + threadId + " AND " +
                           MessageTable.DATE_RECEIVED + " >= " + timestamp + " AND " +
-                          MessageTable.STORY_TYPE + " = 0 AND " + MessageTable.PARENT_STORY_ID + " <= 0";
+                          MessageTable.STORY_TYPE + " = 0 AND " + MessageTable.PARENT_STORY_ID + " <= 0 AND " +
+                          MessageTable.SCHEDULED_DATE + " = -1";
 
     try (Cursor cursor = getReadableDatabase().query(TABLE_NAME, projection, selection, null, null, null, null)) {
       if (cursor != null && cursor.moveToNext()) {

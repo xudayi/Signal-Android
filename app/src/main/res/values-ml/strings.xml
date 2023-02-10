@@ -426,7 +426,7 @@
     <string name="ConversationFragment_delete_on_this_device">ഈ ഉപകരണത്തിൽ ഇല്ലാതാക്കുക</string>
     <!-- Dialog button for deleting one or more note-to-self messages on all linked devices. -->
     <string name="ConversationFragment_delete_everywhere">എല്ലായിടത്തും ഇല്ലാതാക്കുക</string>
-    <string name="ConversationFragment_this_message_will_be_deleted_for_everyone_in_the_conversation">സംഭാഷണത്തിലെ എല്ലാവർ‌ക്കും അവർ‌ Signal-ന്റെ പുതിയ പതിപ്പിലാണെങ്കിൽ‌ ഈ സന്ദേശം ഇല്ലാതാക്കും. നിങ്ങൾ ഒരു സന്ദേശം ഇല്ലാതാക്കിയത് അവർക്ക് കാണാൻ കഴിയും.</string>
+    <string name="ConversationFragment_this_message_will_be_deleted_for_everyone_in_the_conversation">സംഭാഷണത്തിലെ എല്ലാവർ‌ക്കും അവർ‌ Signal-ന്റെ പുതിയ പതിപ്പിലാണെങ്കിൽ‌ ഈ സന്ദേശം ഇല്ലാതാക്കും. നിങ്ങൾ ഒരു സന്ദേശം ഇല്ലാതാക്കിയെന്ന് അവർക്ക് കാണാൻ കഴിയും.</string>
     <string name="ConversationFragment_quoted_message_not_found">യഥാർത്ഥ സന്ദേശം കണ്ടെത്തിയില്ല</string>
     <string name="ConversationFragment_quoted_message_no_longer_available">യഥാർത്ഥ സന്ദേശം മേലിൽ ലഭ്യമല്ല</string>
     <string name="ConversationFragment_failed_to_open_message">സന്ദേശം തുറക്കുന്നതിൽ പരാജയപ്പെട്ടു</string>
@@ -663,7 +663,7 @@
     <!-- Disclaimer in message scheduling dialog. %1$s replaced with a GMT offset (e.g. GMT-05:00), and %2$s is replaced with the time zone name (e.g. Eastern Standard Time) -->
     <string name="ScheduleMessageTimePickerBottomSheet__timezone_disclaimer">എല്ലാ സമയങ്ങളും (%1$s) %2$s എന്നതിലാണ്</string>
     <!-- Warning dialog message text shown when select time for scheduled send is in the past resulting in an immediate send if scheduled. -->
-    <string name="ScheduleMessageTimePickerBottomSheet__select_time_in_past_dialog_warning">തിരഞ്ഞെടുത്ത സമയം ചരിത്രത്തിലാണ്. ഇത് സന്ദേശം ഉടനടി അയയ്ക്കും.</string>
+    <string name="ScheduleMessageTimePickerBottomSheet__select_time_in_past_dialog_warning">തിരഞ്ഞെടുത്ത സമയം കഴിഞ്ഞുപോയതാണ്. ഇത് സന്ദേശം ഉടനടി അയയ്ക്കും.</string>
     <!-- Positive button text for warning dialog shown when scheduled send is in the past -->
     <string name="ScheduleMessageTimePickerBottomSheet__select_time_in_past_dialog_positive_button">ഉടനടി അയയ്ക്കുക</string>
 

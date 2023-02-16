@@ -512,7 +512,7 @@ public class ConversationParentFragment extends Fragment
       return;
     }
 
-    voiceNoteMediaController = new VoiceNoteMediaController(requireActivity());
+    voiceNoteMediaController = new VoiceNoteMediaController(requireActivity(), true);
     voiceRecorderWakeLock    = new VoiceRecorderWakeLock(requireActivity());
 
     // TODO [alex] LargeScreenSupport -- Should be removed once we move to multi-pane layout.
@@ -2267,7 +2267,8 @@ public class ConversationParentFragment extends Fragment
     callback.onInitializeToolbar(toolbar);
   }
 
-  protected boolean isInBubble() {
+  @Override
+  public boolean isInBubble() {
     return callback.isInBubble();
   }
 
@@ -4038,6 +4039,12 @@ public class ConversationParentFragment extends Fragment
     } else {
       MessageDetailsFragment.create(messageRecord, recipient.getId()).show(getChildFragmentManager(), null);
     }
+  }
+
+  @Override
+  public void onFirstRender() {
+    requireActivity().supportStartPostponedEnterTransition();
+    voiceNoteMediaController.finishPostpone();
   }
 
   @Override

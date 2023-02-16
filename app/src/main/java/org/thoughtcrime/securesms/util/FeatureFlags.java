@@ -105,6 +105,7 @@ public final class FeatureFlags {
   private static final String PAYPAL_ONE_TIME_DONATIONS         = "android.oneTimePayPalDonations.2";
   private static final String PAYPAL_RECURRING_DONATIONS        = "android.recurringPayPalDonations.3";
   private static final String TEXT_FORMATTING                   = "android.textFormatting";
+  private static final String ANY_ADDRESS_PORTS_KILL_SWITCH     = "android.calling.fieldTrial.anyAddressPortsKillSwitch";
 
   /**
    * We will only store remote values for flags in this set. If you want a flag to be controllable
@@ -160,7 +161,8 @@ public final class FeatureFlags {
       CHAT_FILTERS,
       PAYPAL_ONE_TIME_DONATIONS,
       PAYPAL_RECURRING_DONATIONS,
-      TEXT_FORMATTING
+      TEXT_FORMATTING,
+      ANY_ADDRESS_PORTS_KILL_SWITCH
   );
 
   @VisibleForTesting
@@ -321,7 +323,7 @@ public final class FeatureFlags {
 
   /** Internal testing extensions. */
   public static boolean internalUser() {
-    return getBoolean(INTERNAL_USER, false);
+    return getBoolean(INTERNAL_USER, false) || Environment.IS_PNP;
   }
 
   /** Whether or not to use the UUID in verification codes. */
@@ -344,7 +346,7 @@ public final class FeatureFlags {
    * IMPORTANT: This is under active development. Enabling this *will* break your contacts in terrible, irreversible ways.
    */
   public static boolean phoneNumberPrivacy() {
-    return getBoolean(PHONE_NUMBER_PRIVACY, false);
+    return getBoolean(PHONE_NUMBER_PRIVACY, false) || Environment.IS_PNP;
   }
 
   /** Whether to use the custom streaming muxer or built in android muxer. */
@@ -572,6 +574,13 @@ public final class FeatureFlags {
    */
   public static boolean textFormatting() {
     return getBoolean(TEXT_FORMATTING, false);
+  }
+
+  /**
+   * Enable/disable RingRTC field trial for "AnyAddressPortsKillSwitch"
+   */
+  public static boolean callingFieldTrialAnyAddressPortsKillSwitch() {
+    return getBoolean(ANY_ADDRESS_PORTS_KILL_SWITCH, false);
   }
 
   /** Only for rendering debug info. */

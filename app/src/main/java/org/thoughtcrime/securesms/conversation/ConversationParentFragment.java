@@ -624,6 +624,8 @@ public class ConversationParentFragment extends Fragment
     if (SignalStore.rateLimit().needsRecaptcha()) {
       RecaptchaProofBottomSheetFragment.show(getChildFragmentManager());
     }
+
+    updateToggleButtonState();
   }
 
   @Override
@@ -981,7 +983,7 @@ public class ConversationParentFragment extends Fragment
     if (recipient != null && recipient.get().isMuted()) inflater.inflate(R.menu.conversation_muted, menu);
     else                                                inflater.inflate(R.menu.conversation_unmuted, menu);
 
-    if (isSingleConversation() && getRecipient().getContactUri() == null && !recipient.get().isReleaseNotes() && !recipient.get().isSelf()) {
+    if (isSingleConversation() && getRecipient().getContactUri() == null && !recipient.get().isReleaseNotes() && !recipient.get().isSelf() && recipient.get().hasE164()) {
       inflater.inflate(R.menu.conversation_add_to_contacts, menu);
     }
 

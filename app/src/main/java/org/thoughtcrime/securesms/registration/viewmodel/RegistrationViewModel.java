@@ -165,7 +165,7 @@ public final class RegistrationViewModel extends BaseRegistrationViewModel {
                                     VerifyResponseProcessor processor = new VerifyResponseWithoutKbs(verifyAccountWithoutKbsResponse);
                                     String                  pin       = SignalStore.kbsValues().getPin();
 
-                                    if (processor.registrationLock() && SignalStore.kbsValues().getRegistrationLockToken() != null && pin != null) {
+                                    if ((processor.isKbsLocked() || processor.registrationLock()) && SignalStore.kbsValues().getRegistrationLockToken() != null && pin != null) {
                                       KbsPinData pinData = new KbsPinData(SignalStore.kbsValues().getOrCreateMasterKey(), SignalStore.kbsValues().getRegistrationLockTokenResponse());
 
                                       return verifyAccountRepository.registerAccount(sessionId, getRegistrationData(), pin, () -> pinData)
@@ -236,7 +236,10 @@ public final class RegistrationViewModel extends BaseRegistrationViewModel {
                  .observeOn(Schedulers.io())
                  .flatMap(data -> {
                    if (data.canProceed) {
-                     return verifyReRegisterWithRecoveryPassword(pin, data.pinData);
+                     return updateFcmTokenValue().subscribeOn(Schedulers.io())
+                                                 .observeOn(Schedulers.io())
+                                                 .onErrorReturnItem("")
+                                                 .flatMap(s -> verifyReRegisterWithRecoveryPassword(pin, data.pinData));
                    } else {
                      throw new IllegalStateException("Unable to get token or master key");
                    }

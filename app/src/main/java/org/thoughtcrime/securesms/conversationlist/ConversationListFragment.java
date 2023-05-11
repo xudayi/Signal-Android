@@ -79,6 +79,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.signal.core.util.DimensionUnit;
 import org.signal.core.util.Stopwatch;
+import org.signal.core.util.concurrent.LifecycleDisposable;
 import org.signal.core.util.concurrent.SignalExecutors;
 import org.signal.core.util.concurrent.SimpleTask;
 import org.signal.core.util.logging.Log;
@@ -157,6 +158,7 @@ import org.thoughtcrime.securesms.profiles.manage.ManageProfileActivity;
 import org.thoughtcrime.securesms.ratelimit.RecaptchaProofBottomSheetFragment;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.recipients.RecipientId;
+import org.thoughtcrime.securesms.registration.RegistrationNavigationActivity;
 import org.thoughtcrime.securesms.search.MessageResult;
 import org.thoughtcrime.securesms.service.KeyCachingService;
 import org.thoughtcrime.securesms.sms.MessageSender;
@@ -169,7 +171,6 @@ import org.thoughtcrime.securesms.util.BottomSheetUtil;
 import org.thoughtcrime.securesms.util.CachedInflater;
 import org.thoughtcrime.securesms.util.ConversationUtil;
 import org.thoughtcrime.securesms.util.FeatureFlags;
-import org.signal.core.util.concurrent.LifecycleDisposable;
 import org.thoughtcrime.securesms.util.PlayStoreUtil;
 import org.thoughtcrime.securesms.util.ServiceUtil;
 import org.thoughtcrime.securesms.util.SignalLocalMetrics;
@@ -803,6 +804,8 @@ public class ConversationListFragment extends MainFragment implements ActionMode
       CdsPermanentErrorBottomSheet.show(getChildFragmentManager());
     } else if (reminderActionId == R.id.reminder_action_fix_username) {
       startActivity(ManageProfileActivity.getIntentForUsernameEdit(requireContext()));
+    } else if (reminderActionId == R.id.reminder_action_re_register) {
+      startActivity(RegistrationNavigationActivity.newIntentForReRegistration(requireContext()));
     }
   }
 
@@ -1042,10 +1045,10 @@ public class ConversationListFragment extends MainFragment implements ActionMode
     Context context = requireContext();
 
     SimpleTask.run(getViewLifecycleOwner().getLifecycle(), () -> {
-      if (UnauthorizedReminder.isEligible(context)) {
-        return Optional.of(new UnauthorizedReminder(context));
-      } else if (ExpiredBuildReminder.isEligible()) {
+      if (ExpiredBuildReminder.isEligible()) {
         return Optional.of(new ExpiredBuildReminder(context));
+      } else if (UnauthorizedReminder.isEligible(context)) {
+        return Optional.of(new UnauthorizedReminder(context));
       } else if (ServiceOutageReminder.isEligible(context)) {
         ApplicationDependencies.getJobManager().add(new ServiceOutageDetectionJob());
         return Optional.of(new ServiceOutageReminder(context));

@@ -52,7 +52,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
@@ -187,7 +186,13 @@ public class ConversationViewModel extends ViewModel {
           ApplicationDependencies.getDatabaseObserver().registerConversationObserver(data.getThreadId(), conversationObserver);
           ApplicationDependencies.getDatabaseObserver().registerMessageInsertObserver(data.getThreadId(), messageInsertObserver);
 
-          ConversationDataSource dataSource = new ConversationDataSource(context, data.getThreadId(), messageRequestData, data.showUniversalExpireTimerMessage(), data.getThreadSize());
+          ConversationDataSource dataSource = new ConversationDataSource(context,
+                                                                         data.getThreadId(),
+                                                                         messageRequestData,
+                                                                         data.showUniversalExpireTimerMessage(),
+                                                                         data.getThreadSize(),
+                                                                         data.getThreadRecipient());
+
           PagingConfig config = new PagingConfig.Builder().setPageSize(25)
                                                           .setBufferPages(2)
                                                           .setStartIndex(Math.max(startPosition, 0))
@@ -436,10 +441,10 @@ public class ConversationViewModel extends ViewModel {
   }
 
   @NonNull LiveData<Optional<NotificationProfile>> getActiveNotificationProfile() {
-    final Observable<Optional<NotificationProfile>> activeProfile = Observable.combineLatest(Observable.interval(0, 30, TimeUnit.SECONDS), notificationProfilesRepository.getProfiles(), (interval, profiles) -> profiles)
-                                                                              .map(profiles -> Optional.ofNullable(NotificationProfiles.getActiveProfile(profiles)));
+    Flowable<Optional<NotificationProfile>> activeProfile = notificationProfilesRepository.getProfiles()
+                                                                                          .map(profiles -> Optional.ofNullable(NotificationProfiles.getActiveProfile(profiles)));
 
-    return LiveDataReactiveStreams.fromPublisher(activeProfile.toFlowable(BackpressureStrategy.LATEST));
+    return LiveDataReactiveStreams.fromPublisher(activeProfile);
   }
 
   @NonNull

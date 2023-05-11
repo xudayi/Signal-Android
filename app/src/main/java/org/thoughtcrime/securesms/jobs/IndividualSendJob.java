@@ -33,6 +33,7 @@ import org.thoughtcrime.securesms.service.ExpiringMessageManager;
 import org.thoughtcrime.securesms.transport.InsecureFallbackApprovalException;
 import org.thoughtcrime.securesms.transport.RetryLaterException;
 import org.thoughtcrime.securesms.transport.UndeliverableMessageException;
+import org.thoughtcrime.securesms.util.ConversationUtil;
 import org.thoughtcrime.securesms.util.Util;
 import org.whispersystems.signalservice.api.SignalServiceMessageSender;
 import org.whispersystems.signalservice.api.SignalServiceMessageSender.IndividualSendEvents;
@@ -42,6 +43,7 @@ import org.whispersystems.signalservice.api.crypto.UntrustedIdentityException;
 import org.whispersystems.signalservice.api.messages.SendMessageResult;
 import org.whispersystems.signalservice.api.messages.SignalServiceAttachment;
 import org.whispersystems.signalservice.api.messages.SignalServiceDataMessage;
+import org.whispersystems.signalservice.api.messages.SignalServiceEditMessage;
 import org.whispersystems.signalservice.api.messages.SignalServicePreview;
 import org.whispersystems.signalservice.api.messages.shared.SharedContact;
 import org.whispersystems.signalservice.api.push.SignalServiceAddress;
@@ -194,6 +196,8 @@ public class IndividualSendJob extends PushSendJob {
         SignalDatabase.attachments().deleteAttachmentFilesForViewOnceMessage(messageId);
       }
 
+      ConversationShortcutRankingUpdateJob.enqueueForOutgoingIfNecessary(recipient);
+
       log(TAG, String.valueOf(message.getSentTimeMillis()), "Sent message: " + messageId);
 
     } catch (InsecureFallbackApprovalException ifae) {
@@ -288,10 +292,18 @@ public class IndividualSendJob extends PushSendJob {
       SignalServiceDataMessage mediaMessage = mediaMessageBuilder.build();
 
       if (originalEditedMessage != null) {
-        SendMessageResult result = messageSender.sendEditMessage(address, UnidentifiedAccessUtil.getAccessFor(context, messageRecipient), ContentHint.RESENDABLE, mediaMessage, IndividualSendEvents.EMPTY, message.isUrgent(), originalEditedMessage.getDateSent());
-        SignalDatabase.messageLog().insertIfPossible(messageRecipient.getId(), message.getSentTimeMillis(), result, ContentHint.RESENDABLE, new MessageId(messageId), false);
+        if (Util.equals(SignalStore.account().getAci(), address.getServiceId())) {
+          Optional<UnidentifiedAccessPair> syncAccess = UnidentifiedAccessUtil.getAccessForSync(context);
+          SendMessageResult                result     = messageSender.sendSelfSyncEditMessage(new SignalServiceEditMessage(originalEditedMessage.getDateSent(), mediaMessage));
+          SignalDatabase.messageLog().insertIfPossible(messageRecipient.getId(), message.getSentTimeMillis(), result, ContentHint.RESENDABLE, new MessageId(messageId), false);
 
-        return result.getSuccess().isUnidentified();
+          return syncAccess.isPresent();
+        } else {
+          SendMessageResult result = messageSender.sendEditMessage(address, UnidentifiedAccessUtil.getAccessFor(context, messageRecipient), ContentHint.RESENDABLE, mediaMessage, IndividualSendEvents.EMPTY, message.isUrgent(), originalEditedMessage.getDateSent());
+          SignalDatabase.messageLog().insertIfPossible(messageRecipient.getId(), message.getSentTimeMillis(), result, ContentHint.RESENDABLE, new MessageId(messageId), false);
+
+          return result.getSuccess().isUnidentified();
+        }
       } else if (Util.equals(SignalStore.account().getAci(), address.getServiceId())) {
         Optional<UnidentifiedAccessPair> syncAccess = UnidentifiedAccessUtil.getAccessForSync(context);
         SendMessageResult                result     = messageSender.sendSyncMessage(mediaMessage);

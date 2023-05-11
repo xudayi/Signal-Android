@@ -106,11 +106,12 @@ public final class FeatureFlags {
   private static final String PAYPAL_RECURRING_DONATIONS        = "android.recurringPayPalDonations.3";
   private static final String TEXT_FORMATTING                   = "android.textFormatting";
   private static final String ANY_ADDRESS_PORTS_KILL_SWITCH     = "android.calling.fieldTrial.anyAddressPortsKillSwitch";
-  private static final String CALLS_TAB                         = "android.calls.tab";
+  private static final String CALLS_TAB                         = "android.calls.tab.2";
   private static final String TEXT_FORMATTING_SPOILER_SEND      = "android.textFormatting.spoilerSend";
   private static final String AD_HOC_CALLING                    = "android.calling.ad.hoc";
   private static final String EDIT_MESSAGE_RECEIVE              = "android.editMessage.receive";
   private static final String EDIT_MESSAGE_SEND                 = "android.editMessage.send";
+  private static final String CALL_DELETE_SYNC                  = "android.calling.deleteSync";
 
   /**
    * We will only store remote values for flags in this set. If you want a flag to be controllable
@@ -177,7 +178,8 @@ public final class FeatureFlags {
   @VisibleForTesting
   static final Set<String> NOT_REMOTE_CAPABLE = SetUtil.newHashSet(
       PHONE_NUMBER_PRIVACY,
-      AD_HOC_CALLING
+      AD_HOC_CALLING,
+      CALL_DELETE_SYNC
   );
 
   /**
@@ -426,11 +428,6 @@ public final class FeatureFlags {
     return getBoolean(RETRY_RECEIPTS, true);
   }
 
-  /** How long to wait before considering a retry to be a failure. */
-  public static long retryReceiptLifespan() {
-    return getLong(RETRY_RECEIPT_LIFESPAN, TimeUnit.HOURS.toMillis(1));
-  }
-
   /** How old a message is allowed to be while still resending in response to a retry receipt . */
   public static long retryRespondMaxAge() {
     return getLong(RETRY_RESPOND_MAX_AGE, TimeUnit.DAYS.toMillis(14));
@@ -624,6 +621,13 @@ public final class FeatureFlags {
    */
   public static boolean adHocCalling() {
     return getBoolean(AD_HOC_CALLING, false);
+  }
+
+  /**
+   * Whether sending deletion sync events is supported
+   */
+  public static boolean callDeleteSync() {
+    return getBoolean(CALL_DELETE_SYNC, false);
   }
 
   /** Only for rendering debug info. */

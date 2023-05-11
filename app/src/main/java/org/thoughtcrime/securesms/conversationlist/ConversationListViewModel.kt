@@ -2,6 +2,7 @@ package org.thoughtcrime.securesms.conversationlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
@@ -63,7 +64,7 @@ class ConversationListViewModel(
   val pinnedCount: Int
     get() = store.state.pinnedCount
   val webSocketState: Observable<WebSocketConnectionState>
-    get() = ApplicationDependencies.getSignalWebSocket().webSocketState
+    get() = ApplicationDependencies.getSignalWebSocket().webSocketState.observeOn(AndroidSchedulers.mainThread())
 
   @get:JvmName("currentSelectedConversations")
   val currentSelectedConversations: Set<Conversation>
@@ -185,13 +186,9 @@ class ConversationListViewModel(
     megaphoneRepository.markVisible(visible.event)
   }
 
-  fun getNotificationProfiles(): Observable<List<NotificationProfile>> {
-    return Observable
-      .combineLatest(
-        Observable.interval(0, 30, TimeUnit.SECONDS),
-        notificationProfilesRepository.getProfiles()
-      ) { _, profiles -> profiles }
-      .distinctUntilChanged()
+  fun getNotificationProfiles(): Flowable<List<NotificationProfile>> {
+    return notificationProfilesRepository.getProfiles()
+      .observeOn(AndroidSchedulers.mainThread())
   }
 
   private fun setSelection(newSelection: Collection<Conversation>) {

@@ -330,7 +330,6 @@ class ConversationFragment :
   private val colorizer = Colorizer()
   private val textDraftSaveDebouncer = Debouncer(500)
 
-  private lateinit var conversationOptionsMenuProvider: ConversationOptionsMenu.Provider
   private lateinit var layoutManager: LinearLayoutManager
   private lateinit var markReadHelper: MarkReadHelper
   private lateinit var giphyMp4ProjectionRecycler: GiphyMp4ProjectionRecycler
@@ -396,7 +395,6 @@ class ConversationFragment :
     disposables.bindTo(viewLifecycleOwner)
     FullscreenHelper(requireActivity()).showSystemUI()
 
-    conversationOptionsMenuProvider = ConversationOptionsMenu.Provider(ConversationOptionsMenuCallback(), disposables)
     markReadHelper = MarkReadHelper(ConversationId.forConversation(args.threadId), requireContext(), viewLifecycleOwner)
 
     initializeConversationThreadUi()
@@ -565,6 +563,7 @@ class ConversationFragment :
       setCursorPositionChangedListener(composeTextEventsListener)
       setOnKeyListener(composeTextEventsListener)
       addTextChangedListener(composeTextEventsListener)
+      setStylingChangedListener(composeTextEventsListener)
       setOnClickListener(composeTextEventsListener)
       onFocusChangeListener = composeTextEventsListener
     }
@@ -777,12 +776,13 @@ class ConversationFragment :
   }
 
   private fun invalidateOptionsMenu() {
-    if (!isSearchRequested && activity != null) {
-      conversationOptionsMenuProvider.onCreateMenu(binding.toolbar.menu, requireActivity().menuInflater)
+    if (!isSearchRequested) {
+      binding.toolbar.invalidateMenu()
     }
   }
 
   private fun presentActionBarMenu() {
+    binding.toolbar.addMenuProvider(ConversationOptionsMenu.Provider(ConversationOptionsMenuCallback(), disposables))
     invalidateOptionsMenu()
 
     when (args.conversationScreenType) {
@@ -790,8 +790,6 @@ class ConversationFragment :
       ConversationScreenType.BUBBLE -> presentNavigationIconForBubble()
       ConversationScreenType.POPUP -> Unit
     }
-
-    binding.toolbar.setOnMenuItemClickListener(conversationOptionsMenuProvider::onMenuItemSelected)
   }
 
   private fun presentNavigationIconForNormal() {
@@ -2109,6 +2107,10 @@ class ConversationFragment :
       )
     }
 
+    override fun isTextHighlighted(): Boolean {
+      return composeText.isTextHighlighted
+    }
+
     override fun onOptionsMenuCreated(menu: Menu) {
       searchMenuItem = menu.findItem(R.id.menu_search)
 
@@ -2336,6 +2338,10 @@ class ConversationFragment :
 
     override fun showGroupCallingTooltip() {
       conversationTooltips.displayGroupCallingTooltip(requireView().findViewById(R.id.menu_video_secure))
+    }
+
+    override fun handleFormatText(id: Int) {
+      composeText.handleFormatText(id)
     }
   }
 
@@ -2662,7 +2668,8 @@ class ConversationFragment :
     View.OnClickListener,
     TextWatcher,
     OnFocusChangeListener,
-    ComposeText.CursorPositionChangedListener {
+    ComposeText.CursorPositionChangedListener,
+    ComposeText.StylingChangedListener {
 
     private var beforeLength = 0
     private var previousText = ""
@@ -2740,6 +2747,10 @@ class ConversationFragment :
       }
 
       previousText = text
+    }
+
+    override fun onStylingChanged() {
+      handleSaveDraftOnTextChange(composeText.textTrimmed)
     }
   }
 
